@@ -1,3 +1,6 @@
+\usepackage{ocgx2}
+\usepackage{fontawesome}
+
 % Colors, used for syntax highlighting.
 % To print this document, set all colors to black!
 \usepackage{xcolor}
@@ -100,6 +103,20 @@
 %	\vspace{\dimexpr\baselineskip+0.5em}%
 %	\addtocounter{lstnumber}{-1}%
 %}
+
+\ifthenelse{\isundefined{\srclink}}{}{
+	\lst@AddToHook{Init}{%
+		\ifthenelse{\equal{\lst@name}{}}{}{%
+			\begin{minipage}[t][0pt]{\linewidth}%
+				\vspace{0pt}%
+				\hfill%
+				\begin{ocg}[printocg=never]{Source links}{srclinks}{1}%
+					\hfill\href{\srclink{\lst@name}}{\faExternalLink}%
+				\end{ocg}%
+			\end{minipage}%
+		}%
+	}
+}
 
 \newenvironment{btHighlight}[1][]
 {\begingroup\tikzset{bt@Highlight@par/.style={#1}}\begin{lrbox}{\@tempboxa}}
