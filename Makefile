@@ -1,4 +1,4 @@
-TESTS = graph/test/binary_lifting.test
+TESTS = graph/test/binary_lifting.test graph/test/LCA_sparse.test
 
 pdf:
 	latexmk -pdf tcr
@@ -21,5 +21,7 @@ clean:
 
 graph/test/binary_lifting.test: graph/test/binary_lifting.cpp \
 	graph/binary_lifting.cpp
+graph/test/LCA_sparse.test: graph/test/LCA_sparse.cpp \
+	graph/LCA_sparse.cpp datastructures/sparseTable.cpp
 
 .PHONY: all pdf test clean
