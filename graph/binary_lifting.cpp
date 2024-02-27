@@ -20,8 +20,8 @@ struct Lift {
 	int lca(int u, int v) {
 		v = lift(v, dep[u]), u = lift(u, dep[v]);
 		while (u != v) {
-			if (jmp[u] == jmp[v]) u = par[u], v = par[v];
-			else u = jmp[u], v = jmp[v];
+			auto &a = jmp[u] == jmp[v] ? par : jmp;
+			u = a[u], v = a[v];
 		}
 		return u;
 	}
