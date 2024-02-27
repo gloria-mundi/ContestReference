@@ -15,13 +15,23 @@
 	\end{itemize}
 \end{algorithm}
 
-\begin{algorithm}{Lowest Common Ancestor}
+\begin{algorithm}[optional]{Lowest Common Ancestor}
 	\begin{methods}
 		\method{init}{baut DFS-Baum über $g$ auf}{\abs{V}\*\log(\abs{V})}
 		\method{getLCA}{findet LCA}{1}
 		\method{getDepth}{berechnet Distanz zur Wurzel im DFS-Baum}{1}
 	\end{methods}
 	\sourcecode{graph/LCA_sparse.cpp}
+\end{algorithm}
+
+\begin{algorithm}{Binary Lifting}
+	\begin{methods}
+		\method{Lift}{constructor}{\abs{V}}
+		\method{depth}{distance to root of vertex $v$}{1}
+		\method{lift}{vertex above $v$ at depth $d$}{\log(\abs{V})}
+		\method{lca}{lowest common ancestor of $u$ and $v$}{\log(\abs{V})}
+	\end{methods}
+	\sourcecode{graph/binary_lifting.cpp}
 \end{algorithm}
 
 \begin{algorithm}{Centroids}
