@@ -118,6 +118,18 @@
 	}
 }
 
+\lst@AddToHook{DeInit}{%
+	\ifthenelse{\equal{\lst@name}{}}{}{%
+		\begin{minipage}[b][0pt]{\linewidth}%
+			\vspace{0pt}%
+			\hfill%
+			\begin{ocg}[printocg=never]{Source file names}{srcfiles}{0}%
+				\hfill\textcolor{gray}{\lst@name}%
+			\end{ocg}%
+		\end{minipage}%
+	}%
+}
+
 \newenvironment{btHighlight}[1][]
 {\begingroup\tikzset{bt@Highlight@par/.style={#1}}\begin{lrbox}{\@tempboxa}}
 {\end{lrbox}\bt@HL@box[bt@Highlight@par]{\@tempboxa}\endgroup}
