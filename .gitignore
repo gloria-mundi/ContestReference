@@ -220,3 +220,7 @@ TSWLatexianTemp*
 *-tags.tex
 
 *~
+
+# files produced by the testing system
+*.test
+*.ok
