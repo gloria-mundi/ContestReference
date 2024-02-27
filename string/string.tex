@@ -60,21 +60,21 @@
 	\sourcecode{string/ahoCorasick.cpp}
 \end{algorithm}
 
-\begin{algorithm}{Lyndon und De-Bruijn}
+\begin{algorithm}{\textsc{Lyndon} und \textsc{De-Bruijn}}
 	\begin{itemize}
-		\item \textbf{Lyndon-Wort:} Ein Wort das lexikographisch kleiner ist als jede seiner Rotationen.
-		\item Jedes Wort kann \emph{eindeutig} in eine nicht ansteigende Folge von Lyndon-Worten zerlegt werden.
-		\item Für Lyndon-Worte $u, v$ mit $u<v$ gilt, dass $uv$ auch ein Lyndon-Wort ist.
+		\item \textbf{\textsc{Lyndon}-Wort:} Ein Wort das lexikographisch kleiner ist als jede seiner Rotationen.
+		\item Jedes Wort kann \emph{eindeutig} in eine nicht ansteigende Folge von \textsc{Lyndon}-Worten zerlegt werden.
+		\item Für \textsc{Lyndon}-Worte $u, v$ mit $u<v$ gilt, dass $uv$ auch ein \textsc{Lyndon}-Wort ist.
 	\end{itemize}
 	\begin{methods}
-		\method[, Durchschnitt $\Theta(1)$]{next}{lexikographisch nächstes Lyndon-Wort}{n}
-		\method{duval}{zerlegt $s$ in Lyndon-Worte}{n}
+		\method[, Durchschnitt $\Theta(1)$]{next}{lexikographisch nächstes \textsc{Lyndon}-Wort}{n}
+		\method{duval}{zerlegt $s$ in \textsc{Lyndon}-Worte}{n}
 		\method{minrotation}{berechnet kleinste Rotation von $s$}{n}
 	\end{methods}
 	\sourcecode{string/lyndon.cpp}
 	\sourcecode{string/duval.cpp}
 	\begin{itemize}
-		\item \textbf{De-Bruijn-Sequenze $\boldsymbol{B(\Sigma, n)}$:}~~~ein Wort das jedes Wort der Länge $n$ genau einmal als substring enthält (und minimal ist). Wobei $B(\Sigma, n)$ zyklisch betrachtet wird.
+		\item \textbf{\textsc{De-Bruijn}-Sequenz $\boldsymbol{B(\Sigma, n)}$:}~~~ein Wort das jedes Wort der Länge $n$ genau einmal als substring enthält (und minimal ist). Wobei $B(\Sigma, n)$ zyklisch betrachtet wird.
 		\item es gibt $\frac{(k!)^{k^{n-1}}}{k^{n}}$ verschiedene $B(\Sigma, n)$
 		\item $B(\Sigma, n)$ hat Länge $\abs{\Sigma}^n$
 	\end{itemize}

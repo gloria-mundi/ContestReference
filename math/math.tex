@@ -151,21 +151,21 @@ sich alle Lösungen von $x^2-ny^2=c$ berechnen durch:
 	\sourcecode{math/discreteNthRoot.cpp}
 \end{algorithm}
 
-\begin{algorithm}{Linearessieb und Multiplikative Funktionen}
+\begin{algorithm}{Lineares Sieb und multiplikative Funktionen}
 	Eine (zahlentheoretische) Funktion $f$ heißt multiplikativ wenn $f(1)=1$ und $f(a\cdot b)=f(a)\cdot f(b)$, falls $\ggT(a,b)=1$.
 	
 	$\Rightarrow$ Es ist ausreichend $f(p^k)$ für alle primen $p$ und alle $k$ zu kennen.
 	
 	\begin{methods}
 		\method{sieve}{berechnet Primzahlen und co.}{N}
-		\method{sieved}{Wert der endsprechenden Multiplikativen Funktion}{1}
+		\method{sieved}{Wert der entsprechenden multiplikativen Funktion}{1}
 		
-		\method{naive}{Wert der endsprechenden Multiplikativen Funktion}{\sqrt{n}}
+		\method{naive}{Wert der entsprechenden multiplikativen Funktion}{\sqrt{n}}
 	\end{methods}
 	\textbf{Wichtig:} Sieb rechts ist schneller für \code{isPrime} oder \code{primes}!
 	
 	\sourcecode{math/linearSieve.cpp}
-	\textbf{\textsc{Möbius} Funtkion:}
+	\textbf{\textsc{Möbius} Funktion:}
 	\begin{itemize}
 		\item $\mu(n)=+1$, falls $n$ quadratfrei ist und gerade viele Primteiler hat
 		\item $\mu(n)=-1$, falls $n$ quadratfrei ist und ungerade viele Primteiler hat
@@ -178,7 +178,7 @@ sich alle Lösungen von $x^2-ny^2=c$ berechnen durch:
 		\item $p$ prim, $k \in \mathbb{N}$:
 		$~\varphi(p^k) = p^k - p^{k - 1}$
 		
-		\item \textbf{Euler's Theorem:}
+		\item \textbf{\textsc{Euler}'s Theorem:}
 		Für $b \geq \varphi(c)$ gilt: $a^b \equiv a^{b \bmod \varphi(c) + \varphi(c)} \pmod{c}$. Darüber hinaus gilt: $\gcd(a, c) = 1 \Leftrightarrow a^b \equiv a^{b \bmod \varphi(c)} \pmod{c}$.
 		Falls $m$ prim ist, liefert das den \textbf{kleinen Satz von \textsc{Fermat}}:
 		$a^{m} \equiv a \pmod{m}$
@@ -282,18 +282,18 @@ sich alle Lösungen von $x^2-ny^2=c$ berechnen durch:
 \end{methods}
 \sourcecode{math/piLehmer.cpp}
 
-\begin{algorithm}{Lineare-Recurenz}
+\begin{algorithm}{Lineare Rekurrenz}
 	\begin{methods}
-		\method{BerlekampMassey}{Berechnet eine lineare Recurenz $n$-ter Ordnung}{n^2}
+		\method{BerlekampMassey}{Berechnet eine lineare Rekurrenz $n$-ter Ordnung}{n^2}
 		\method{}{aus den ersten $2n$ Werte}{}
 	\end{methods}
 	\sourcecode{math/berlekampMassey.cpp}
-	Sei $f(n)=c_{n-1}f(n-1)+c_{n-2}f(n-2)+\dots + c_0f(0)$ eine lineare Recurenz.
+	Sei $f(n)=c_{n-1}f(n-1)+c_{n-2}f(n-2)+\dots + c_0f(0)$ eine lineare Rekurrenz.
 	
 	\begin{methods}
-		\method{kthTerm}{Berechnet $k$-ten Term einer Recurenz $n$-ter Ordnung}{\log(k)\cdot n^2}
+		\method{kthTerm}{Berechnet $k$-ten Term einer Rekurrenz $n$-ter Ordnung}{\log(k)\cdot n^2}
 	\end{methods}
-	\sourcecode{math/linearRecurence.cpp}
+	\sourcecode{math/linearRecurrence.cpp}
 	Alternativ kann der \mbox{$k$-te} Term in \runtime{n^3\log(k)} berechnet werden:
 	$$\renewcommand\arraystretch{1.5}
 	\setlength\arraycolsep{3pt}
@@ -375,7 +375,7 @@ Wenn man $k$ Spiele in den Zuständen $X_1, \ldots, X_k$ hat, dann ist die \text
 
 \subsection{Kombinatorik}
 
-\paragraph{Wilsons Theorem}
+\paragraph{\textsc{Wilson}'s Theorem}
 A number $n$ is prime if and only if
 $(n-1)!\equiv -1\bmod{n}$.\\
 ($n$ is prime if and only if $(m-1)!\cdot(n-m)!\equiv(-1)^m\bmod{n}$ for all $m$ in $\{1,\dots,n\}$)
@@ -387,14 +387,14 @@ $(n-1)!\equiv -1\bmod{n}$.\\
 	\end{cases}
 \end{align*}
 
-\paragraph{\textsc{Zeckendorfs} Theorem}
+\paragraph{\textsc{Zeckendorf}'s Theorem}
 Jede positive natürliche Zahl kann eindeutig als Summe einer oder mehrerer
 verschiedener \textsc{Fibonacci}-Zahlen geschrieben werden, sodass keine zwei
 aufeinanderfolgenden \textsc{Fibonacci}-Zahlen in der Summe vorkommen.\\
 \emph{Lösung:} Greedy, nimm immer die größte \textsc{Fibonacci}-Zahl, die noch
 hineinpasst.
 
-\paragraph{\textsc{Lucas}-Theorem}
+\paragraph{\textsc{Lucas}'s Theorem}
 Ist $p$ prim, $m=\sum_{i=0}^km_ip^i$, $n=\sum_{i=0}^kn_ip^i$ ($p$-adische Darstellung),
 so gilt
 \vspace{-0.75\baselineskip}
@@ -405,6 +405,7 @@ so gilt
 %\begin{algorithm}{Binomialkoeffizienten}
 \paragraph{Binomialkoeffizienten}
 	Die Anzahl der \mbox{$k$-elementigen} Teilmengen einer \mbox{$n$-elementigen} Menge.
+
 	\begin{methods}
 		\method{precalc}{berechnet $n!$ und $n!^{-1}$ vor}{\mathit{lim}}
 		\method{calc\_binom}{berechnet Binomialkoeffizient}{1}
