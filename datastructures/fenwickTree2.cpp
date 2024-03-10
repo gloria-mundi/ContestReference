@@ -14,7 +14,7 @@ void init(vector<ll>& v) {
 }
 
 ll prefix_sum (int i) {
-	ll res = 0; i++;
+	ll res = 0;
 	for (int ti = i; ti > 0; ti -= ti&(-ti))
 		res += add[ti] * i + mul[ti];
 	return res;

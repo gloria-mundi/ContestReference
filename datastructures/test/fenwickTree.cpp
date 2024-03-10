@@ -10,10 +10,10 @@ void test(int n) {
 		update(p, delta);
 		naive[p] += delta;
 
-		int r = util::randint(n+1) - 1;
+		int r = util::randint(n+1);
 
 		ll naive_result = 0;
-		for (int i = 0; i <= r; i++) naive_result += naive[i];
+		for (int i = 0; i < r; i++) naive_result += naive[i];
 		ll fenwick_result = prefix_sum(r);
 		assert(naive_result == fenwick_result);
 	}

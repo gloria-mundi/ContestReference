@@ -10,6 +10,6 @@ void init(int n) {
 
 ll prefix_sum(int i) {
 	ll sum = 0;
-	for (i++; i > 0; i -= (i & (-i))) sum += tree[i];
+	for (; i > 0; i -= (i & (-i))) sum += tree[i];
 	return sum;
 }
