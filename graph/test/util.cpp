@@ -1,13 +1,6 @@
 
 namespace util {
 
-mt19937 rd(0);
-
-int randint(int x) {
-	assert(x > 0);
-	return uniform_int_distribution<int>(0, x-1)(rd);
-}
-
 void shuffle_adj_lists(vector<vector<int>> &adj) {
 	for (auto &a: adj) ranges::shuffle(a, rd);
 }

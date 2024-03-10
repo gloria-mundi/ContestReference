@@ -1,4 +1,8 @@
-TESTS = graph/test/binary_lifting.test graph/test/LCA_sparse.test
+TESTS = \
+	datastructures/test/fenwickTree.test \
+	datastructures/test/fenwickTree2.test \
+	graph/test/binary_lifting.test \
+	graph/test/LCA_sparse.test
 
 pdf:
 	latexmk -pdf tcr
@@ -23,6 +27,10 @@ cleantest:
 	g++ -include test.h -std=gnu++20 -Wall -Wextra -Wpedantic -Werror \
 		-fsanitize=address,undefined -g -o $@ $<
 
+datastructures/test/fenwickTree.test: datastructures/test/fenwickTree.cpp \
+	datastructures/fenwickTree.cpp
+datastructures/test/fenwickTree2.test: datastructures/test/fenwickTree2.cpp \
+	datastructures/fenwickTree2.cpp
 graph/test/binary_lifting.test: graph/test/binary_lifting.cpp \
 	graph/binary_lifting.cpp graph/test/util.cpp
 graph/test/LCA_sparse.test: graph/test/LCA_sparse.cpp \

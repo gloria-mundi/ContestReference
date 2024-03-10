@@ -11,3 +11,23 @@ T _lg_check(T n) {
 }
 
 #define __lg _lg_check
+
+namespace util {
+
+mt19937 rd(0);
+
+int randint(int l, int r) {
+	assert(l <= r);
+	return uniform_int_distribution<int>(l, r)(rd);
+}
+
+int randint(int x) {
+	assert(x > 0);
+	return randint(0, x-1);
+}
+
+int randint() {
+	return randint(-1'000'000, +1'000'000);
+}
+
+}
