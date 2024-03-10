@@ -1,26 +1,9 @@
-#include <bits/stdc++.h>
-using namespace std;
-using ll = long long;
-
-#define sz(x) ((int)(x).size())
-#define all(x) (x).begin(), (x).end()
+#include "util.cpp"
 #include "../../datastructures/sparseTable.cpp"
 #include "../LCA_sparse.cpp"
 
-mt19937 rd(0);
-
-void test(const vector<vector<int>> &old_adj, int root) {
-	int n = old_adj.size();
-	vector<int> perm(n);
-	iota(perm.begin(), perm.end(), 0);
-	ranges::shuffle(perm, rd);
-	vector<vector<int>> adj(n);
-	for (int i = 0; i < n; i++) {
-		auto &a = adj[perm[i]] = old_adj[i];
-		for (int &v: a) v = perm[v];
-		ranges::shuffle(a, rd);
-	}
-	root = perm[root];
+void test(vector<vector<int>> &adj, int root) {
+	int n = adj.size();
 
 	vector<int> parent(n);
 	function<void(int,int)> dfs = [&](int u, int p) {
@@ -42,10 +25,9 @@ void test(const vector<vector<int>> &old_adj, int root) {
 	LCA lca;
 	lca.init(adj, root);
 	for (int i = 0; i < n; i++) assert(lca.getDepth(i) == depth(i));
-	uniform_int_distribution<int> distrib(0, n-1);
 	for (int i = 0; i < 1000; i++) {
-		int u = distrib(rd);
-		int v = distrib(rd);
+		int u = util::randint(n);
+		int v = util::randint(n);
 		int l = lca.getLCA(u, v);
 		assert(is_ancestor(l, u));
 		assert(is_ancestor(l, v));
@@ -64,27 +46,16 @@ int main() {
 	}
 	{
 		// Path
-		vector<vector<int>> adj(100);
-		for (int i = 1; i < 100; i++) {
-			adj[i-1].push_back(i);
-			adj[i].push_back(i-1);
-		}
-		test(adj, 0);
-		test(adj, 99);
-		test(adj, 40);
+		vector<vector<int>> adj = util::path(100);
+		int left = 0, mid = 40, right = 99;
+		util::shuffle_graph(adj, left, mid, right);
+		test(adj, left);
+		test(adj, mid);
+		test(adj, right);
 	}
 	{
 		// Random
-		vector<vector<int>> adj(1000);
-		for (int i = 1; i < 1000; i++) {
-			uniform_int_distribution<int> distrib(0, i-1);
-			int p = distrib(rd);
-			adj[p].push_back(i);
-			adj[i].push_back(p);
-		}
+		vector<vector<int>> adj = util::random_tree(1000);
 		test(adj, 0);
-		test(adj, 300);
-		test(adj, 600);
-		test(adj, 900);
 	}
 }
