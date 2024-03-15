@@ -26,7 +26,7 @@
 	\end{methods}
 	\sourcecode{math/permIndex.cpp}
 \end{algorithm}
-\clearpage
+\columnbreak
 
 \subsection{Mod-Exponent und Multiplikation über $\boldsymbol{\mathbb{F}_p}$}
 %\vspace{-1.25em}
@@ -41,6 +41,11 @@
 \begin{itemize}
 	\item für $a > 10^9$ \code{__int128} oder \code{modMul} benutzten!
 \end{itemize}
+
+\begin{algorithm}[optional]{Square root modulo prime}
+	\sourcecode{math/modSqrt.cpp}
+	\sourcecode{math/sqrtModCipolla.cpp}
+\end{algorithm}
 
 \begin{algorithm}{ggT, kgV, erweiterter euklidischer Algorithmus}
 	\runtime{\log(a) + \log(b)}
@@ -272,7 +277,7 @@ sich alle Lösungen von $x^2-ny^2=c$ berechnen durch:
 \method{gauss}{löst LGS}{n^3}
 \sourcecode{math/lgsFp.cpp}
 
-\clearpage
+\columnbreak
 
 \subsection{Primzahlzählfunktion $\boldsymbol{\pi}$}
 \begin{methods}

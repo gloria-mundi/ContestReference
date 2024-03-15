@@ -1,25 +1,26 @@
-vector<int> uf;
+// unions[i] >= 0 => unions[i] =  parent
+// unions[i]  < 0 => unions[i] = -size
+vector<int> unions;
 
-init(int N) {
-	uf.assign(N,-1); //-1 indicates that every subset has size 1
+init(int n) {
+	unions.assign(n, -1);
 }
 
 int findSet(int i) {
-	if(uf[i] < 0) return i; //If uf[i] < 0 we have reach a root
-	uf[i] = findSet(uf[i]); //Path-Compression
-	return uf[i];
+	if (unions[i] < 0) return i;
+	return unions[i] = findSet(unions[i]);
 }
 
-void linkSets(int i, int j) {
-	//Take |uf[i]|, where i must be a root, to get the size
-	//of the subset
-	if(abs(uf[i]) < abs(uf[j])) { //Union-by-size.
-		uf[j] += uf[i]; uf[i] = j;
-	} else {
-		uf[i] += uf[j]; uf[j] = i;
-	}
+void linkSets(int a, int b) { // Union by size.
+	if (unions[b] > unions[a]) swap(a, b);
+	unions[b] += unions[a];
+	unions[a] = b;
 }
 
-void unionSets(int i, int j) {
-	if(findSet(i) != findSet(j)) linkSets(findSet(i),findSet(j));
+void unionSets(int a, int b) {
+	if (findSet(a) != findSet(b)) linkSets(findSet(a),findSet(b));
+}
+
+void getSize(int i) {
+	return -unions[findSet(i)];
 }

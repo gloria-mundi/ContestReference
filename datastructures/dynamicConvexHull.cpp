@@ -19,13 +19,11 @@ struct HullDynamic : multiset<Line, less<>> {
 		auto x = insert({m, b, 0});
 		while (isect(x, next(x))) erase(next(x));
 		if (x != begin()) {
-			x--;
-			if (isect(x, next(x))) {
-				erase(next(x));
-				isect(x, next(x));
-		}}
+			--x;
+			while (isect(x, next(x))) erase(next(x));
+		}
 		while (x != begin() && prev(x)->p >= x->p) {
-			x--;
+			--x;
 			isect(x, erase(next(x)));
 	}}
 

@@ -51,7 +51,15 @@
 	Subbaum unter dem Knoten $v$ ist das Intervall  $[\text{\code{in[v]}},~\text{\code{out[v]}})$.
 	\sourcecode{graph/hld.cpp}
 \end{algorithm}
-\clearpage
+\columnbreak
+
+\begin{algorithm}[optional]{DP rerooting}
+	\sourcecode{graph/reroot.cpp}
+\end{algorithm}
+
+\begin{algorithm}[optional]{Virtual trees}
+	\sourcecode{graph/virtualTree.cpp}
+\end{algorithm}
 
 \begin{algorithm}{Baum-Isomorphie}
 	\begin{methods}
@@ -139,6 +147,8 @@ Sei $a_{ij}$ die Adjazenzmatrix von $G$ \textcolor{gray}{(mit $a_{ii} = 1$)}, da
 	\sourcecode{graph/scc.cpp}
 \end{algorithm}
 
+\columnbreak
+
 \begin{algorithm}{2-SAT}
 	\sourcecode{graph/2sat.cpp}
 \end{algorithm}
@@ -150,7 +160,7 @@ Sei $a_{ij}$ die Adjazenzmatrix von $G$ \textcolor{gray}{(mit $a_{ii} = 1$)}, da
 	\end{methods}
 	\sourcecode{graph/bronKerbosch.cpp}
 \end{algorithm}
-\clearpage
+\columnbreak
 
 \begin{algorithm}{Cycle Counting}
 	\begin{methods}
@@ -208,7 +218,7 @@ Sei $a_{ij}$ die Adjazenzmatrix von $G$ \textcolor{gray}{(mit $a_{ii} = 1$)}, da
 
 \subsection{Max-Flow}
 \optional{
-\subsubsection{Capacity Scaling}
+\subsubsection{Capacity Scaling \opthint}
 \begin{methods}
 	\method{maxFlow}{gut bei dünn besetzten Graphen.}{\abs{E}^2\*\log(C)}
 	\method{addEdge}{fügt eine \textbf{gerichtete} Kante ein}{1}
@@ -231,7 +241,7 @@ Sei $a_{ij}$ die Adjazenzmatrix von $G$ \textcolor{gray}{(mit $a_{ii} = 1$)}, da
 \sourcecode{graph/dinicScaling.cpp}
 
 \optional{
-\subsubsection{Anwendungen}
+\subsubsection{Anwendungen \opthint}
 \begin{itemize}
 	\item \textbf{Maximum Edge Disjoint Paths}\newline
 	Finde die maximale Anzahl Pfade von $s$ nach $t$, die keine Kante teilen.

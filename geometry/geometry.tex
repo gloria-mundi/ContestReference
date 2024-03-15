@@ -41,7 +41,7 @@
 \sourcecode{geometry/formulars3d.cpp}
 
 \optional{
-	\subsection{3D-Kugeln}
+	\subsection{3D-Kugeln \opthint}
 	\sourcecode{geometry/spheres.cpp}
 }
 
@@ -49,15 +49,22 @@
 	\sourcecode{geometry/hpi.cpp}
 \end{algorithm}
 
+\begin{algorithm}[optional]{Intersecting Segments}
+	\begin{methods}
+		\method{intersect}{finds ids of intersecting segments}{n\*\log(n)}
+	\end{methods}
+	\sourcecode{geometry/segmentIntersection.cpp}
+\end{algorithm}
+
 \begin{algorithm}[optional]{Delaunay Triangulierung}
 	\begin{methods}
 		\method{delaunay}{berechnet Triangulierung}{n\*\log(n)}
 	\end{methods}
-	\textbf{WICHTIG:} Wenn alle Punkte kollinear sind gibt es keine Traingulierung! Wenn 4 Punkte auf einem Kreis liegen ist die Triangulierung nicht eindeutig.
+	\textbf{WICHTIG:} Wenn alle Punkte kollinear sind gibt es keine Triangulierung! Wenn 4 Punkte auf einem Kreis liegen ist die Triangulierung nicht eindeutig.
 	\sourcecode{geometry/delaunay.cpp}
 \end{algorithm}
 
 \optional{
-\subsection{Geraden}
+\subsection{Geraden \opthint}
 \sourcecode{geometry/lines.cpp}
 }

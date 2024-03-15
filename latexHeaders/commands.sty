@@ -7,6 +7,11 @@
 \newcommand{\code}[1]{\lstinline[breaklines=true]{#1}}
 \let\codeSafe\lstinline
 
+\ifoptional
+	\renewcommand{\columnbreak}{}
+	\newcommand\opthint{\textcolor{gray}{(optional)}}
+\fi
+
 \usepackage{tikz}
 \usetikzlibrary{angles,quotes}
 
@@ -17,7 +22,7 @@
 	\ifthenelse{\equal{#1}{optional}}{%
 		\optional{
 				\needspace{4\baselineskip}%
-				\subsection{#2\textcolor{gray}{(optional)}}%
+				\subsection{#2 \opthint}%
 				#3%
 			}
 	}{%

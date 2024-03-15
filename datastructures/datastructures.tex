@@ -29,7 +29,7 @@
 	\end{methods}
 	\sourcecode{datastructures/fenwickTree2.cpp}
 \end{algorithm}
-\clearpage
+\columnbreak
 
 \begin{algorithm}{STL-Rope (Implicit Cartesian Tree)}
 	\sourcecode{datastructures/stlRope.cpp}
@@ -52,6 +52,14 @@
 		\item \code{better}-Funktion muss idempotent sein!
 	\end{itemize}
 	\sourcecode{datastructures/sparseTable.cpp}
+\end{algorithm}
+
+\begin{algorithm}[optional]{Range Aggregate Query}
+	\begin{methods}
+		\method{init}{baut Struktur auf}{n\*\log(n)}
+		\method{query}{Aggregat über [l,r)}{1}
+	\end{methods}
+	\sourcecode{datastructures/sparseTableDisjoint.cpp}
 \end{algorithm}
 
 \begin{algorithm}{Wavelet Tree}
@@ -79,7 +87,7 @@
 	\end{methods}
 	\sourcecode{datastructures/LCT.cpp}
 \end{algorithm}
-\clearpage
+\columnbreak
 
 \begin{algorithm}{Union-Find}
 	\begin{methods}
@@ -91,11 +99,37 @@
 	\sourcecode{datastructures/unionFind.cpp}
 \end{algorithm}
 
-\begin{algorithm}{Lower/Upper Envelope (Convex Hull Optimization)}
-	Um aus einem lower envelope einen upper envelope zu machen (oder umgekehrt), einfach beim Einfügen der Geraden $m$ und $b$ negieren.
+\begin{algorithm}[optional]{Union-Find with size}
+	\begin{methods}
+		\method{init}{legt $n$ einzelne Unions an}{n}
+		\method{findSet}{findet den Repräsentanten}{\log(n)}
+		\method{unionSets}{vereint 2 Mengen}{\log(n)}
+		\method{getSize}{zählt Elemente in Menge, die $i$ enthält}{\log(n)}
+		\method{m\*findSet + n\*unionSets}{Folge von Befehlen}{n+m\*\alpha(n)}
+	\end{methods}
+	\sourcecode{datastructures/unionFind2.cpp}
+\end{algorithm}
+
+\begin{algorithm}{Lower Envelope (Convex Hull Optimization)}
+	Um aus einem Lower Envelope einen Upper Envelope zu machen (oder
+	umgekehrt), einfach beim Einfügen der Geraden $m$ und $b$ negieren.
+	\subsubsection{Monotonic}
+	\begin{methods}
+		\method{add}{add line $mx + b$, $m$ is decreasing}{1}
+		\method{query}{minimum value at $x$, $x$ is increasing}{1}
+	\end{methods}
 	\sourcecode{datastructures/monotonicConvexHull.cpp}
 	\columnbreak
+	\subsubsection{Dynamic}
+	\begin{methods}
+		\method{add}{add line $mx + b$}{\log(n)}
+		\method{query}{minimum value at $x$}{\log(n)}
+	\end{methods}
 	\sourcecode{datastructures/dynamicConvexHull.cpp}
+	\optional{
+		\subsubsection{Li Chao tree \opthint}
+		\sourcecode{datastructures/lichao.cpp}
+	}
 \end{algorithm}
 
 \begin{algorithm}{Persistent}
@@ -105,6 +139,7 @@
 		\method{reset}{setzt die Datenstruktur auf Zeitpunkt $t$}{1}
 	\end{methods}
 	\sourcecode{datastructures/persistent.cpp}
+	\columnbreak
 	\sourcecode{datastructures/persistentArray.cpp}
 \end{algorithm}
 

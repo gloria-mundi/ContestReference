@@ -1,11 +1,19 @@
 TESTS = \
 	datastructures/test/fenwickTree.test \
 	datastructures/test/fenwickTree2.test \
+	datastructures/test/monotonicConvexHull.test \
 	graph/test/binary_lifting.test \
 	graph/test/LCA_sparse.test
 
-pdf:
-	latexmk -pdf tcr
+LATEXMK = latexmk -interaction=nonstopmode
+
+tcr.pdf: FORCE
+	$(LATEXMK) -pdf tcr
+
+pdf: tcr.pdf tcr-opt.pdf
+
+tcr-opt.pdf: FORCE
+	$(LATEXMK) -pdf -jobname=tcr-opt -usepretex="\def\OPTIONAL{}" tcr
 
 all: pdf test
 
@@ -14,7 +22,8 @@ test: $(TESTS:.test=.ok)
 clean: cleanpdf cleantest
 
 cleanpdf:
-	latexmk -c tcr
+	$(LATEXMK) -C tcr
+	$(LATEXMK) -C -jobname=tcr-opt tcr
 	rm -f *.thm
 
 cleantest:
@@ -31,9 +40,13 @@ datastructures/test/fenwickTree.test: datastructures/test/fenwickTree.cpp \
 	datastructures/fenwickTree.cpp
 datastructures/test/fenwickTree2.test: datastructures/test/fenwickTree2.cpp \
 	datastructures/fenwickTree2.cpp
+datastructures/test/monotonicConvexHull.test: \
+	datastructures/test/monotonicConvexHull.cpp \
+	datastructures/monotonicConvexHull.cpp
 graph/test/binary_lifting.test: graph/test/binary_lifting.cpp \
 	graph/binary_lifting.cpp graph/test/util.cpp
 graph/test/LCA_sparse.test: graph/test/LCA_sparse.cpp \
 	graph/LCA_sparse.cpp datastructures/sparseTable.cpp graph/test/util.cpp
 
-.PHONY: all pdf test clean cleanpdf cleantest
+FORCE:
+.PHONY: all pdf test clean cleanpdf cleantest FORCE

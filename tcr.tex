@@ -11,7 +11,9 @@
 
 % Options
 \newif\ifoptional
-%\optionaltrue
+\ifdefined\OPTIONAL
+	\optionaltrue
+\fi
 
 % Font encoding.
 \usepackage[T1]{fontenc}
@@ -43,6 +45,7 @@
 
 % Content.
 \begin{multicols*}{3}
+  \raggedcolumns
   \input{datastructures/datastructures}
   \input{graph/graph}
   \input{geometry/geometry}
@@ -51,6 +54,7 @@
   \clearpage
   \input{math/tables}
 \begin{multicols*}{3}
+  \raggedcolumns
   \input{string/string}
   \input{java/java}
   \input{other/other}
