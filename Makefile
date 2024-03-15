@@ -2,6 +2,7 @@ TESTS = \
 	datastructures/test/fenwickTree.test \
 	datastructures/test/fenwickTree2.test \
 	datastructures/test/monotonicConvexHull.test \
+	datastructures/test/persistent.test \
 	graph/test/binary_lifting.test \
 	graph/test/LCA_sparse.test
 
@@ -43,6 +44,8 @@ datastructures/test/fenwickTree2.test: datastructures/test/fenwickTree2.cpp \
 datastructures/test/monotonicConvexHull.test: \
 	datastructures/test/monotonicConvexHull.cpp \
 	datastructures/monotonicConvexHull.cpp
+datastructures/test/persistent.test: datastructures/test/persistent.cpp \
+	datastructures/persistent.cpp
 graph/test/binary_lifting.test: graph/test/binary_lifting.cpp \
 	graph/binary_lifting.cpp graph/test/util.cpp
 graph/test/LCA_sparse.test: graph/test/LCA_sparse.cpp \
