@@ -4,7 +4,8 @@ TESTS = \
 	datastructures/test/monotonicConvexHull.test \
 	datastructures/test/persistent.test \
 	graph/test/binary_lifting.test \
-	graph/test/LCA_sparse.test
+	graph/test/LCA_sparse.test \
+	math/test/binomial0.test
 
 LATEXMK = latexmk -interaction=nonstopmode
 
@@ -50,6 +51,8 @@ graph/test/binary_lifting.test: graph/test/binary_lifting.cpp \
 	graph/binary_lifting.cpp graph/test/util.cpp
 graph/test/LCA_sparse.test: graph/test/LCA_sparse.cpp \
 	graph/LCA_sparse.cpp datastructures/sparseTable.cpp graph/test/util.cpp
+math/test/binomial0.test: math/test/binomial0.cpp math/binomial0.cpp \
+	math/shortModInv.cpp
 
 FORCE:
 .PHONY: all pdf test clean cleanpdf cleantest FORCE
