@@ -179,7 +179,7 @@ Sei $a_{ij}$ die Adjazenzmatrix von $G$ \textcolor{gray}{(mit $a_{ii} = 1$)}, da
     \sourcecode{graph/virtualTree.cpp}
 \end{algorithm}
 
-\begin{algorithm}{Maximal Cardinatlity Bipartite Matching}
+\begin{algorithm}{Maximum Cardinality Bipartite Matching}
 	\label{kuhn}
 	\begin{methods}
 		\method{kuhn}{berechnet Matching}{\abs{V}\*\min(ans^2, \abs{E})}
@@ -214,7 +214,7 @@ Sei $a_{ij}$ die Adjazenzmatrix von $G$ \textcolor{gray}{(mit $a_{ii} = 1$)}, da
 }
 
 \optional{
-\subsubsection{Push Relabel}
+\subsubsection{Push Relabel \opthint}
 \begin{methods}
 	\method{maxFlow}{gut bei sehr dicht besetzten Graphen.}{\abs{V}^2\*\sqrt{\abs{E}}}
 	\method{addEdge}{fügt eine \textbf{gerichtete} Kante ein}{1}
@@ -222,20 +222,19 @@ Sei $a_{ij}$ die Adjazenzmatrix von $G$ \textcolor{gray}{(mit $a_{ii} = 1$)}, da
 \sourcecode{graph/pushRelabel.cpp}
 }
 
-\begin{algorithm}{Min-Cost-Max-Flow}
-	\begin{methods}
-		\method{mincostflow}{berechnet Fluss}{\abs{V}^2\cdot\abs{E}^2}
-	\end{methods}
-	\sourcecode{graph/minCostMaxFlow.cpp}
-\end{algorithm}
-
 \subsubsection{\textsc{Dinic}'s Algorithm mit Capacity Scaling}
 \begin{methods}
 	\method{maxFlow}{doppelt so schnell wie \textsc{Ford-Fulkerson}}{\abs{V}^2\cdot\abs{E}}
 	\method{addEdge}{fügt eine \textbf{gerichtete} Kante ein}{1}
 \end{methods}
 \sourcecode{graph/dinicScaling.cpp}
-\vfill*
+
+\begin{algorithm}{Min-Cost-Max-Flow}
+	\begin{methods}
+		\method{mincostflow}{berechnet Fluss}{\abs{V}^2\cdot\abs{E}^2}
+	\end{methods}
+	\sourcecode{graph/minCostMaxFlow.cpp}
+\end{algorithm}
 \columnbreak
 
 \optional{
