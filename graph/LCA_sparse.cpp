@@ -10,7 +10,7 @@ struct LCA {
 		first.assign(sz(adj), 2 * sz(adj));
 		idx = 0;
 		dfs(adj, root);
-		st.init(&depth);
+		st.init(depth);
 	}
 
 	void dfs(vector<vector<int>>& adj, int v, ll d=0) {

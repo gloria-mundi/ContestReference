@@ -6,9 +6,9 @@ struct SparseTable {
 		return a[lidx] <= a[ridx] ? lidx : ridx;
 	}
 
-	void init(vector<ll> *vec) {
-		int n = sz(*vec);
-		a = vec->data();
+	void init(vector<ll> &vec) {
+		int n = sz(vec);
+		a = vec.data();
 		st.assign(__lg(n) + 1, vector<int>(n));
 		iota(all(st[0]), 0);
 		for (int j = 0; (2 << j) <= n; j++) {

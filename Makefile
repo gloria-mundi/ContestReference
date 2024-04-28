@@ -3,6 +3,8 @@ TESTS = \
 	datastructures/test/fenwickTree2.test \
 	datastructures/test/monotonicConvexHull.test \
 	datastructures/test/persistent.test \
+	datastructures/test/sparseTable.test \
+	datastructures/test/sparseTableDisjoint.test \
 	graph/test/binary_lifting.test \
 	graph/test/LCA_sparse.test \
 	math/test/binomial0.test
@@ -47,6 +49,11 @@ datastructures/test/monotonicConvexHull.test: \
 	datastructures/monotonicConvexHull.cpp
 datastructures/test/persistent.test: datastructures/test/persistent.cpp \
 	datastructures/persistent.cpp
+datastructures/test/sparseTable.test: datastructures/test/sparseTable.cpp \
+	datastructures/sparseTable.cpp
+datastructures/test/sparseTableDisjoint.test: \
+	datastructures/test/sparseTableDisjoint.cpp \
+	datastructures/sparseTableDisjoint.cpp
 graph/test/binary_lifting.test: graph/test/binary_lifting.cpp \
 	graph/binary_lifting.cpp graph/test/util.cpp
 graph/test/LCA_sparse.test: graph/test/LCA_sparse.cpp \
