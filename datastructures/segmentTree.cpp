@@ -4,9 +4,9 @@ struct SegTree {
 	vector<T> tree;
 	static constexpr T E = 0; // Neutral element for combine
 
-	SegTree(vector<T>& a) : n(sz(a)), tree(2 * n) {
+	SegTree(vector<T>& a) : n(ssize(a)), tree(2 * n) {
 	//SegTree(int size, T val = E) : n(size), tree(2 * n, val) {
-		copy(all(a), tree.begin() + n);
+		ranges::copy(a, tree.begin() + n);
 		for (int i = n - 1; i > 0; i--) { // remove for range update
 			tree[i] = comb(tree[2 * i], tree[2 * i + 1]);
 	}}

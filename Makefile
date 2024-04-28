@@ -1,4 +1,6 @@
 TESTS = \
+	datastructures/test/segmentTree.test \
+	datastructures/test/segmentTree2.test \
 	datastructures/test/fenwickTree.test \
 	datastructures/test/fenwickTree2.test \
 	datastructures/test/monotonicConvexHull.test \
@@ -31,7 +33,9 @@ cleanpdf:
 	rm -f *.thm
 
 cleantest:
-	rm -f $(TESTS) $(TESTS:.test=.ok)
+	rm -f $(TESTS) $(TESTS:.test=.ok) \
+		datastructures/test/segmentTree.tmp.cpp \
+		datastructures/test/segmentTree2.tmp.cpp
 
 %.ok: %.test
 	timeout -v 1 ./$<
@@ -40,6 +44,15 @@ cleantest:
 	g++ -include test.h -std=gnu++20 -Wall -Wextra -Wpedantic -Werror \
 		-fsanitize=address,undefined -g -o $@ $<
 
+datastructures/test/segmentTree.test: datastructures/test/segmentTree.cpp \
+	datastructures/test/segmentTree.tmp.cpp
+datastructures/test/segmentTree.tmp.cpp: datastructures/segmentTree.cpp
+	{ sed -e '/OR/,$$d' $< ; echo '};' ; } > $@
+datastructures/test/segmentTree2.test: datastructures/test/segmentTree2.cpp \
+	datastructures/test/segmentTree2.tmp.cpp
+datastructures/test/segmentTree2.tmp.cpp: datastructures/segmentTree.cpp
+	sed -e '/void update/,/OR/d' \
+	    -e '/remove for range/,/}}/{/}}/!d;s/}}/}/}' $< > $@
 datastructures/test/fenwickTree.test: datastructures/test/fenwickTree.cpp \
 	datastructures/fenwickTree.cpp
 datastructures/test/fenwickTree2.test: datastructures/test/fenwickTree2.cpp \

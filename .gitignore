@@ -224,3 +224,4 @@ TSWLatexianTemp*
 # files produced by the testing system
 *.test
 *.ok
+*.tmp.cpp
