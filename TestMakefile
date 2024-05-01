@@ -8,6 +8,8 @@ predep = $(patsubst $(source)=%,%,$(filter $(source)=%,$(PREDEPS)))
 TESTS := \
 	$(call with-defines-subsets,datastructures/test/segmentTree,SEGTREE_MUL SEGTREE_INIT_DEFAULT SEGTREE_RANGE_UPDATE) \
 	$(call with-defines-subsets,datastructures/test/segmentTree.SEGTREE_FIRST_NEG,SEGTREE_INIT_DEFAULT) \
+	$(call with-defines-subsets,datastructures/test/lazyPropagation,SEGTREE_FIRST_NEG SEGTREE_INIT_DEFAULT) \
+	$(call with-defines-subsets,datastructures/test/lazyPropagation.SEGTREE_MAX,SEGTREE_INIT_DEFAULT) \
 	datastructures/test/fenwickTree \
 	datastructures/test/fenwickTree2 \
 	datastructures/test/monotonicConvexHull \
@@ -20,7 +22,8 @@ TESTS := \
 
 # Dependencies which must be present before generating the .d file.
 PREDEPS := \
-	datastructures/test/segmentTree=datastructures/test/segmentTree.tmp.cpp
+	datastructures/test/segmentTree=datastructures/test/segmentTree.tmp.cpp \
+	datastructures/test/lazyPropagation=datastructures/test/lazyPropagation.tmp.cpp
 
 CPPFLAGS := -include test.h -std=gnu++20 -Wall -Wextra \
 	-Werror -fsanitize=address,undefined -fno-sanitize-recover -g
@@ -45,6 +48,9 @@ cleantest:
 datastructures/test/segmentTree.tmp.cpp: datastructures/segmentTree.cpp \
 	datastructures/test/segmentTree.awk
 	awk -f datastructures/test/segmentTree.awk $< > $@
+datastructures/test/lazyPropagation.tmp.cpp: \
+	datastructures/lazyPropagation.cpp datastructures/test/lazyPropagation.awk
+	awk -f datastructures/test/lazyPropagation.awk $< > $@
 
 .PHONY: test cleantest
 .SECONDARY: $(TESTS:=.test)

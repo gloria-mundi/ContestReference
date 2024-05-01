@@ -1,21 +1,22 @@
 struct SegTree {
 	using T = ll; using U = ll;
-	int n, h;
 	static constexpr T E = 0; // Neutral element for combine
 	static constexpr U UF = 0; // Unused value by updates
+	int n;
 	vector<T> tree; vector<U> lazy;
+	int h;
 	vector<ll> k; // size of segments (optional)
 
-	SegTree(const vector<T>& a) : n(sz(a) + 1), tree(2 * n, E),
+	SegTree(const vector<T>& a) : n(ssize(a) + 1), tree(2 * n),
 	//SegTree(int size, T def = E) : n(size + 1), tree(2 * n, def),
-			h(__lg(2 * n)), lazy(n, UF), k(2 * n, 1) {
-		copy(all(a), tree.begin() + n);
+			lazy(n, UF), h(__lg(2 * n)), k(2 * n, 1) {
+		ranges::copy(a, tree.begin() + n);
 		for (int i = n - 1; i > 0; i--) {
 			k[i] = 2 * k[2 * i];
 			tree[i] = comb(tree[2 * i], tree[2 * i + 1]);
 	}}
 
-	T comb(T a, T b) {return a + b;} // Modify this + E
+	T comb(T a, T b) { return a + b; } // Modify this + E
 
 	void apply(int i, U val) { // And this + UF
 		tree[i] = val * k[i];
@@ -42,17 +43,17 @@ struct SegTree {
 	void update(int l, int r, U val) {
 		l += n, r += n;
 		int l0 = l, r0 = r;
-		push(l0), push(r0 - 1);
+		push(l0), push(r0);
 		for (; l < r; l /= 2, r /= 2) {
 			if (l&1) apply(l++, val);
 			if (r&1) apply(--r, val);
 		}
-		build(l0), build(r0 - 1);
+		build(l0), build(r0);
 	}
 
 	T query(int l, int r) {
 		l += n, r += n;
-		push(l), push(r - 1);
+		push(l), push(r);
 		T resL = E, resR = E;
 		for (; l < r; l /= 2, r /= 2) {
 			if (l&1) resL = comb(resL, tree[l++]);
@@ -64,7 +65,7 @@ struct SegTree {
 	// Optional:
 	ll lower_bound(int l, int r, T x) {
 		l += n, r += n;
-		push(l), push(r - 1);
+		push(l), push(r);
 		vector<int> a, st;
 		for (; l < r; l /= 2, r /= 2) {
 			if (l&1) a.push_back(l++);
