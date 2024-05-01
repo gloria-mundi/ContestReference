@@ -4,14 +4,15 @@ struct SegTree {
 	vector<T> tree;
 	static constexpr T E = 0; // Neutral element for combine
 
-	SegTree(vector<T>& a) : n(ssize(a)), tree(2 * n) {
-	//SegTree(int size, T val = E) : n(size), tree(2 * n, val) {
+	SegTree(vector<T>& a) : n(ssize(a)), tree(2 * n, E) {
 		ranges::copy(a, tree.begin() + n);
+	//SegTree(int size, T val = E) : n(size), tree(2 * n, E) {
+	//	fill(tree.begin() + n, tree.end(), val);
 		for (int i = n - 1; i > 0; i--) { // remove for range update
 			tree[i] = comb(tree[2 * i], tree[2 * i + 1]);
 	}}
 
-	ll comb(T a, T b) {return a + b;} // modify this + neutral
+	ll comb(T a, T b) { return a + b; } // modify this + neutral
 
 	void update(int i, T val) {
 		tree[i += n] = val; // apply update code

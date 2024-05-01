@@ -1,3 +1,5 @@
+#define _GLIBCXX_DEBUG 1
+#define _GLIBCXX_SANITIZE_VECTOR 1
 #include <bits/stdc++.h>
 using namespace std;
 using ll = long long;

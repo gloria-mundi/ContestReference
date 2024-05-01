@@ -225,3 +225,4 @@ TSWLatexianTemp*
 *.test
 *.ok
 *.tmp.cpp
+*.d

@@ -1,0 +1,54 @@
+with-defines-subsets = $(if $2,$(call with-defines-subsets,$1,$(call dropfirst,$2)) $(call with-defines-subsets,$1.$(firstword $2),$(call dropfirst,$2)),$1)
+dropfirst = $(wordlist 2,$(words $1),$1)
+
+source = $(dir $*)$(firstword $(subst ., ,$(notdir $*)))
+flags = $(call dropfirst,$(subst ., -D,$(notdir $*))) $(CPPFLAGS)
+predep = $(patsubst $(source)=%,%,$(filter $(source)=%,$(PREDEPS)))
+
+TESTS := \
+	$(call with-defines-subsets,datastructures/test/segmentTree,SEGTREE_MUL SEGTREE_INIT_DEFAULT SEGTREE_RANGE_UPDATE) \
+	$(call with-defines-subsets,datastructures/test/segmentTree.SEGTREE_FIRST_NEG,SEGTREE_INIT_DEFAULT) \
+	datastructures/test/lazyPropagation \
+	datastructures/test/fenwickTree \
+	datastructures/test/fenwickTree2 \
+	datastructures/test/monotonicConvexHull \
+	datastructures/test/persistent \
+	datastructures/test/sparseTable \
+	datastructures/test/sparseTableDisjoint \
+	graph/test/binary_lifting \
+	graph/test/LCA_sparse \
+	math/test/binomial0
+
+# Dependencies which must be present before generating the .d file.
+PREDEPS := \
+	datastructures/test/segmentTree=datastructures/test/segmentTree.tmp.cpp
+
+CPPFLAGS := -include test.h -std=gnu++20 -Wall -Wextra \
+	-Werror -fsanitize=address,undefined -fno-sanitize-recover -g
+
+test: $(TESTS:=.ok)
+
+cleantest:
+	rm -f $(TESTS:=.test) $(TESTS:=.ok) $(TESTS:=.d) \
+		datastructures/test/segmentTree.tmp.cpp
+
+%.ok: %.test
+	timeout -v 2 ./$<
+	@touch $@
+
+.SECONDEXPANSION:
+%.test: $$(source).cpp
+	g++ $(flags) -o $@ $<
+
+%.d: $$(source).cpp $$(predep)
+	g++ -MM -MT '$*.test $*.d' -MF '$@' $(flags) $<
+
+datastructures/test/segmentTree.tmp.cpp: datastructures/segmentTree.cpp \
+	datastructures/test/segmentTree.awk
+	awk -f datastructures/test/segmentTree.awk $< > $@
+
+.PHONY: test cleantest
+.SECONDARY: $(TESTS:=.test)
+
+include $(TESTS:=.d)
+
