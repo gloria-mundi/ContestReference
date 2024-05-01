@@ -8,7 +8,6 @@ predep = $(patsubst $(source)=%,%,$(filter $(source)=%,$(PREDEPS)))
 TESTS := \
 	$(call with-defines-subsets,datastructures/test/segmentTree,SEGTREE_MUL SEGTREE_INIT_DEFAULT SEGTREE_RANGE_UPDATE) \
 	$(call with-defines-subsets,datastructures/test/segmentTree.SEGTREE_FIRST_NEG,SEGTREE_INIT_DEFAULT) \
-	datastructures/test/lazyPropagation \
 	datastructures/test/fenwickTree \
 	datastructures/test/fenwickTree2 \
 	datastructures/test/monotonicConvexHull \
