@@ -10,6 +10,7 @@ TESTS := \
 	$(call with-defines-subsets,datastructures/test/segmentTree.SEGTREE_FIRST_NEG,SEGTREE_INIT_DEFAULT) \
 	$(call with-defines-subsets,datastructures/test/lazyPropagation,SEGTREE_FIRST_NEG SEGTREE_INIT_DEFAULT) \
 	$(call with-defines-subsets,datastructures/test/lazyPropagation.SEGTREE_MAX,SEGTREE_INIT_DEFAULT) \
+	datastructures/test/waveletTree \
 	datastructures/test/fenwickTree \
 	datastructures/test/fenwickTree2 \
 	datastructures/test/monotonicConvexHull \
