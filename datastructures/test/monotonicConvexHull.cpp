@@ -1,3 +1,4 @@
+#define sz(X) ((int)size(X))
 #include "../monotonicConvexHull.cpp"
 
 int main() {

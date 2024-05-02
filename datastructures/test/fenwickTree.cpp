@@ -1,3 +1,4 @@
+#define sz ssize
 #include "../fenwickTree.cpp"
 
 void test(int n) {

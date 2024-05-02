@@ -1,3 +1,4 @@
+#define all(X) begin(X), end(X)
 #include "../persistent.cpp"
 
 int main() {

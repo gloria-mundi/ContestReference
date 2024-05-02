@@ -1,4 +1,6 @@
 #include "util.cpp"
+#define all(X) begin(X), end(X)
+#define sz ssize
 #include "../../datastructures/sparseTable.cpp"
 #include "../LCA_sparse.cpp"
 

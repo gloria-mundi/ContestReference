@@ -1,3 +1,5 @@
+#define sz ssize
+#define all(X) begin(X), end(X)
 #include "../sparseTableDisjoint.cpp"
 
 void test(int n) {
