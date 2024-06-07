@@ -13,10 +13,11 @@ TESTS := \
 	datastructures/test/waveletTree \
 	datastructures/test/fenwickTree \
 	datastructures/test/fenwickTree2 \
-	datastructures/test/monotonicConvexHull \
-	datastructures/test/persistent \
+	datastructures/test/treap2 \
 	datastructures/test/sparseTable \
 	datastructures/test/sparseTableDisjoint \
+	datastructures/test/monotonicConvexHull \
+	datastructures/test/persistent \
 	graph/test/binary_lifting \
 	graph/test/LCA_sparse \
 	math/test/binomial0
