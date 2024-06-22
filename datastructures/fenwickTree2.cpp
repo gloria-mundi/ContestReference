@@ -7,7 +7,7 @@ void update(int l, int r, ll val) {
 		add[tr] -= val, mul[tr] += val * r;
 }
 
-void init(vector<ll>& v) {
+void init(vector<ll> &v) {
 	mul.assign(size(v) + 1, 0);
 	add.assign(size(v) + 1, 0);
 	for(int i = 0; i < ssize(v); i++) update(i, i + 1, v[i]);
@@ -15,7 +15,7 @@ void init(vector<ll>& v) {
 
 ll prefix_sum(int i) {
 	ll res = 0;
-	for (int ti = i; ti > 0; ti -= ti & -ti)
+	for (int ti = i; ti > 0; ti &= ti-1)
 		res += add[ti] * i + mul[ti];
 	return res;
 }
