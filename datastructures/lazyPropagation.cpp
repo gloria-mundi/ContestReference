@@ -65,14 +65,13 @@ struct SegTree {
 	// Optional:
 	ll lower_bound(int l, int r, T x) {
 		l += n, r += n;
-		push(l), push(r);
-		vector<int> a, st;
+		push(l), push(r - 1);
+		int a[64] = {}, lp = 0, rp = 64;
 		for (; l < r; l /= 2, r /= 2) {
-			if (l&1) a.push_back(l++);
-			if (r&1) st.push_back(--r);
+			if (l&1) a[lp++] = l++;
+			if (r&1) a[--rp] = --r;
 		}
-		a.insert(a.end(), st.rbegin(), st.rend());
-		for (int i : a) if (tree[i] >= x) { // Modify this
+		for (int i : a) if (i != 0 && tree[i] >= x) { // Modify this
 			while (i < n) {
 				push_down(i);
 				if (tree[2 * i] >= x) i = 2 * i; // And this

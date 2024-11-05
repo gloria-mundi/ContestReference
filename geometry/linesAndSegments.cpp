@@ -36,7 +36,7 @@ double distToLine(pt a, pt b, pt p) {
 	return abs(cross(p - a, b - a)) / abs(b - a);
 }
 
-// Projektiert p auf die Gerade a-b
+// Projiziert p auf die Gerade a-b
 pt projectToLine(pt a, pt b, pt p) {
 	return a + (b - a) * dot(p - a, b - a) / norm(b - a);
 }
