@@ -1,5 +1,5 @@
-int rotateLeft(int n) { // Der letzte Überlebende, 1-basiert.
+ll rotateLeft(ll n) { // Der letzte Überlebende, 0-basiert.
 	int bits = __lg(n);
-	n ^= 1 << bits;
-	return 2 * n + 1;
+	n ^= 1ll << bits;
+	return n << 1;
 }

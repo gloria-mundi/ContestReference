@@ -10,6 +10,14 @@ namespace INT {constexpr int INF = 0x3FFF'FFFF;}
 namespace LL {constexpr ll INF = 0x3FFF'FFFF'FFFF'FFFFll;}
 namespace LD {constexpr ld INF = numeric_limits<ld>::infinity();}
 
+template<typename T>
+T _lg_check(T n) {
+	assert(n > 0);
+	return __lg(n);
+}
+
+#define __lg _lg_check
+
 namespace details {
 	template<typename T = ll>
 	bool isPrime(T x) {

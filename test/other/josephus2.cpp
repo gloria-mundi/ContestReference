@@ -15,7 +15,7 @@ void stress_test() {
 	ll tests = 0;
 	for (ll i = 1; i < 2'000; i++) {
 		auto got = rotateLeft(i);
-		auto expected = naive<1>(i, 2);
+		auto expected = naive<0>(i, 2);
 		if (got != expected) cerr << "error: " << i << FAIL;
 		tests++;
 	}
