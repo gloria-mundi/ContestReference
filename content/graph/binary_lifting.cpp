@@ -3,13 +3,13 @@ struct Lift {
 
 	Lift(vector<vector<int>> &adj, int root):
 			dep(adj.size()), par(adj.size()), jmp(adj.size(), root) {
-		function<void(int,int,int)> dfs = [&](int u, int p, int d) {
+		auto dfs = [&](auto &self, int u, int p, int d) -> void {
 			dep[u] = d, par[u] = p;
 			jmp[u] = dep[p] + dep[jmp[jmp[p]]] == 2*dep[jmp[p]]
 			       ? jmp[jmp[p]] : p;
-			for (int v: adj[u]) if (v != p) dfs(v, u, d+1);
+			for (int v: adj[u]) if (v != p) self(self, v, u, d+1);
 		};
-		dfs(root, root, 0);
+		dfs(dfs, root, root, 0);
 	}
 
 	int depth(int v) { return dep[v]; }
