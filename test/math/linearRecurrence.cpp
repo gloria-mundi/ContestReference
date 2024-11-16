@@ -1,5 +1,10 @@
 #include "../util.h"
+vector<ll> mul(const vector<ll>& a, const vector<ll>& b);
 #include <math/linearRecurrence.cpp>
+
+vector<ll> mul(const vector<ll>& a, const vector<ll>& b) {
+	return mulSlow(a, b);
+}
 
 struct RandomRecurence {
 	vector<ll> f, c, cache;

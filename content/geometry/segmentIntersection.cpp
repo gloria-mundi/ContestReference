@@ -18,8 +18,8 @@ struct event {
 	int id, type;
 	bool operator<(const event& o) const {
 		if (real(p) != real(o.p)) return real(p) < real(o.p);
-		if (type != o.type) return type > o.type;
-		return imag(p) < imag(o.p);
+		if (imag(p) != imag(o.p)) return imag(p) < imag(o.p);
+		return type > o.type;
 	}
 };
 
@@ -29,7 +29,7 @@ bool lessPT(const pt& a, const pt& b) {
 }
 
 bool intersect(const seg& a, const seg& b) {
-	return lineSegmentIntersection(a.a, a.b, b.a, b.b);
+	return segmentIntersection(a.a, a.b, b.a, b.b); //@\sourceref{geometry/linesAndSegments.cpp}@
 }
 
 pair<int, int> intersect(vector<seg>& segs) {

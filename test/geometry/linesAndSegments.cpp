@@ -30,7 +30,7 @@ void stress_lineIntersection(ll range) {
 		auto [c, d] = Random::line(range);
 		if (ccw(a, b, c) == 0 && ccw(a, b, d) == 0) continue;
 
-		bool expected = ccw(0, a-b, c-d) == 0;
+		bool expected = ccw(0, a-b, c-d) != 0;
 		bool got = lineIntersection(a, b, c, d);
 
 		if (got != expected) cerr << "error" << FAIL;
@@ -49,7 +49,7 @@ void stress_lineIntersection2(ll range) {
 		auto got = lineIntersection2(a, b, c, d);
 
 		if (distToLine(a, b, got) > 1e-6) cerr << "error: 1" << FAIL;
-		if (distToLine(a, b, got) > 1e-6) cerr << "error: 2" << FAIL;
+		if (distToLine(c, d, got) > 1e-6) cerr << "error: 2" << FAIL;
 		queries++;
 	}
 	cerr << "tested lineIntersection2: " << queries << endl;
@@ -172,7 +172,7 @@ void stress_segmentIntersection2(ll range) {
 		if (!got.empty() != tmp) cerr << "error: 1" << FAIL;
 		for (pt p : got) {
 			if (distToSegment(a, b, p) > 1e-6) cerr << "error: 2" << FAIL;
-			if (distToSegment(a, b, p) > 1e-6) cerr << "error: 3" << FAIL;
+			if (distToSegment(c, d, p) > 1e-6) cerr << "error: 3" << FAIL;
 		}
 		if (tmp) {
 			double gotDist = abs(got.front() - got.back());
@@ -220,7 +220,7 @@ int main() {
 	stress_lineIntersection(100);
 	stress_lineIntersection(1'000'000'000);
 	stress_lineIntersection2(100);
-	stress_lineIntersection2(1'000'000);
+	stress_lineIntersection2(1'000);//intersection can bet at N^3...
 	stress_distToLine(100);
 	stress_distToLine(1'000'000'000);
 	stress_projectToLine(100);

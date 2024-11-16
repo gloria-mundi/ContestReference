@@ -224,5 +224,6 @@ TSWLatexianTemp*
 # files produced by the testing system
 *.test
 *.ok
-*.tmp.cpp
 *.d
+# ignore build test awk files
+test/awk/*

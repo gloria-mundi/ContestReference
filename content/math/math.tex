@@ -109,8 +109,6 @@ sich alle Lösungen von $x^2-ny^2=c$ berechnen durch:
 	\sourcecode{math/millerRabin.cpp}
 	\method{rho}{findet zufälligen Teiler}{\sqrt[\leftroot{3}\uproot{2}4]{n}}
 	\sourcecode{math/rho.cpp}
-	%\method{squfof}{findet zufälligen Teiler}{\sqrt[\leftroot{4}\uproot{2}4]{n}}
-	%\sourcecode{math/squfof.cpp}
 \end{algorithm}
 
 \begin{algorithm}{Teiler}
@@ -138,8 +136,9 @@ sich alle Lösungen von $x^2-ny^2=c$ berechnen durch:
 	Sei $f(n)=c_{0}f(n-1)+c_{1}f(n-2)+\dots + c_{n-1}f(0)$ eine lineare Rekurrenz.
 	
 	\begin{methods}
-		\method{kthTerm}{Berechnet $k$-ten Term einer Rekurrenz $n$-ter Ordnung}{\log(k)\cdot n^2}
+		\method{kthTerm}{Berechnet $k$-ten Term einer Rekurrenz $n$-ter Ordnung}{\log(k)\cdot \text{mul}(n)}
 	\end{methods}
+	Die Polynom-Multiplikation kann auch mit NTT gemacht werden!
 	\sourcecode{math/linearRecurrence.cpp}
 	Alternativ kann der \mbox{$k$-te} Term in \runtime{n^3\log(k)} berechnet werden:
 	$$\renewcommand\arraystretch{1.5}
@@ -308,7 +307,10 @@ sich alle Lösungen von $x^2-ny^2=c$ berechnen durch:
 \method{gauss}{löst LGS}{n^3}
 \sourcecode{math/gauss.cpp}
 
-\vfill\null\columnbreak
+\begin{algorithm}{Inversionszahl}
+	\vspace{-2pt}
+	\sourcecode{math/inversions.cpp}
+\end{algorithm}
 
 \begin{algorithm}{Numerisch Extremstelle bestimmen}
 	\sourcecode{math/goldenSectionSearch.cpp}
@@ -317,7 +319,6 @@ sich alle Lösungen von $x^2-ny^2=c$ berechnen durch:
 \begin{algorithm}{Numerisch Integrieren, Simpsonregel}
 	\sourcecode{math/simpson.cpp}
 \end{algorithm}
-
 
 \begin{algorithm}{Polynome, FFT, NTT \& andere Transformationen}
 	Multipliziert Polynome $A$ und $B$.
@@ -341,21 +342,6 @@ sich alle Lösungen von $x^2-ny^2=c$ berechnen durch:
 \begin{algorithm}{Operations on Formal Power Series}
     \sourcecode{math/transforms/seriesOperations.cpp}
 \end{algorithm}
-
-\begin{algorithm}{Inversionszahl}
-	\sourcecode{math/inversions.cpp}
-\end{algorithm}
-
-\subsection{Satz von \textsc{Sprague-Grundy}}
-Weise jedem Zustand $X$ wie folgt eine \textsc{Grundy}-Zahl $g\left(X\right)$ zu:
-\[
-g\left(X\right) := \min\left\{
-\mathbb{Z}_0^+ \setminus
-\left\{g\left(Y\right) \mid Y \text{ von } X \text{ aus direkt erreichbar}\right\}
-\right\}
-\]
-$X$ ist genau dann gewonnen, wenn $g\left(X\right) > 0$ ist.\\
-Wenn man $k$ Spiele in den Zuständen $X_1, \ldots, X_k$ hat, dann ist die \textsc{Grundy}-Zahl des Gesamtzustandes $g\left(X_1\right) \oplus \ldots \oplus g\left(X_k\right)$.
 
 \subsection{Kombinatorik}
 
@@ -389,7 +375,9 @@ so gilt
 %\begin{algorithm}{Binomialkoeffizienten}
 \paragraph{Binomialkoeffizienten}
 	Die Anzahl der \mbox{$k$-elementigen} Teilmengen einer \mbox{$n$-elementigen} Menge.
-
+	
+	\input{math/tables/binom}
+	
 	\begin{methods}
 		\method{precalc}{berechnet $n!$ und $n!^{-1}$ vor}{\mathit{lim}}
 		\method{calc\_binom}{berechnet Binomialkoeffizient}{1}
@@ -498,7 +486,7 @@ Die Anzahl der Partitionen von $n$ mit Elementen aus ${1,\dots,k}$.
 \begin{align*}
 	p_0(0)=1 \qquad p_k(n)&=0 \text{ für } k > n \text{ oder } n \leq 0 \text{ oder } k \leq 0\\
 	p_k(n)&= p_k(n-k) + p_{k-1}(n-1)\\[2pt]
-	p(n)&=\sum_{k=1}^{n} p_k(n)=p_n(2n)=\sum\limits_{k\neq0}^\infty(-1)^{k+1}p\bigg(n - \frac{k(3k-1)}{2}\bigg)
+	p(n)=\sum_{k=1}^{n} p_k(n)&=p_n(2n)=\sum\limits_{k=1}^\infty(-1)^{k+1}\bigg[p\bigg(n - \frac{k(3k-1)}{2}\bigg) + p\bigg(n - \frac{k(3k+1)}{2}\bigg)\bigg]
 \end{align*}
 \begin{itemize}
 	\item in Formel $3$ kann abgebrochen werden wenn $\frac{k(3k-1)}{2} > n$.
@@ -508,6 +496,59 @@ Die Anzahl der Partitionen von $n$ mit Elementen aus ${1,\dots,k}$.
 \subsection{The Twelvefold Way \textnormal{(verteile $n$ Bälle auf $k$ Boxen)}}
 \input{math/tables/twelvefold}
 
+\subsection{Platonische Körper}
+\input{math/tables/platonic}
+
+\input{math/tables/probability}
+
+\subsection{Satz von \textsc{Sprague-Grundy}}
+Weise jedem Zustand $X$ wie folgt eine \textsc{Grundy}-Zahl $g\left(X\right)$ zu:
+\[
+g\left(X\right) := \min\left\{
+\mathbb{Z}_0^+ \setminus
+\left\{g\left(Y\right) \mid Y \text{ von } X \text{ aus direkt erreichbar}\right\}
+\right\}
+\]
+$X$ ist genau dann gewonnen, wenn $g\left(X\right) > 0$ ist.\\
+Wenn man $k$ Spiele in den Zuständen $X_1, \ldots, X_k$ hat, dann ist die \textsc{Grundy}-Zahl des Gesamtzustandes $g\left(X_1\right) \oplus \ldots \oplus g\left(X_k\right)$.
+
+\subsection{Nim-Spiele}
+\begin{itemize}
+	\item[\ding{182}] letzter gewinnt (normal)
+	\item[\ding{183}] letzter verliert
+\end{itemize}
+\input{math/tables/nim}
+
+\subsection{Verschiedenes}
+\input{math/tables/stuff}
+
+\begin{algorithm}{Div Sum}
+	\method{divSum}{berechnet $\sum_{i=0}^{n-1} \left\lfloor \frac{a\cdot i + b}{m}  \right\rfloor$}{\log(n)}
+	\textbf{Wichtig:} $b$ darf nicht negativ sein!
+	\sourcecode{math/divSum.cpp}
+\end{algorithm}
+
+\begin{algorithm}{Min Mod}
+	\begin{methods}
+		\method{firstVal}{berechnet den ersten Wert von $0,\ a, \ldots,\ a \cdot i \bmod{m}$,}{\log(m)}
+		\method{}{der in $[l, r]$ liegt. Gibt $-1$ zurück, falls er nicht existiert.}{}
+		\method{minMod}{berechnet das Minimum von $(a \cdot i + b) \bmod{m}$ für $i \in [0, n)$}{\log(m)}
+	\end{methods}
+	\textbf{Wichtig:} $0 \leq a, b, l, r < m$
+	\sourcecode{math/minMod.cpp}
+\end{algorithm}
+
+\subsection{Reihen}
+\input{math/tables/series}
+
+\subsection{Wichtige Zahlen}
+\input{math/tables/prime-composite}
+
+\subsection{Recover $\boldsymbol{x}$ and $\boldsymbol{y}$ from $\boldsymbol{y}$ from $\boldsymbol{x\*y^{-1}}$ }
+\method{recover}{findet $x$ und $y$ für $x=x\*y^{-1}\bmod m$}{\log(m)}
+\textbf{WICHTIG:} $x$ und $y$ müssen kleiner als $\sqrt{\nicefrac{m}{2}}$ sein!
+\sourcecode{math/recover.cpp}
+
 \optional{
 \subsection{Primzahlzählfunktion $\boldsymbol{\pi}$}
 \begin{methods}
@@ -516,9 +557,10 @@ Die Anzahl der Partitionen von $n$ mit Elementen aus ${1,\dots,k}$.
 	\method{pi}{zählt Primzahlen  $\leq n$ ($n < N^2$)}{n^{2/3}}
 \end{methods}
 \sourcecode{math/piLehmer.cpp}
-}
 
-%\input{math/tables/numbers}
+\subsection{Primzahlzählfunktion $\boldsymbol{\pi}$}
+\sourcecode{math/piLegendre.cpp}
+}
 
 \begin{algorithm}[optional]{Big Integers}
 	\sourcecode{math/bigint.cpp}

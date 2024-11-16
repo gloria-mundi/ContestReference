@@ -13,6 +13,19 @@
 	\sourcecode{other/timed.cpp}
 \end{algorithm}
 
+\begin{algorithm}{Overflow-sichere arithmetische Operationen}
+	Gibt zurück, ob es einen Overflow gab. Wenn nicht, enthält \code{c} das Ergebnis.
+	\begin{expandtable}
+		\begin{tabularx}{\linewidth}{|lR|}
+			\hline
+			Addition & \code{__builtin_saddll_overflow(a, b, \&c)} \\
+			Subtraktion & \code{__builtin_ssubll_overflow(a, b, \&c)} \\
+			Multiplikation & \code{__builtin_smulll_overflow(a, b, \&c)} \\
+			\hline
+		\end{tabularx}
+	\end{expandtable}
+\end{algorithm}
+
 \begin{algorithm}{Bit Operations}
 	\begin{expandtable}
 	\begin{tabularx}{\linewidth}{|Ll|}
@@ -29,19 +42,6 @@
 	\end{tabularx}\\
 	\end{expandtable}
 	\sourcecode{other/bitOps.cpp}
-\end{algorithm}
-
-\begin{algorithm}{Overflow-sichere arithmetische Operationen}
-	Gibt zurück, ob es einen Overflow gab. Wenn nicht, enthält \code{c} das Ergebnis.
-	\begin{expandtable}
-		\begin{tabularx}{\linewidth}{|lR|}
-			\hline
-			Addition & \code{__builtin_saddll_overflow(a, b, \&c)} \\
-			Subtraktion & \code{__builtin_ssubll_overflow(a, b, \&c)} \\
-			Multiplikation & \code{__builtin_smulll_overflow(a, b, \&c)} \\
-			\hline
-		\end{tabularx}
-	\end{expandtable}
 \end{algorithm}
 
 \begin{algorithm}{Pragmas}
@@ -70,6 +70,12 @@
 	\paragraph{Sum over Subsets DP} $\text{res}[\text{mask}]=\sum_{i\subseteq\text{mask}}\text{in}[i]$.
 	Für Summe über Supersets \code{res} einmal vorher und einmal nachher reversen.
 	\sourcecode{other/sos.cpp}
+\end{algorithm}
+
+\begin{algorithm}{Fast Subset Sum}
+	\method{fastSubsetSum}{findet maximale subset $\mathit{sum}\leq t$}{n \cdot A}
+	Die Laufzeit hängt vom maximalen Wert $A$ in der Menge ab.
+	\sourcecode{other/fastSubsetSum.cpp}
 \end{algorithm}
 
 \begin{algorithm}{Parallel Binary Search}

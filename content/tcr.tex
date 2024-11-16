@@ -1,6 +1,9 @@
-
-%maybe size 9pt if too many pages
-\documentclass[a4paper,fontsize=7.8pt]{scrartcl}
+\documentclass[
+	paper=a4,
+	DIV=calc,
+	fontsize=7.8pt,
+	usegeometry
+]{scrartcl}
 
 % General information.
 \newcommand{\teamname}{Infinite Loopers}
@@ -54,11 +57,7 @@
   \input{graph/graph}
   \input{geometry/geometry}
   \input{math/math}
-\end{multicols*}
   \clearpage
-  \input{math/tables}
-\begin{multicols*}{3}
-  \raggedcolumns
   \input{string/string}
   \input{python/python}
   \input{other/other}

@@ -1,33 +1,30 @@
-constexpr ll mod = 1'000'000'007;
-vector<ll> modMul(const vector<ll>& a, const vector<ll>& b,
-                  const vector<ll>& c) {
-	ll n = sz(c);
-	vector<ll> res(n * 2 + 1);
-	for (int i = 0; i <= n; i++) { //a*b
-		for (int j = 0; j <= n; j++) {
-			res[i + j] += a[i] * b[j];
-			res[i + j] %= mod;
+constexpr ll mod = 998244353;
+// oder ntt mul @\sourceref{math/transforms/ntt.cpp}@
+vector<ll> mul(const vector<ll>& a, const vector<ll>& b) {
+	vector<ll> c(sz(a) + sz(b) - 1);
+	for (int i = 0; i < sz(a); i++) {
+		for (int j = 0; j < sz(b); j++) {
+			c[i+j] += a[i]*b[j] % mod;
 	}}
-	for (int i = 2 * n; i > n; i--) { //res%c
-		for (int j = 0; j < n; j++) {
-			res[i - 1 - j] += res[i] * c[j];
-			res[i - 1 - j] %= mod;
-	}}
-	res.resize(n + 1);
-	return res;
+	for (ll& x : c) x %= mod;
+	return c;
 }
 
 ll kthTerm(const vector<ll>& f, const vector<ll>& c, ll k) {
-	assert(sz(f) == sz(c));
-	vector<ll> tmp(sz(c) + 1), a(sz(c) + 1);
-	tmp[0] = a[1] = 1; //tmp = (x^k) % c
-
-	for (k++; k > 0; k /= 2) {
-		if (k & 1) tmp = modMul(tmp, a, c);
-		a = modMul(a, a, c);
-	}
-
-	ll res = 0;
-	for (int i = 0; i < sz(c); i++) res += (tmp[i+1] * f[i]) % mod;
-	return res % mod;
+	int n = sz(c);
+	vector<ll> q(n + 1, 1);
+	for (int i = 0; i < n; i++) q[i + 1] = (mod - c[i]) % mod;
+	vector<ll> p = mul(f, q);
+	p.resize(n);
+	p.push_back(0);
+	do {
+		vector<ll> q2 = q;
+		for (int i = 1; i <= n; i += 2) q2[i] = (mod - q2[i]) % mod;
+		vector<ll> x = mul(p, q2), y = mul(q, q2);
+		for (int i = 0; i <= n; i++){
+			p[i] = i == n ? 0 : x[2*i + (k&1)];
+			q[i] = y[2*i];
+		}
+	} while (k /= 2);
+	return p[0];
 }

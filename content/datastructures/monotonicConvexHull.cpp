@@ -16,7 +16,7 @@ struct Envelope {
 			ls.pop_back();
 		}
 		ls.push_back({m, b});
-		ptr = min(ptr, sz(ls) - 1);
+		ptr = min(ptr, (int)sz(ls) - 1);
 	}
 
 	ll query(ll x) {
