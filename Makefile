@@ -1,28 +1,26 @@
-
 LATEXMK = latexmk -interaction=nonstopmode
 
 tcr.pdf: FORCE
-	$(LATEXMK) -pdf tcr
-
-pdf: tcr.pdf tcr-opt.pdf
+	cd content && $(LATEXMK)
 
 tcr-opt.pdf: FORCE
-	$(LATEXMK) -pdf -jobname=tcr-opt -usepretex="\def\OPTIONAL{}" tcr
+	cd content && $(LATEXMK) -r latexmk.opt
+
+pdf: tcr.pdf tcr-opt.pdf
 
 all: pdf test
 
 test:
-	+gmake -f TestMakefile
+	+gmake -C test
 
 clean: cleanpdf cleantest
 
 cleanpdf:
-	$(LATEXMK) -C tcr
-	$(LATEXMK) -C -jobname=tcr-opt tcr
-	rm -f *.thm
+	cd content && $(LATEXMK) -C
+	cd content && $(LATEXMK) -r latexmk.opt -C
 
 cleantest:
-	+-gmake -f TestMakefile cleantest
+	+-gmake -C clean
 
 FORCE:
 .PHONY: all pdf test clean cleanpdf cleantest FORCE

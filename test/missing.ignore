@@ -1,0 +1,9 @@
+datastructures/stlRope.cpp
+other/bitOps.cpp
+other/pbs.cpp
+other/pragmas.cpp
+other/stuff.cpp
+other/timed.cpp
+tests/gcc5bug.cpp
+tests/precision.cpp
+tests/whitespace.cpp

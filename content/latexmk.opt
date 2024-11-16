@@ -1,0 +1,2 @@
+$jobname = 'tcr-opt';
+$pre_tex_code .= '\def\OPTIONAL{}'

@@ -1,0 +1,13 @@
+@default_files = qw(tcr);
+$pdf_mode = 1;
+$aux_dir = ".";
+$out_dir = "..";
+{
+	my $commit = `git rev-parse HEAD`;
+	chomp $commit;
+	$pre_tex_code .=
+	  '\newcommand{\srclink}[1]'
+	  .'{https://git.gloria-mundi.eu/tcr/plain/content/#1?'.$commit.'}';
+}
+&alt_tex_cmds;
+$jobname = 'tcr';

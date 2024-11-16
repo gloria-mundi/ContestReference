@@ -1,0 +1,69 @@
+
+%maybe size 9pt if too many pages
+\documentclass[a4paper,fontsize=7.8pt]{scrartcl}
+
+% General information.
+\newcommand{\teamname}{Infinite Loopers}
+\newcommand{\university}{Karlsruhe Institute of Technology}
+
+% Source code links (optional)
+\ifdefined\srclink
+\else
+	\newcommand{\srclink}[1]{https://git.gloria-mundi.eu/tcr/plain/#1}
+\fi
+
+% Options
+\newif\ifoptional
+\ifdefined\OPTIONAL
+	\optionaltrue
+\fi
+
+% Font encoding.
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[hidelinks,pdfencoding=auto]{hyperref}
+
+% Include headers.
+\usepackage{latexHeaders/layout}
+\usepackage{latexHeaders/math}
+\usepackage{latexHeaders/code}
+\usepackage{latexHeaders/commands}
+
+% Title and author information.
+\title{Team Contest Reference}
+\author{\teamname \\ \university}
+\date{\today}
+\begin{document}
+
+% Titlepage with table of contents.
+\setlength{\columnsep}{1cm}
+\optional{
+\maketitle
+\begin{multicols*}{3}
+	\tableofcontents
+\end{multicols*}
+}
+
+\newpage
+
+% Content.
+\begin{multicols*}{3}
+  \raggedcolumns
+  \input{datastructures/datastructures}
+  \input{graph/graph}
+  \input{geometry/geometry}
+  \input{math/math}
+\end{multicols*}
+  \clearpage
+  \input{math/tables}
+\begin{multicols*}{3}
+  \raggedcolumns
+  \input{string/string}
+  \input{python/python}
+  \input{other/other}
+  \input{template/template}
+  \clearpage
+  \input{tests/test}
+\end{multicols*}
+\end{document}
