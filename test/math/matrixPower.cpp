@@ -7,15 +7,15 @@ struct mat {
 	mat(int dim = 0, int diag = 1) : m(dim, vector<ll>(dim)) {
 		for (int i = 0; i < dim; i++) m[i][i] = diag;
 	}
-	mat(const vector<ll> c) : m(sz(c), vector<ll>(sz(c))) {
+	mat(const vector<ll> c) : m(ssize(c), vector<ll>(ssize(c))) {
 		m[0] = c;
-		for (ll i = 1; i < sz(c); i++) {
+		for (ll i = 1; i < ssize(c); i++) {
 			m[i][i-1] = 1;
 		}
 	}
 
 	mat operator*(const mat& o) const {
-		int dim = sz(m);
+		int dim = ssize(m);
 		mat res(dim, 0);
 		for (int i = 0; i < dim; i++) {
 			for (int j = 0; j < dim; j++) {
@@ -29,7 +29,7 @@ struct mat {
 	}
 
 	vector<ll> operator*(const vector<ll>& o) const {
-		int dim = sz(m);
+		int dim = ssize(m);
 		vector<ll> res(dim);
 		for (int i = 0; i < dim; i++) {
 			for (int j = 0; j < dim; j++) {
@@ -48,10 +48,10 @@ struct RandomRecurence {
 	RandomRecurence(int n) : f(Random::integers<ll>(n, 0, mod)), c(Random::integers<ll>(n, 0, mod)), cache(f) {}
 
 	ll operator()(ll k){
-		while (sz(cache) <= k) {
+		while (ssize(cache) <= k) {
 			ll cur = 0;
-			for (ll i = 0; i < sz(c); i++) {
-				cur += (c[i] * cache[sz(cache) - i - 1]) % mod;
+			for (ll i = 0; i < ssize(c); i++) {
+				cur += (c[i] * cache[ssize(cache) - i - 1]) % mod;
 			}
 			cur %= mod;
 			cache.push_back(cur);
@@ -67,13 +67,13 @@ void stress_test() {
 		RandomRecurence f(n);
 		precalc(mat(f.c));
 		auto tmp = f.f;
-		reverse(all(tmp));
+		ranges::reverse(tmp);
 
 		for (int j = 0; j < 100; j++) {
 			ll k = Random::integer<ll>(0, 1000);
 
 			vector<ll> got = calc(k, tmp);
-			vector<ll> expected(sz(f.f));
+			vector<ll> expected(ssize(f.f));
 			for (ll l = 0; l < n; l++) expected[n - 1 - l] = f(k + l);
 
 			if (got != expected) cerr << "error" << FAIL;
@@ -89,7 +89,7 @@ void performance_test() {
 	timer t;
 	RandomRecurence f(N);
 	auto tmp = f.f;
-	reverse(all(tmp));
+	ranges::reverse(tmp);
 
 	t.start();
 	precalc(mat(f.c));

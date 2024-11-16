@@ -3,7 +3,7 @@
 
 ll naive(const vector<ll>& v) {
 	ll res = 0;
-	for (ll i = 0; i < sz(v); i++) {
+	for (ll i = 0; i < ssize(v); i++) {
 		for (ll j = 0; j < i; j++) {
 			if (v[j] > v[i]) res++;
 		}

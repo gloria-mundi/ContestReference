@@ -2,8 +2,8 @@ using path = pair<ll, int>; //dist, destination
 
 auto dijkstra(const vector<vector<path>>& adj, int start) {
 	priority_queue<path, vector<path>, greater<path>> pq;
-	vector<ll> dist(sz(adj), INF);
-	vector<int> prev(sz(adj), -1);
+	vector<ll> dist(ssize(adj), INF);
+	vector<int> prev(ssize(adj), -1);
 	dist[start] = 0; pq.emplace(0, start);
 
 	while (!pq.empty()) {

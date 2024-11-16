@@ -4,10 +4,10 @@
 pair<int, int> naive(string_view s, string_view t) {
 	int pos = 0;
 	int len = 0;
-	for (int j = 0; j < sz(t); j++) {
-		for (int i = 0; i < sz(s); i++) {
+	for (int j = 0; j < ssize(t); j++) {
+		for (int i = 0; i < ssize(s); i++) {
 			int cur = 0;
-			while (i+cur < sz(s) && j+cur < sz(t) && s[i+cur] == t[j+cur]) cur++;
+			while (i+cur < ssize(s) && j+cur < ssize(t) && s[i+cur] == t[j+cur]) cur++;
 			if (cur > len) {
 				pos = j;
 				len = cur;
@@ -43,7 +43,7 @@ void performance_test() {
 	SuffixAutomaton sa(s);
 	t.stop();
 	hash_t hash = 0;
-	for (ll c = 0; c < sz(s);) {
+	for (ll c = 0; c < ssize(s);) {
 		int m = Random::integer<int>(1, 1000);
 		s = Random::string(m, "abc");
 		t.start();

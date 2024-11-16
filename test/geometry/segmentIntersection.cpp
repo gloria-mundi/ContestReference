@@ -40,7 +40,7 @@ vector<seg> randomSegs(int n, ll range) {
 }
 
 bool naive(vector<seg>& segs) {
-	for (ll i = 0; i < sz(segs); i++) {
+	for (ll i = 0; i < ssize(segs); i++) {
 		for (ll j = 0; j < i; j++) {
 			if (segmentIntersection(segs[i].a, segs[i].b, segs[j].a, segs[j].b)) return true;
 		}

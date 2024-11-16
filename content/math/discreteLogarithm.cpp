@@ -5,11 +5,11 @@ ll dlog(ll a, ll b, ll m) { //a > 0!
 		vals[i] = {e, i};
 	}
 	vals.emplace_back(m, 0);
-	sort(all(vals));
+	ranges::sort(vals);
 	ll fact = powMod(a, m - bound - 1, m);
 
 	for (ll i = 0; i < m; i += bound, b = (b * fact) % m) {
-		auto it = lower_bound(all(vals), pair<ll, ll>{b, 0});
+		auto it = ranges::lower_bound(vals, pair<ll, ll>{b, 0});
 		if (it->first == b) {
 			return (i + it->second) % m;
 	}}

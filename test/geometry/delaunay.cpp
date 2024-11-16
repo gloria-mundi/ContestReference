@@ -6,28 +6,27 @@ auto cross(pt p, pt a, pt b) {return cross(a - p, b - p);}
 #pragma GCC diagnostic ignored "-Wunused-variable"
 #include <geometry/delaunay.cpp>
 
+
 vector<pt> convexHull(vector<pt> pts){
-	sort(all(pts), [](const pt& a, const pt& b){
-		return real(a) == real(b) ? imag(a) < imag(b)
-		                          : real(a) < real(b);
-	});
-	pts.erase(unique(all(pts)), pts.end());
+	ranges::sort(pts, {},
+		[](pt x) { return pair{real(x), imag(x)}; });
+	pts.erase(begin(ranges::unique(pts)), end(pts));
 	int k = 0;
-	vector<pt> h(2 * sz(pts));
-	auto half = [&](auto begin, auto end, int t) {
-		for (auto it = begin; it != end; it++) {
-			while (k > t && cross(h[k-2], h[k-1], *it) < 0) k--; //allow collinear points!
-			h[k++] = *it;
+	vector<pt> h(2 * ssize(pts));
+	auto half = [&](auto &&v, int t) {
+		for (auto x: v) {
+			while (k > t && cross(h[k-2], h[k-1], x) < 0) k--; // allow collinear points
+			h[k++] = x;
 	}};
-	half(all(pts), 1); // Untere Hülle.
-	half(next(pts.rbegin()), pts.rend(), k); // Obere Hülle.
+	half(pts, 1); // Untere Hülle.
+	half(pts | views::reverse | views::drop(1), k); // Obere Hülle
 	h.resize(k);
 	return h;
 }
 
 lll area(const vector<pt>& poly) { //poly[0] == poly.back()
 	lll res = 0;
-	for (int i = 0; i + 1 < sz(poly); i++)
+	for (int i = 0; i + 1 < ssize(poly); i++)
 		res += cross(poly[i], poly[i + 1]);
 	return res;
 }
@@ -89,15 +88,15 @@ void stress_test(ll range) {
 		hull.pop_back();
 
 		auto got = delaunay(ps);
-		if (sz(got) % 3 != 0) cerr << "error: not triangles" << FAIL;
-		if (sz(got) / 3 + sz(hull) - 3 + 1 != 2 * sz(ps) - 4) cerr << "error: wrong number" << FAIL;
+		if (ssize(got) % 3 != 0) cerr << "error: not triangles" << FAIL;
+		if (ssize(got) / 3 + ssize(hull) - 3 + 1 != 2 * ssize(ps) - 4) cerr << "error: wrong number" << FAIL;
 
 		//all triangles should be oriented ccw
 		lll gotArea = 0;
-		for (int i = 0; i < sz(got); i += 3) gotArea += cross(got[i], got[i+1], got[i+2]);
+		for (int i = 0; i < ssize(got); i += 3) gotArea += cross(got[i], got[i+1], got[i+2]);
 		if (gotArea != expectedArea) cerr << "error: wrong area" << FAIL;
 
-		for (int i = 0; i < sz(got); i++) {
+		for (int i = 0; i < ssize(got); i++) {
 			int ii = i + 1;
 			if (i / 3 != ii / 3) ii -= 3;
 			for (int j = 0; j < i; j++) {
@@ -111,7 +110,7 @@ void stress_test(ll range) {
 			for (pt p : ps) seen |= p == got[i];
 			if (!seen) cerr << "error: invalid point" << FAIL;
 		}
-		for (int i = 0; i < sz(got); i += 3) {
+		for (int i = 0; i < ssize(got); i += 3) {
 			for (pt p : ps) {
 				if (p == got[i]) continue;
 				if (p == got[i+1]) continue;
@@ -131,7 +130,7 @@ void performance_test() {
 	t.start();
 	auto got = delaunay(ps);
 	t.stop();
-	hash_t hash = sz(got);
+	hash_t hash = ssize(got);
 	if (t.time > 500) cerr << "too slow: " << t.time << FAIL;
 	cerr << "tested performance: " << t.time << "ms (hash: " << hash << ")" << endl;
 }

@@ -39,10 +39,10 @@ pair<int, int> intersect(vector<seg>& segs) {
 		events.push_back({s.a, s.id, 1});
 		events.push_back({s.b, s.id, -1});
 	}
-	sort(all(events));
+	ranges::sort(events, less{});
 
 	set<seg> q;
-	vector<set<seg>::iterator> where(sz(segs));
+	vector<set<seg>::iterator> where(ssize(segs));
 	for (auto e : events) {
 		int id = e.id;
 		if (e.type > 0) {

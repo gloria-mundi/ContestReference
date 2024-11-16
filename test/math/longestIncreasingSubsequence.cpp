@@ -9,7 +9,7 @@ constexpr ll INF = LL::INF;
 
 template<bool STRICT>
 bool isLis(const vector<ll>& a, const vector<int>& lis) {
-	for (int i = 1; i < sz(lis); i++) {
+	for (int i = 1; i < ssize(lis); i++) {
 		if (lis[i-1] >= lis[i]) return false;
 		if (a[lis[i-1]] > a[lis[i]]) return false;
 		if (STRICT && a[lis[i-1]] == a[lis[i]]) return false;
@@ -20,12 +20,12 @@ bool isLis(const vector<ll>& a, const vector<int>& lis) {
 template<bool STRICT>
 vector<int> naive(const vector<ll>& a) {
 	vector<int> res;
-	for (ll i = 1; i < (1ll << sz(a)); i++) {
+	for (ll i = 1; i < (1ll << ssize(a)); i++) {
 		vector<int> tmp;
-		for (ll j = 0; j < sz(a); j++) {
+		for (ll j = 0; j < ssize(a); j++) {
 			if (((i >> j) & 1) != 0) tmp.push_back(j);
 		}
-		if (sz(tmp) >= sz(res) && isLis<STRICT>(a, tmp)) res = tmp;
+		if (ssize(tmp) >= ssize(res) && isLis<STRICT>(a, tmp)) res = tmp;
 	}
 	return res;
 }
@@ -56,10 +56,9 @@ void performance_test() {
 	timer t;
 	auto a = Random::integers<ll>(N, -10'000, 10'000);
 	auto b = Random::integers<ll>(N, -10'000, 10'000);
-	sort(all(b));
+	ranges::sort(b);
 	auto c = Random::integers<ll>(N, -10'000, 10'000);
-	sort(all(c));
-	reverse(all(c));
+	ranges::sort(c | views::reverse);
 	hash_t hash = 0;
 	t.start();
 	hash += lis(a).size();

@@ -23,11 +23,11 @@ void visit(int v) {
 }}}
 
 void scc() {
-	inStack.assign(sz(adj), false);
-	low.assign(sz(adj), -1);
-	idx.assign(sz(adj), -1);
+	inStack.assign(ssize(adj), false);
+	low.assign(ssize(adj), -1);
+	idx.assign(ssize(adj), -1);
 
 	counter = sccCounter = 0;
-	for (int i = 0; i < sz(adj); i++) {
+	for (int i = 0; i < ssize(adj); i++) {
 		if (low[i] < 0) visit(i);
 }}

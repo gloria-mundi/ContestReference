@@ -52,8 +52,8 @@ void stress_test() {
 		int m = Random::integer<int>(30, 300);
 
 		vector<int> insertOrder(m);
-		iota(all(insertOrder), 0);
-		shuffle(all(insertOrder), Random::rng);
+		iota(begin(insertOrder), end(insertOrder), 0);
+		ranges::shuffle(insertOrder, Random::rng);
 		vector<pair<int, int>> edges(m, {-1, -1});
 
 		connect con(n, m);
@@ -104,15 +104,15 @@ void performance_test() {
 	t.stop();
 
 	vector<int> insertOrder(M);
-	iota(all(insertOrder), 0);
-	shuffle(all(insertOrder), Random::rng);
+	iota(begin(insertOrder), end(insertOrder), 0);
+	ranges::shuffle(insertOrder, Random::rng);
 	vector<bool> inserted(M);
 
 	for (int i = 0, j = 0; i < N; i++) {
 		int a = Random::integer<int>(0, N);
 		int b = a;
 		while (b == a) b = Random::integer<int>(0, N);
-		
+
 		t.start();
 		con.addEdge(a, b, insertOrder[i]);
 		t.stop();

@@ -18,7 +18,7 @@ void stress_test() {
 		if (got) found.push_back(i);
 		queries++;
 	}
-	primes.resize(sz(found));
+	primes.resize(ssize(found));
 	if (primes != found) cerr << "error: primes" << FAIL;
 	for (int i = 0; i < 1'000'000; i++) {
 		ll x = Random::integer<ll>(2, N);
@@ -34,7 +34,7 @@ void performance_test() {
 	timer t;
 	t.start();
 	primeSieve();
-	hash_t hash = sz(primes);
+	hash_t hash = ssize(primes);
 	t.stop();
 	if (t.time > 500) cerr << "too slow: " << t.time << FAIL;
 	cerr << "tested performance: " << t.time << "ms (hash: " << hash << ")" << endl;

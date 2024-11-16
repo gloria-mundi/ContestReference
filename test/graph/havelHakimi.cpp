@@ -13,11 +13,11 @@ void stress_test() {
 		for (int i = 0; i < n; i++) expected[i] = g.deg(i);
 
 		auto res = havelHakimi(expected);
-		if (sz(res) != n) cerr << "error: wrong number of nodes" << FAIL;
+		if (ssize(res) != n) cerr << "error: wrong number of nodes" << FAIL;
 		vector<vector<int>> rev(n);
 		vector<int> got(n);
 		for (int i = 0; i < n; i++) {
-			got[i] = sz(res[i]);
+			got[i] = ssize(res[i]);
 			for (int j : res[i]) {
 				if (j < 0 || j >= n) cerr << "error: invalid edge" << FAIL;
 				rev[j].push_back(i);
@@ -25,11 +25,11 @@ void stress_test() {
 		}
 
 		for (int i = 0; i < n; i++) {
-			sort(all(res[i]));
-			sort(all(rev[i]));
+			ranges::sort(res[i]);
+			ranges::sort(rev[i]);
 			if (res[i] != rev[i]) cerr << "error: graph is directed" << FAIL;
 			for (int j : res[i]) if (j == i) cerr << "error: graph has loop" << FAIL;
-			for (int j = 1; j < sz(res[i]); j++) {
+			for (int j = 1; j < ssize(res[i]); j++) {
 				if (res[i][j] == res[i][j-1]) cerr << "error: multiedge" << FAIL;
 			}
 		}
@@ -54,7 +54,7 @@ void performance_test() {
 	auto res = havelHakimi(expected);
 	t.stop();
 	hash_t hash = 0;
-	for (auto& v : res) hash += sz(v);
+	for (auto& v : res) hash += ssize(v);
 	if (t.time > 500) cerr << "too slow: " << t.time << FAIL;
 	cerr << "tested performance: " << t.time << "ms (hash: " << hash << ")" << endl;
 }

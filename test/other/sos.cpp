@@ -6,8 +6,8 @@ vector<ll> sos(const vector<ll>& in) {
 }
 
 vector<ll> naive(const vector<ll>& in) {
-	vector<ll> res(sz(in));
-	for (ll i = 0; i < sz(in); i++) {
+	vector<ll> res(ssize(in));
+	for (ll i = 0; i < ssize(in); i++) {
 		for (ll j = 0; j <= i; j++) {
 			if ((i | j) == i) {
 				res[i] += in[j];

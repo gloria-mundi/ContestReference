@@ -66,7 +66,7 @@ struct Treap {
 	void insert(int i, ll val) { // and i = val
 		auto [left, right] = split(root, i);
 		treap.emplace_back(val);
-		left = merge(left, sz(treap) - 1);
+		left = merge(left, ssize(treap) - 1);
 		root = merge(left, right);
 	}
 

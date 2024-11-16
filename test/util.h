@@ -1,9 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define all(x) std::begin(x), std::end(x)
-#define sz(x) (ll)std::size(x)
-
 using ll = long long;
 using lll = __int128;
 using ld = long double;
@@ -109,7 +106,7 @@ namespace Random {
 
 	std::string string(std::size_t n, string_view chars) {
 		std::string res(n, '*');
-		for (char& c : res) c = chars[integer(sz(chars))];
+		for (char& c : res) c = chars[integer(ssize(chars))];
 		return res;
 	}
 
@@ -281,9 +278,9 @@ public:
 
 	Graph(int n) : adj(n) {}
 
-	int m() const {return sz(edges);}
-	int n() const {return sz(adj);}
-	int deg(int x) const {return sz(adj[x]);}
+	int m() const {return ssize(edges);}
+	int n() const {return ssize(adj);}
+	int deg(int x) const {return ssize(adj[x]);}
 
 	Graph& clear() {
 		adj.assign(adj.size(), {});
@@ -295,33 +292,33 @@ public:
 		if (!LOOPS && from == to) return false;
 		if (!MULTI && adj[from].find(to) != adj[from].end()) return false;
 		edges.emplace_back(from, to, w);
-		_addAdj(sz(edges) - 1);
+		_addAdj(ssize(edges) - 1);
 		return true;
 	}
 
 	Graph& reverse() {
 		for (auto& e : edges) swap(e.from, e.to);
 		adj.assign(adj.size(), {});
-		for (int i = 0; i < sz(edges); i++) _addAdj(i);
+		for (int i = 0; i < ssize(edges); i++) _addAdj(i);
 		return *this;
 	}
 
 	Graph& shuffle() {
-		std::shuffle(all(edges), Random::rng);
+		ranges::shuffle(edges, Random::rng);
 		if constexpr (!DIR) {
 			for (auto& e : edges) {
 				if (Random::integer(0, 2)) swap(e.from, e.to);
 			}
 		}
 		adj.assign(adj.size(), {});
-		for (int i = 0; i < sz(edges); i++) _addAdj(i);
+		for (int i = 0; i < ssize(edges); i++) _addAdj(i);
 		return *this;
 	}
 
 	Graph& permutate() {
 		vector<int> perm(n());
-		iota(all(perm), 0);
-		std::shuffle(all(perm), Random::rng);
+		iota(begin(perm), end(perm), 0);
+		ranges::shuffle(perm, Random::rng);
 		for (auto& e : edges) {
 			e.from = perm[e.from];
 			e.to = perm[e.to];
@@ -399,7 +396,7 @@ public:
 						}
 					}
 				}
-				std::shuffle(all(tmp), Random::rng);
+				ranges::shuffle(tmp, Random::rng);
 				for (auto [a, b] : tmp) {
 					if (todo <= 0) break;
 					if (addEdge(a, b)) todo--;

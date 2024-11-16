@@ -7,7 +7,7 @@ void takeAll(int n, int line) {
 	for (int i = 0; i < n; i++) {
 		if (i == line) continue;
 		double diff = mat[i][line];
-		for (int j = 0; j < sz(mat[i]); j++) {
+		for (int j = 0; j < ssize(mat[i]); j++) {
 			mat[i][j] -= diff * mat[line][j];
 }}}
 
@@ -22,7 +22,7 @@ int gauss(int n) {
 		if (abs(mat[i][i]) > EPS) {
 			normalLine(i);
 			takeAll(n, i);
-			done[i] = true;	
+			done[i] = true;
 	}}
 	for (int i = 0; i < n; i++) { // gauss fertig, prüfe Lösung
 		bool allZero = true;

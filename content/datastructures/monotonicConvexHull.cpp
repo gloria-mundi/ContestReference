@@ -12,15 +12,14 @@ struct Envelope {
 	}
 
 	void add(ll m, ll b) {
-		while (sz(ls) > 1 && bad(ls.end()[-2], ls.back(), {m, b})) {
-			ls.pop_back();
-		}
+		while (ssize(ls) > 1
+		  && bad(ls.end()[-2], ls.back(), {m,b})) ls.pop_back();
 		ls.push_back({m, b});
-		ptr = min(ptr, (int)sz(ls) - 1);
+		ptr = min(ptr, (int)ssize(ls) - 1);
 	}
 
 	ll query(ll x) {
-		while (ptr < sz(ls)-1 && ls[ptr + 1](x) < ls[ptr](x)) ptr++;
+		while (ptr < ssize(ls)-1 && ls[ptr+1](x) < ls[ptr](x)) ptr++;
 		return ls[ptr](x);
 	}
 };

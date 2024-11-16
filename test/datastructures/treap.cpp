@@ -26,14 +26,14 @@ void stress_test(int T, int n) {
             if (a.empty()) is_ins = true;
 
             if (is_ins) {
-                int ind = Random::integer<int>(0, (int)sz(a)+1);
+                int ind = Random::integer<int>(0, (int)ssize(a)+1);
                 ll val = Random::integer((ll)-1e18, (ll)1e18+1);
                 t.insert(ind, val);
                 a.insert(a.begin() + ind, val);
                 ins--;
             } else {
-                int ind = Random::integer<int>(0, (int)sz(a));
-                int cnt = Random::integer<int>(1, 1 + min<int>({(int)sz(a)-ind, rem, (int)sqrt(n)}));
+                int ind = Random::integer<int>(0, (int)ssize(a));
+                int cnt = Random::integer<int>(1, 1 + min<int>({(int)ssize(a)-ind, rem, (int)sqrt(n)}));
                 t.remove(ind, cnt);
                 a.erase(a.begin() + ind, a.begin() + ind + cnt);
                 rem -= cnt;

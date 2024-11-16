@@ -9,8 +9,8 @@ vector<ll> ec;
 vector<int> cur, H;
 
 void addEdge(int u, int v, ll c) {
-	adj[u].push_back({v, (int)sz(adj[v]), 0, c});
-	adj[v].push_back({u, (int)sz(adj[u])-1, 0, 0});
+	adj[u].push_back({v, (int)ssize(adj[v]), 0, c});
+	adj[v].push_back({u, (int)ssize(adj[u])-1, 0, 0});
 }
 
 void addFlow(Edge& e, ll f) {
@@ -23,7 +23,7 @@ void addFlow(Edge& e, ll f) {
 }
 
 ll maxFlow(int s, int t) {
-	int n = sz(adj);
+	int n = ssize(adj);
 	hs.assign(2*n, {});
 	ec.assign(n, 0);
 	cur.assign(n, 0);
@@ -38,9 +38,9 @@ ll maxFlow(int s, int t) {
 		int v = hs[hi].back();
 		hs[hi].pop_back();
 		while (ec[v] > 0) {
-			if (cur[v] == sz(adj[v])) {
+			if (cur[v] == ssize(adj[v])) {
 				H[v] = 2*n;
-				for (int i = 0; i < sz(adj[v]); i++) {
+				for (int i = 0; i < ssize(adj[v]); i++) {
 					Edge& e = adj[v][i];
 					if (e.c - e.f > 0 &&
 					    H[v] > H[e.to] + 1) {

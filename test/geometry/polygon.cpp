@@ -135,7 +135,7 @@ void test_insideConvex(ll range) {
 // convex hull without duplicates, h[0] != h.back()
 // apply comments if border counts as inside
 bool insideOrOnConvex(pt p, const vector<pt>& hull) {
-	int l = 0, r = sz(hull) - 1;
+	int l = 0, r = ssize(hull) - 1;
 	if (cross(hull[0], hull[r], p) > 0) return false;
 	while (l + 1 < r) {
 		int m = (l + r) / 2;
@@ -155,7 +155,7 @@ void test_minkowski(ll range) {
 
 		auto got = minkowski(A, B);
 		bool convex = true;
-		for (int i = 0; i < sz(got); i++) convex &= cross(got[i], got[(i+1) % sz(got)], got[(i+2) % sz(got)]) >= 0;
+		for (int i = 0; i < ssize(got); i++) convex &= cross(got[i], got[(i+1) % ssize(got)], got[(i+2) % ssize(got)]) >= 0;
 		if (!convex) cerr << "error: not convex" << FAIL;
 
 		for (pt a : A) {
@@ -172,19 +172,19 @@ double naive_dist(const vector<pt>& ps, const vector<pt>& qs) {
 	//check if intersect
 	double res = LD::INF;
 	bool intersect = true;
-	for (int i = 0; i < sz(qs); i++) {
+	for (int i = 0; i < ssize(qs); i++) {
 		bool sep = true;
 		for (pt p : ps) {
-			res = min(res, distToSegment(qs[i], qs[(i+1) % sz(qs)], p));
-			sep &= cross(qs[i], qs[(i+1) % sz(qs)], p) <= 0;
+			res = min(res, distToSegment(qs[i], qs[(i+1) % ssize(qs)], p));
+			sep &= cross(qs[i], qs[(i+1) % ssize(qs)], p) <= 0;
 		}
 		if (sep) intersect = false;
 	}
-	for (int i = 0; i < sz(ps); i++) {
+	for (int i = 0; i < ssize(ps); i++) {
 		bool sep = true;
 		for (pt q : qs) {
-			res = min(res, distToSegment(ps[i], ps[(i+1) % sz(ps)], q));
-			sep &= cross(ps[i], ps[(i+1) % sz(ps)], q) <= 0;
+			res = min(res, distToSegment(ps[i], ps[(i+1) % ssize(ps)], q));
+			sep &= cross(ps[i], ps[(i+1) % ssize(ps)], q) <= 0;
 		}
 		if (sep) intersect = false;
 	}
@@ -263,10 +263,10 @@ void test_intersect(ll range) {
 					}
 				}
 			}
-			if (sz(expected) > 1 && expected[0] == expected[1]) expected.pop_back();
+			if (ssize(expected) > 1 && expected[0] == expected[1]) expected.pop_back();
 
-			sort(all(got));
-			sort(all(expected));
+			ranges::sort(got);
+			ranges::sort(expected);
 
 			if (got != expected) cerr << "error" << FAIL;
 

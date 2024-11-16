@@ -15,16 +15,16 @@ struct MinCostFlow {
 		adj(n), s(source), t(target) {};
 
 	void addEdge(int u, int v, ll c, ll cost) {
-		adj[u].push_back(sz(edges));
+		adj[u].push_back(ssize(edges));
 		edges.push_back({v, c, cost});
-		adj[v].push_back(sz(edges));
+		adj[v].push_back(ssize(edges));
 		edges.push_back({u, 0, -cost});
 	}
 
 	bool SPFA() {
-		pref.assign(sz(adj), -1);
-		dist.assign(sz(adj), INF);
-		vector<bool> inqueue(sz(adj));
+		pref.assign(ssize(adj), -1);
+		dist.assign(ssize(adj), INF);
+		vector<bool> inqueue(ssize(adj));
 		queue<int> queue;
 		dist[s] = 0;
 		queue.push(s);
@@ -59,7 +59,7 @@ struct MinCostFlow {
 	}}
 
 	void mincostflow() {
-		con.assign(sz(adj), 0);
+		con.assign(ssize(adj), 0);
 		maxflow = mincost = 0;
 		while (SPFA()) extend();
 	}

@@ -73,13 +73,13 @@ struct Naive {
 			}
 		};
 		dfs_comp(dfs_comp, x);
-		return seen[Random::integer<int>(sz(seen))];
+		return seen[Random::integer<int>(ssize(seen))];
 	}
 
 	int randomAdj(int x) {
 		if (adj[x].empty()) return -1;
-		vector<int> seen(all(adj[x]));
-		return seen[Random::integer<int>(sz(seen))];
+		vector<int> seen(begin(adj[x]), end(adj[x]));
+		return seen[Random::integer<int>(ssize(seen))];
 	}
 };
 
@@ -179,7 +179,7 @@ void performance_test() {
 		int a = Random::integer<int>(0, N);
 		int b = Random::integer<int>(0, N);
 		ll w = Random::integer<ll>(-1000, 1000);
-		
+
 		t.start();
 		if (!lct.connected(&lct.nodes[a], &lct.nodes[b])) {
 			lct.link(&lct.nodes[a], &lct.nodes[b]);

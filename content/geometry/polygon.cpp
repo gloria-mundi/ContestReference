@@ -2,7 +2,7 @@
 // Punkte gegen den Uhrzeigersinn: positiv, sonst negativ.
 double area(const vector<pt>& poly) { //poly[0] == poly.back()
 	ll res = 0;
-	for (int i = 0; i + 1 < sz(poly); i++)
+	for (int i = 0; i + 1 < ssize(poly); i++)
 		res += cross(poly[i], poly[i + 1]);
 	return 0.5 * res;
 }
@@ -13,7 +13,7 @@ double area(const vector<pt>& poly) { //poly[0] == poly.back()
 // selbstschneidenden Polygonen (definitions Sache)
 ll windingNumber(pt p, const vector<pt>& poly) {
 	ll res = 0;
-	for (int i = 0; i + 1 < sz(poly); i++) {
+	for (int i = 0; i + 1 < ssize(poly); i++) {
 		pt a = poly[i], b = poly[i + 1];
 		if (real(a) > real(b)) swap(a, b);
 		if (real(a) <= real(p) && real(p) < real(b) &&
@@ -27,7 +27,7 @@ ll windingNumber(pt p, const vector<pt>& poly) {
 // Ändere Zeile 32 falls rand zählt, poly[0] == poly.back()
 bool inside(pt p, const vector<pt>& poly) {
 	bool in = false;
-	for (int i = 0; i + 1 < sz(poly); i++) {
+	for (int i = 0; i + 1 < ssize(poly); i++) {
 		pt a = poly[i], b = poly[i + 1];
 		if (pointOnSegment(a, b, p)) return false;
 		if (real(a) > real(b)) swap(a,b);
@@ -41,7 +41,7 @@ bool inside(pt p, const vector<pt>& poly) {
 // convex hull without duplicates, h[0] != h.back()
 // apply comments if border counts as inside
 bool insideConvex(pt p, const vector<pt>& hull) {
-	int l = 0, r = sz(hull) - 1;
+	int l = 0, r = ssize(hull) - 1;
 	if (cross(hull[0], hull[r], p) >= 0) return false; // > 0
 	while (l + 1 < r) {
 		int m = (l + r) / 2;
@@ -52,11 +52,9 @@ bool insideConvex(pt p, const vector<pt>& hull) {
 }
 
 void rotateMin(vector<pt>& hull) {
-	auto mi = min_element(all(hull), [](const pt& a, const pt& b){
-		return real(a) == real(b) ? imag(a) < imag(b)
-		                          : real(a) < real(b);
-	});
-	rotate(hull.begin(), mi, hull.end());
+	auto mi = ranges::min_element(hull, {},
+		[](pt a) { return pair{real(a), imag(a)}; });
+	ranges::rotate(hull, mi);
 }
 
 // convex hulls without duplicates, h[0] != h.back()
@@ -68,7 +66,7 @@ vector<pt> minkowski(vector<pt> ps, vector<pt> qs) {
 	ps.push_back(ps[1]);
 	qs.push_back(qs[1]);
 	vector<pt> res;
-	for (ll i = 0, j = 0; i + 2 < sz(ps) || j + 2 < sz(qs);) {
+	for (ll i = 0, j = 0; i + 2 < ssize(ps) || j + 2 < ssize(qs);) {
 		res.push_back(ps[i] + qs[j]);
 		auto c = cross(ps[i + 1] - ps[i], qs[j + 1] - qs[j]);
 		if(c >= 0) i++;
@@ -84,7 +82,7 @@ double dist(const vector<pt>& ps, vector<pt> qs) {
 	p.push_back(p[0]);
 	double res = INF;
 	bool intersect = true;
-	for (ll i = 0; i + 1 < sz(p); i++) {
+	for (ll i = 0; i + 1 < ssize(p); i++) {
 		intersect &= cross(p[i], p[i+1]) >= 0;
 		res = min(res, distToSegment(p[i], p[i+1], 0));
 	}
@@ -99,7 +97,7 @@ bool left(pt of, pt p) { return cross(p, of) < 0 ||
 // returns index of corner where dot(dir, corner) is maximized
 int extremal(const vector<pt>& hull, pt dir) {
 	dir *= pt(0, 1);
-	int l = 0, r = sz(hull) - 1;
+	int l = 0, r = ssize(hull) - 1;
 	while (l + 1 < r) {
 		int m = (l + r) / 2;
 		pt dm = hull[m+1]-hull[m];
@@ -111,7 +109,7 @@ int extremal(const vector<pt>& hull, pt dir) {
 			if (cross(dir, dm) < 0) l = m;
 			else r = m;
 	}}
-	return r % (sz(hull) - 1);
+	return r % (ssize(hull) - 1);
 }
 
 // convex hulls without duplicates, hull[0] == hull.back() and
@@ -127,7 +125,7 @@ vector<int> intersectLine(const vector<pt>& hull, pt a, pt b) {
 	if (cross(hull[endA], a, b) > 0 ||
 	    cross(hull[endB], a, b) < 0) return {};
 
-	int n = sz(hull) - 1;
+	int n = ssize(hull) - 1;
 	vector<int> res;
 	for (auto _ : {0, 1}) {
 		int l = endA, r = endB;

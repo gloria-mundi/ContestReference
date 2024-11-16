@@ -12,12 +12,12 @@ void stress_test(ll range) {
 	for (int tries = 0; tries < 1000; tries++) {
 		int n = Random::integer<int>(1, 100);
 		auto ms = Random::integers<ll>(n, -range, range);
-		sort(all(ms), greater<>{});
+		ranges::sort(ms | views::reverse);
 		auto cs = ms;
 		for (int l = 0, r = 0; l < n;) {
 			while (r < n && ms[l] == ms[r]) r++;
 			auto tmp = Random::distinct<ll>(r - l, -range, range);
-			sort(all(tmp), greater<>{});
+			ranges::sort(tmp | views::reverse);
 			for (int c : tmp) {
 				cs[l] = c;
 				l++;
@@ -25,7 +25,7 @@ void stress_test(ll range) {
 		}
 
 		auto xs = Random::integers<ll>(n*100, -range*n, range*n);
-		sort(all(xs));
+		ranges::sort(xs);
 		int i = 0;
 
 		vector<Line> naive;
@@ -58,12 +58,12 @@ void stress_test_independent(ll range) {
 	for (int tries = 0; tries < 1000; tries++) {
 		int n = Random::integer<int>(1, 100);
 		auto ms = Random::integers<ll>(n, -range, range);
-		sort(all(ms), greater<>{});
+		ranges::sort(ms | views::reverse);
 		auto cs = ms;
 		for (int l = 0, r = 0; l < n;) {
 			while (r < n && ms[l] == ms[r]) r++;
 			auto tmp = Random::distinct<ll>(r - l, -range, range);
-			sort(all(tmp), greater<>{});
+			ranges::sort(tmp | views::reverse);
 			for (int c : tmp) {
 				cs[l] = c;
 				l++;
@@ -81,7 +81,7 @@ void stress_test_independent(ll range) {
 			naive.emplace_back(m, c);
 
 			auto xs = Random::integers<ll>(100, -range, range);
-			sort(all(xs));
+			ranges::sort(xs);
 			auto tmp = mch;
 
 			for (auto x : xs) {
@@ -101,9 +101,9 @@ constexpr int N = 1'000'000;
 void performance_test() {
 	timer t;
 	auto ms = Random::distinct<ll>(N, -1'000'000'000, 1'000'000'000);
-	sort(all(ms), greater<>{});
+	ranges::sort(ms | views::reverse);
 	auto xs = Random::distinct<ll>(N, -1'000'000'000, 1'000'000'000);
-	sort(all(xs));
+	ranges::sort(xs);
 	Envelope mch;
 
 	hash_t hash = 0;

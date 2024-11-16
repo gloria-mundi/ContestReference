@@ -7,9 +7,9 @@ int treeLabel(int v, int from = -1) {
 		if (u == from) continue;
 		children.push_back(treeLabel(u, v));
 	}
-	sort(all(children));
+	ranges::sort(children);
 	if (known.find(children) == known.end()) {
-		known[children] = sz(known);
+		known[children] = ssize(known);
 	}
 	return known[children];
 }

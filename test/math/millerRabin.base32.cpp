@@ -95,7 +95,7 @@ void extra_tests() {
 		t.start();
 		auto got = isPrime(x);
 		t.stop();
-		bool expected = sz(factors) == 1 && factors.begin()->second == 1;
+		bool expected = ssize(factors) == 1 && factors.begin()->second == 1;
 		if (got != expected) cerr << "error: " << x << FAIL;
 	}
 	if (t.time > 10) cerr << "too slow" << FAIL;

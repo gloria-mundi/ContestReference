@@ -21,7 +21,7 @@ int lca(int u, int v) {
 }
 
 void init(vector<vector<int>>& adj) {
-    int n = (int)sz(adj);
+    int n = (int)ssize(adj);
     d.assign(n, 0);
     in = par = out = d;
     int counter = 0;
@@ -44,7 +44,7 @@ void stress_test() {
         vector<int> ind = Random::distinct(Random::integer(1, n+1), 0, n);
         auto [idk, tree] = virtualTree(ind);
         vector<pair<int, int>> edges;
-        for (int i=0; i<sz(idk); i++) for (int v : tree[i]) {
+        for (int i=0; i<ssize(idk); i++) for (int v : tree[i]) {
             edges.emplace_back(idk[i], idk[v]);
         }
 
@@ -60,7 +60,7 @@ void stress_test() {
         };
         dfs(dfs, 0, -1, -1);
 
-        sort(all(edges)), sort(all(edges2));
+        ranges::sort(edges), ranges::sort(edges2);
         if (edges != edges2) cerr << "WA edge list does not match" << FAIL;
 	}
 	cerr << "tested random 50'000 tests" << endl;
@@ -83,7 +83,7 @@ void performance_test() {
     ll hash = 0;
 	t.start();
     auto [idk, tree] = virtualTree(ind);
-    hash = accumulate(all(idk), 0LL);
+    hash = accumulate(begin(idk), end(idk), 0LL);
 	t.stop();
 	if (t.time > 1000) cerr << "too slow: " << t.time << FAIL;
 	cerr << "tested performance: " << t.time << "ms (hash: " << hash << ")" << endl;

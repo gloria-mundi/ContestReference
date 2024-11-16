@@ -4,7 +4,8 @@ struct AhoCorasick {
 		int suffix = 0, ch, cnt = 0;
 		array<int, ALPHABET_SIZE> nxt = {};
 
-		vert(int p, int c): suffix(-p), ch(c) { fill(all(nxt), -1); }
+		vert(int p, int c):
+		  suffix(-p), ch(c) { ranges::fill(nxt, -1); }
 	};
 	vector<vert> aho = {{0, -1}};
 
@@ -13,7 +14,7 @@ struct AhoCorasick {
 		for (auto c : s) {
 			int idx = c - OFFSET;
 			if (aho[v].nxt[idx] == -1) {
-				aho[v].nxt[idx] = sz(aho);
+				aho[v].nxt[idx] = ssize(aho);
 				aho.emplace_back(v, idx);
 			}
 			v = aho[v].nxt[idx];
@@ -37,9 +38,9 @@ struct AhoCorasick {
 	vector<vector<int>> adj;
 	vector<ll> dp;
 	void buildGraph() {
-		adj.resize(sz(aho));
-		dp.assign(sz(aho), 0);
-		for (int i = 1; i < sz(aho); i++) {
+		adj.resize(ssize(aho));
+		dp.assign(ssize(aho), 0);
+		for (int i = 1; i < ssize(aho); i++) {
 			adj[getSuffix(i)].push_back(i);
 	}}
 

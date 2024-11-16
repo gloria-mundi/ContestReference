@@ -13,7 +13,7 @@ namespace pushRelabel {
 #include <graph/pushRelabel.cpp>
 	ll minCut() {
 		ll res = INF;
-		for (int i = 0; i < sz(adj); i++) {
+		for (int i = 0; i < ssize(adj); i++) {
 			for (int j = 0; j < i; j++) {
 				if (i == j) continue;
 				res = min(res, maxFlow(i, j));
@@ -48,7 +48,7 @@ void stress_test() {
 
 		ll got = stoerWagner::stoer_wagner();
 		ll expected = pushRelabel::minCut();
-		
+
 		if (got != expected) cerr << "got: " << got << ", expected: " << expected << FAIL;
 		queries += n;
 	}

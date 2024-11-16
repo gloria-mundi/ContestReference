@@ -20,7 +20,7 @@ Euler eulerGraph(int n, int m) {
 	}
 	int last = -1;
 	for (int i = 0; i < n; i++) {
-		if (sz(res.idx[i]) % 2 != 0) {
+		if (ssize(res.idx[i]) % 2 != 0) {
 			if (last >= 0) {
 				res.addEdge(last, i);
 				last = -1;
@@ -41,25 +41,25 @@ void stress_test() {
 		int m = Random::integer<int>(n-1, 200);
 
 		auto g = eulerGraph(n, m);
-		
+
 		vector<vector<int>> expected(n);
 		for (int i = 0; i < n; i++) {
 			for (int j : g.idx[i]) {
 				expected[i].push_back(g.to[j]);
 			}
-			sort(all(expected[i]));
+			ranges::sort(expected[i]);
 		}
 
 		g.euler(0);
 		vector<vector<int>> got(n);
 		if (g.cycle.front() != g.cycle.back()) cerr << "error: not cyclic" << FAIL;
-		for (int i = 1; i < sz(g.cycle); i++) {
+		for (int i = 1; i < ssize(g.cycle); i++) {
 			int a = g.cycle[i-1];
 			int b = g.cycle[i];
 			got[a].push_back(b);
 			got[b].push_back(a);
 		}
-		for (auto& v : got) sort(all(v));
+		for (auto& v : got) ranges::sort(v);
 
 		if (got != expected) cerr << "error" << FAIL;
 		queries += n;

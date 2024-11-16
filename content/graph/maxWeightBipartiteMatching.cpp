@@ -45,6 +45,6 @@ double match(int l, int r) {
 			yx[y] = aug[y];
 			swap(y, xy[aug[y]]);
 	}}
-	return accumulate(all(lx), 0.0) +
-	       accumulate(all(ly), 0.0); // Wert des Matchings
+	return accumulate(begin(lx), end(lx), 0.0) +
+	     accumulate(begin(ly), end(ly), 0.0); // Wert des Matchings
 }

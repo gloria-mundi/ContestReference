@@ -9,7 +9,7 @@ void naive(bits mask = {}, int l = 0) {
 		if (mask[i]) continue;
 		if ((adj[i] & mask) == mask) maximal = false;
 	}
-	for (; l < sz(adj); l++) {
+	for (; l < ssize(adj); l++) {
 		if ((adj[l] & mask) == mask) {
 			maximal = false;
 			mask[l] = 1;
@@ -37,10 +37,10 @@ void stress_test() {
 		naiveCliques.clear();
 		naive();
 
-		sort(all(cliques), [](bits a, bits b){return a.to_ullong()  < b.to_ullong();});
-		sort(all(naiveCliques), [](bits a, bits b){return a.to_ullong()  < b.to_ullong();});
+		ranges::sort(cliques, {}, [](bits x) { return x.to_ullong(); });
+		ranges::sort(naiveCliques, {}, [](bits x) { return x.to_ullong(); });
 
-		if (cliques != naiveCliques) cerr << "got: " << sz(cliques) << ", expected: " << sz(naiveCliques) << FAIL;
+		if (cliques != naiveCliques) cerr << "got: " << ssize(cliques) << ", expected: " << ssize(naiveCliques) << FAIL;
 		queries += n;
 	}
 	cerr << "tested random queries: " << queries << endl;
@@ -62,7 +62,7 @@ void performance_test() {
 	bronKerbosch();
 	t.stop();
 
-	hash_t hash = sz(cliques);
+	hash_t hash = ssize(cliques);
 	if (t.time > 500) cerr << "too slow: " << t.time << FAIL;
 	cerr << "tested performance: " << t.time << "ms (hash: " << hash << ")" << endl;
 }

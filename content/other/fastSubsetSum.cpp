@@ -1,11 +1,11 @@
 int fastSubsetSum(vector<int> w, int t){
 	int a = 0, b = 0;
-	while(b < sz(w) && a + w[b] <= t) a += w[b++];
-	if(b == sz(w)) return a;
-	int m = *max_element(all(w));
+	while(b < ssize(w) && a + w[b] <= t) a += w[b++];
+	if(b == ssize(w)) return a;
+	int m = *ranges::max_element(w);
 	vector<int> dp(2*m, -1), old;
 	dp[m+a-t] = b;
-	for(int i = b; i < sz(w); i++){
+	for(int i = b; i < ssize(w); i++){
 		old = dp;
 		for(int j = 0; j < m; j++){
 			dp[j+w[i]] = max(dp[j+w[i]], old[j]);

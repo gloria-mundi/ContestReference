@@ -21,7 +21,7 @@ bool bfs(int l) {
 }
 
 bool dfs(int v) {
-	for (; ptr[v] < sz(adj[v]); ptr[v]++) {
+	for (; ptr[v] < ssize(adj[v]); ptr[v]++) {
 		int u = adj[v][ptr[v]];
 		if (pairs[u] < 0 ||
 		   (dist[pairs[u]] > dist[v] && dfs(pairs[u]))) {
@@ -33,7 +33,7 @@ bool dfs(int v) {
 
 int hopcroft_karp(int l) { // l = #Knoten links
 	int ans = 0;
-	pairs.assign(sz(adj), -1);
+	pairs.assign(ssize(adj), -1);
 	dist.resize(l);
 	// Greedy Matching, optionale Beschleunigung.
 	for (int v = 0; v < l; v++) for (int u : adj[v])

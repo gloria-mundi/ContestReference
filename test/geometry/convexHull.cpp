@@ -9,7 +9,7 @@ constexpr ll EPS = 0;
 
 //strict convex hull
 ll isConvexHull(const vector<pt>& ps, const vector<pt>& hull) {
-	ll n = sz(hull) - 1;
+	ll n = ssize(hull) - 1;
 	if (n == 0) {
 		for (pt p : ps) if (p != hull[0]) return 1;
 		return 0;
@@ -67,7 +67,7 @@ void performance_test() {
 	t.start();
 	auto a = convexHull(ps);
 	t.stop();
-	hash_t hash = sz(a);
+	hash_t hash = ssize(a);
 	if (t.time > 500) cerr << "too slow: " << t.time << FAIL;
 	cerr << "tested performance: " << t.time << "ms (hash: " << hash << ")" << endl;
 }

@@ -24,7 +24,7 @@ namespace reference {//checked against yosupo
 	}
 
 	vector<ll> poly_deriv(vector<ll> a){
-		for(int i = 0; i < sz(a)-1; i++)
+		for(int i = 0; i < ssize(a)-1; i++)
 			a[i] = a[i+1] * (i+1) % mod;
 		a.pop_back();
 		return a;
@@ -32,8 +32,8 @@ namespace reference {//checked against yosupo
 
 	vector<ll> poly_integr(vector<ll> a){
 		if(a.empty()) return {0};
-		a.push_back(a.back() * powMod(sz(a), mod-2, mod) % mod);
-		for(int i = sz(a)-2; i > 0; i--)
+		a.push_back(a.back() * powMod(ssize(a), mod-2, mod) % mod);
+		for(int i = ssize(a)-2; i > 0; i--)
 			a[i] = a[i-1] * powMod(i, mod-2, mod) % mod;
 		a[0] = 0;
 		return a;
@@ -51,7 +51,7 @@ namespace reference {//checked against yosupo
 		for(int len = 1; len < n; len *= 2){
 			vector<ll> p = poly_log(q, 2*len);
 			for(int i = 0; i < 2*len; i++)
-				p[i] = (mod - p[i] + (i < sz(a) ? a[i] : 0)) % mod;
+				p[i] = (mod - p[i] + (i < ssize(a) ? a[i] : 0)) % mod;
 			vector<ll> q2 = q;
 			q2.resize(2*len);
 			ntt(p), ntt(q2);

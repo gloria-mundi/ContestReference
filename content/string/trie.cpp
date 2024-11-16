@@ -3,7 +3,7 @@ constexpr int ALPHABET_SIZE = 2;
 struct node {
 	int words, ends;
 	array<int, ALPHABET_SIZE> nxt;
-	node(): words(0), ends(0) { fill(all(nxt), -1); }
+	node(): words(0), ends(0) { ranges::fill(nxt, -1); }
 };
 vector<node> trie = {node()};
 
@@ -13,7 +13,7 @@ int traverse(const vector<int>& word, int x) {
 		if (id < 0 || (trie[id].words == 0 && x <= 0)) return -1;
 		trie[id].words += x;
 		if (trie[id].nxt[c] < 0 && x > 0) {
-			trie[id].nxt[c] = sz(trie);
+			trie[id].nxt[c] = ssize(trie);
 			trie.emplace_back();
 		}
 		id = trie[id].nxt[c];

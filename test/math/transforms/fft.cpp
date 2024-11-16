@@ -2,14 +2,14 @@
 #include <math/transforms/fft.cpp>
 
 vector<cplx> to_cplx(const vector<ll>& in) {
-	vector<cplx> res(sz(in));
-	for (int i = 0; i < sz(in); i++) res[i] = in[i];
+	vector<cplx> res(ssize(in));
+	for (int i = 0; i < ssize(in); i++) res[i] = in[i];
 	return res;
 }
 
 vector<ll> from_cplx(const vector<cplx>& in) {
-	vector<ll> res(sz(in));
-	for (int i = 0; i < sz(in); i++) res[i] = llround(real(in[i]));
+	vector<ll> res(ssize(in));
+	for (int i = 0; i < ssize(in); i++) res[i] = llround(real(in[i]));
 	return res;
 }
 

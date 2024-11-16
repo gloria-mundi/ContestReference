@@ -4,11 +4,11 @@
 
 int naive(const vector<pair<int, int>>& edges, int n) {
 	int res = 0;
-	for (int i = 1; i < (1ll << sz(edges)); i++) {
+	for (int i = 1; i < (1ll << ssize(edges)); i++) {
 		vector<int> deg(n);
 		init(n);
 		int cycles = 0;
-		for (int j = 0; j < sz(edges); j++) {
+		for (int j = 0; j < ssize(edges); j++) {
 			if (((i >> j) & 1) != 0) {
 				auto [a, b] = edges[j];
 				deg[a]++;
@@ -66,7 +66,7 @@ void performance_test() {
 
 	t.start();
 	hash_t hash = cyc.count();
-	cerr << sz(cyc.base) << endl;
+	cerr << ssize(cyc.base) << endl;
 	t.stop();
 
 	if (t.time > 1000) cerr << "too slow: " << t.time << FAIL;

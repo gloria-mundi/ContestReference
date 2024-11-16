@@ -4,8 +4,8 @@
 template<ll O>
 ll naive(ll n, ll k) {
 	vector<ll> state(n);
-	iota(all(state), O);
-	for (ll i = k-1; state.size() > 1; i = (i + k - 1) % sz(state)) {
+	iota(begin(state), end(state), O);
+	for (ll i = k-1; state.size() > 1; i = (i + k - 1) % ssize(state)) {
 		state.erase(state.begin() + i);
 	}
 	return state[0];

@@ -8,7 +8,7 @@ struct DisjointST {
 	}
 
 	void init(vector<ll> &vec) {
-		int n = sz(vec);
+		int n = ssize(vec);
 		a = vec.data();
 		dst.assign(__lg(n) + 1, vector<ll>(n + 1, neutral));
 		for (int h = 0, l = 1; l <= n; h++, l *= 2) {

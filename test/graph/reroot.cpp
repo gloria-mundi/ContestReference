@@ -47,7 +47,7 @@ void performance_test() {
 	t.start();
     Reroot re;
     auto ans = re.solve();
-    hash = accumulate(all(ans), 0LL);
+    hash = accumulate(begin(ans), end(ans), 0LL);
 	t.stop();
 	if (t.time > 1000) cerr << "too slow: " << t.time << FAIL;
 	cerr << "tested performance: " << t.time << "ms (hash: " << hash << ")" << endl;

@@ -12,10 +12,10 @@ struct RandomRecurence {
 	}
 
 	ll operator()(ll k){
-		while (sz(cache) <= k) {
+		while (ssize(cache) <= k) {
 			ll cur = 0;
-			for (ll i = 0; i < sz(c); i++) {
-				cur += (c[i] * cache[sz(cache) - i - 1]) % mod;
+			for (ll i = 0; i < ssize(c); i++) {
+				cur += (c[i] * cache[ssize(cache) - i - 1]) % mod;
 			}
 			cur %= mod;
 			cache.push_back(cur);
@@ -60,7 +60,7 @@ void performance_test() {
 	cerr << "tested performance: " << t.time << "ms (hash: " << hash << ")" << endl;
 }
 
-	
+
 int main() {
 	stress_test();
 	performance_test();

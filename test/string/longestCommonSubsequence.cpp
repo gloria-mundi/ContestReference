@@ -4,19 +4,19 @@
 bool isSubstr(string_view s, string_view sub) {
 	int i = 0;
 	for (char c : s) {
-		if (i < sz(sub) && c == sub[i]) i++;
+		if (i < ssize(sub) && c == sub[i]) i++;
 	}
-	return i >= sz(sub);
+	return i >= ssize(sub);
 }
 
 string naive(string_view s, string_view t) {
 	string res = "";
-	for (ll i = 1; i < (1ll << sz(s)); i++) {
+	for (ll i = 1; i < (1ll << ssize(s)); i++) {
 		string tmp;
-		for (ll j = 0; j < sz(s); j++) {
+		for (ll j = 0; j < ssize(s); j++) {
 			if (((i >> j) & 1) != 0) tmp.push_back(s[j]);
 		}
-		if (sz(tmp) >= sz(res) && isSubstr(t, tmp)) res = tmp;
+		if (ssize(tmp) >= ssize(res) && isSubstr(t, tmp)) res = tmp;
 	}
 	return res;
 }
@@ -44,7 +44,7 @@ void performance_test() {
 	t.start();
 	auto res = lcss(a, b);
 	t.stop();
-	hash_t hash = sz(res);
+	hash_t hash = ssize(res);
 	if (t.time > 500) cerr << "too slow: " << t.time << FAIL;
 	cerr << "tested performance: " << t.time << "ms (hash: " << hash << ")" << endl;
 }

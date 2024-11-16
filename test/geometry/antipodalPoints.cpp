@@ -9,7 +9,7 @@ constexpr ll EPS = 0;
 #include "../geometry.h"
 
 vector<pair<int, int>> naive(vector<pt> ps) {
-	ll n = sz(ps);
+	ll n = ssize(ps);
 	auto test = [&](int i, int j){
 		if (dot(ps[j] - ps[i], ps[i - 1] - ps[i]) <= 0) return false;
 		if (dot(ps[j] - ps[i], ps[i + 1] - ps[i]) <= 0) return false;
@@ -34,13 +34,13 @@ void stress_test(ll range) {
 
 		auto got = antipodalPoints(ps);
 		for (auto& [a, b] : got) if (a > b) swap(a, b);
-		sort(all(got));
+		ranges::sort(got);
 
 		auto expected = naive(ps);
 		for (auto& [a, b] : expected) if (a > b) swap(a, b);
 
 		for (auto x : expected) {
-			auto it = lower_bound(all(got), x);
+			auto it = ranges::lower_bound(got, x);
 			if (it == got.end() || *it != x) cerr << "error" << FAIL;
 		}
 		queries += n;
@@ -58,7 +58,7 @@ void performance_test() {
 	auto got = antipodalPoints(ps);
 	t.stop();
 
-	hash_t hash = sz(got);
+	hash_t hash = ssize(got);
 	if (t.time > 50) cerr << "too slow: " << t.time << FAIL;
 	cerr << "tested performance: " << t.time << "ms (hash: " << hash << ")" << endl;
 }

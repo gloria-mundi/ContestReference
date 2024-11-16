@@ -9,7 +9,7 @@ struct modInt {
 		stringstream a;
 		a << x;
 		string b = a.str();
-		for (ll i = b[0] == '-' ? 1 : 0; i < sz(b); i++) {
+		for (ll i = b[0] == '-' ? 1 : 0; i < ssize(b); i++) {
 			value *= 10;
 			value += b[i] - '0';
 			value %= MOD;
@@ -115,7 +115,7 @@ void stress_test() {
 	}
 	cerr << "tested random queries: " << queries << endl;
 }
-	
+
 int main() {
 	stress_test();
 }

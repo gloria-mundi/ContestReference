@@ -28,9 +28,7 @@ pt projectToLine(pt a, pt b, pt p) {
 
 // sortiert alle Punkte pts auf einer Linie entsprechend dir
 void sortLine(pt dir, vector<pt>& pts) { // (2d und 3d)
-	sort(all(pts), [&](pt a, pt b){
-		return dot(dir, a) < dot(dir, b);
-	});
+	ranges::sort(pts, {}, [&](pt x) { return dot(dir, x); });
 }
 
 // Liegt p auf der Strecke a-b? (nutze < für inberhalb)

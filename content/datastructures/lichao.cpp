@@ -1,5 +1,6 @@
 vector<ll> xs; // IMPORTANT: Initialize before constructing!
-int findX(int i) { return lower_bound(all(xs), i) - begin(xs); }
+int findX(int i) {
+	return ranges::lower_bound(xs, i) - begin(xs); }
 
 struct Fun { // Default: Linear function. Change as needed.
 	ll m, c;
@@ -11,7 +12,7 @@ struct Lichao {
 	static constexpr Fun id = {0, INF}; // {0, -INF}
 	int n, cap;
 	vector<Fun> seg;
-	Lichao() : n(sz(xs)), cap(2 << __lg(n)), seg(2 * cap, id) {}
+	Lichao() : n(ssize(xs)), cap(2 << __lg(n)), seg(2 * cap, id) {}
 
 	void _insert(Fun f, int l, int r, int i) {
 		while (i < 2 * cap) {

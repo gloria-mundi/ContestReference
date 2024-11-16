@@ -2,8 +2,8 @@
 #include <string/suffixTree.cpp>
 
 vector<string> naive(string_view s) {
-	vector<string> res(sz(s));
-	for (ll i = 0; i < sz(s); i++) {
+	vector<string> res(ssize(s));
+	for (ll i = 0; i < ssize(s); i++) {
 		res[i] = s.substr(i);
 	}
 	return res;
@@ -19,7 +19,7 @@ void stress_test() {
 		auto dfs = [&](auto&& self, string pref, ll node) -> void {
 			auto& [l, r, _, next] = st.tree[node];
 			if (l >= 0) pref += s.substr(l, r - l);
-			if (pref.back() == '#') got[n + 1 - sz(pref)] = pref;
+			if (pref.back() == '#') got[n + 1 - ssize(pref)] = pref;
 			for (auto [__, j] : next) {
 				self(self, pref, j);
 			}
@@ -39,7 +39,7 @@ void performance_test() {
 	t.start();
 	SuffixTree st(s);
 	t.stop();
-	hash_t hash = sz(st.tree);
+	hash_t hash = ssize(st.tree);
 	if (t.time > 500) cerr << "too slow: " << t.time << FAIL;
 	cerr << "tested performance: " << t.time << "ms (hash: " << hash << ")" << endl;
 }

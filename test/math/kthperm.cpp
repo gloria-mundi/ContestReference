@@ -6,13 +6,13 @@ void stress_test() {
 	for (ll i = 0; i < 10'000; i++) {
 		int n = Random::integer<int>(1, 100);
 		vector<ll> expected(n);
-		iota(all(expected), 0);
+		iota(begin(expected), end(expected), 0);
 		ll k = 0;
 		do {
 			auto got = kthperm(n, k);
 			if (got != expected) cerr << "error" << FAIL;
 			k++;
-		} while (k < 100 && next_permutation(all(expected)));
+		} while (k < 100 && ranges::next_permutation(expected).found);
 		queries += n;
 	}
 	cerr << "tested queries: " << queries << endl;

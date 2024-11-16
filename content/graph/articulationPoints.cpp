@@ -14,14 +14,14 @@ int dfs(int v, int from = -1) {
 			if (num[e.to] < me) st.push_back(e);
 		} else {
 			if (v == root) rootCount++;
-			int si = sz(st);
+			int si = ssize(st);
 			int up = dfs(e.to, e.id);
 			top = min(top, up);
 			if (up >= me) isArt[v] = true;
 			if (up > me) bridges.push_back(e);
 			if (up <= me) st.push_back(e);
 			if (up == me) {
-				bcc.emplace_back(si + all(st));
+				bcc.emplace_back(begin(st) + si, end(st));
 				st.resize(si);
 	}}}
 	return top;
@@ -29,12 +29,12 @@ int dfs(int v, int from = -1) {
 
 void find() {
 	counter = 0;
-	num.assign(sz(adj), 0);
-	isArt.assign(sz(adj), false);
+	num.assign(ssize(adj), 0);
+	isArt.assign(ssize(adj), false);
 	bridges.clear();
 	st.clear();
 	bcc.clear();
-	for (int v = 0; v < sz(adj); v++) {
+	for (int v = 0; v < ssize(adj); v++) {
 		if (!num[v]) {
 			root = v;
 			rootCount = 0;

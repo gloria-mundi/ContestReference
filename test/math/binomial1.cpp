@@ -11,7 +11,7 @@ void stress_test() {
 			ll expected = last[j];
 			if (got != expected) cerr << "calc_binom(" << i << ", " << j << "), got: " << got << ", expected: " << expected << FAIL;
 		}
-		queries += sz(last);
+		queries += ssize(last);
 
 		last.push_back(1);
 		for (ll j = i; j > 0; j--) {

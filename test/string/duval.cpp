@@ -6,8 +6,8 @@ constexpr int N = 20'000'000;
 
 bool isLyndon(string_view s) {
 	string t = string(s) + string(s);
-	for (ll i = 1; i < sz(s); i++) {
-		if (s >= t.substr(i, sz(s))) return false;
+	for (ll i = 1; i < ssize(s); i++) {
+		if (s >= t.substr(i, ssize(s))) return false;
 	}
 	return !s.empty();
 }
@@ -21,11 +21,11 @@ void stress_test_duval() {
 		if (got.empty()) cerr << "error: a" << FAIL;
 		if (got.front().first != 0) cerr << "error: b" << FAIL;
 		if (got.back().second != n) cerr << "error: c" << FAIL;
-		for (int j = 1; j < sz(got); j++) {
-			if (got[j - 1].second != got[j].first) cerr << "error: d" << FAIL; 
+		for (int j = 1; j < ssize(got); j++) {
+			if (got[j - 1].second != got[j].first) cerr << "error: d" << FAIL;
 		}
 		for (auto [l, r] : got) {
-			if (!isLyndon(string_view(s).substr(l, r-l))) cerr << "error: e" << FAIL; 
+			if (!isLyndon(string_view(s).substr(l, r-l))) cerr << "error: e" << FAIL;
 		}
 		queries += n;
 	}
@@ -45,7 +45,7 @@ void performance_test_duval() {
 }
 
 int naive(string s) {
-	ll n = sz(s);
+	ll n = ssize(s);
 	s += s;
 	int res = 0;
 	for (int i = 0; i < n; i++) {

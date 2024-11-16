@@ -46,9 +46,9 @@ void test_circleIntersection(ll range) {
 
 		auto got = circleIntersection(c1, r1, c2, r2);
 
-		if (sz(got) != expectedCount(real(c1), imag(c1), r1, real(c2), imag(c2), r2)) cerr << "error: wrong count" << FAIL;
+		if (ssize(got) != expectedCount(real(c1), imag(c1), r1, real(c2), imag(c2), r2)) cerr << "error: wrong count" << FAIL;
 
-		for (int i = 0; i < sz(got); i++) {
+		for (int i = 0; i < ssize(got); i++) {
 			for (int j = 0; j < i; j++) {
 				if (abs(got[i] - got[j]) < 1e-6) cerr << "error: identical" << FAIL;
 			}
@@ -58,7 +58,7 @@ void test_circleIntersection(ll range) {
 			if (float_error(abs(c1 - p), r1) > 1e-6) cerr << "error: 1" << FAIL;
 			if (float_error(abs(c2 - p), r2) > 1e-6) cerr << "error: 2" << FAIL;
 		}
-		queries += sz(got);
+		queries += ssize(got);
 	}
 	cerr << "tested circleIntersection: " << queries << endl;
 }
@@ -91,9 +91,9 @@ void test_circleRayIntersection(ll range) {
 			else expected = 1;
 		}
 
-		if (sz(got) != expected) cerr << "error: wrong count" << FAIL;
+		if (ssize(got) != expected) cerr << "error: wrong count" << FAIL;
 
-		for (int i = 0; i < sz(got); i++) {
+		for (int i = 0; i < ssize(got); i++) {
 			for (int j = 0; j < i; j++) {
 				if (abs(got[i] - got[j]) < 1e-6) cerr << "error: identical" << FAIL;
 			}
@@ -103,7 +103,7 @@ void test_circleRayIntersection(ll range) {
 			if (float_error(abs(c - p), r) > 1e-6) cerr << "error: 1" << FAIL;
 			if (distToLine(orig, orig + dir, p) > 1e-6) cerr << "error: 2" << FAIL;
 		}
-		queries += sz(got);
+		queries += ssize(got);
 	}
 	cerr << "tested circleIntersection: " << queries << endl;
 }

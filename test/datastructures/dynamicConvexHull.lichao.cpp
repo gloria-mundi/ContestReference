@@ -8,7 +8,7 @@ void stress_test(ll range) {
 	for (int tries = 0; tries < 1000; tries++) {
 		int n = Random::integer<int>(1, 100);
 		xs = Random::distinct(n, -range, range);
-		sort(all(xs));
+		ranges::sort(xs);
 
 		HullDynamic hd;
 		Lichao lichao;

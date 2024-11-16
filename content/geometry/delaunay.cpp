@@ -99,12 +99,10 @@ pair<QuadEdge*, QuadEdge*> rec(IT l, IT r) {
 }
 
 vector<pt> delaunay(vector<pt> pts) {
-	if (sz(pts) <= 2) return {};
-	sort(all(pts), [](const pt& a, const pt& b) {
-		if (real(a) != real(b)) return real(a) < real(b);
-		return imag(a) < imag(b);
-	});
-	QuadEdge* r = rec(all(pts)).first;
+	if (ssize(pts) <= 2) return {};
+	ranges::sort(pts, {},
+	  [](pt x) { return pair{real(x), imag(x)}; });
+	QuadEdge* r = rec(begin(pts), end(pts)).first;
 	vector<QuadEdge*> edges = {r};
 	while (cross(r->onext->dest(), r->dest(), r->orig) < 0) r = r->onext;
 	auto add = [&](QuadEdge* e){
@@ -118,7 +116,7 @@ vector<pt> delaunay(vector<pt> pts) {
 	};
 	add(r);
 	pts.clear();
-	for (int i = 0; i < sz(edges); i++) {
+	for (int i = 0; i < ssize(edges); i++) {
 		if (!edges[i]->used) add(edges[i]);
 	}
 	return pts;

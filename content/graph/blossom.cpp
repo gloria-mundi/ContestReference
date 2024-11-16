@@ -32,7 +32,7 @@ struct GM {
 		auto h = label[r] = label[s] = {~x, y};
 		int join;
 		while (true) {
-			if (s != sz(adj)) swap(r, s);
+			if (s != ssize(adj)) swap(r, s);
 			r = findFirst(label[pairs[r]].first);
 			if (label[r] == h) {
 				join = r;
@@ -48,13 +48,13 @@ struct GM {
 	}}}
 
 	bool augment(int v) {
-		label[v] = {sz(adj), -1};
-		first[v] = sz(adj);
+		label[v] = {ssize(adj), -1};
+		first[v] = ssize(adj);
 		head = tail = 0;
 		for (que[tail++] = v; head < tail;) {
 			int x = que[head++];
 			for (int y : adj[x]) {
-				if (pairs[y] == sz(adj) && y != v) {
+				if (pairs[y] == ssize(adj) && y != v) {
 					pairs[y] = x;
 					rematch(x, y);
 					return true;
@@ -70,12 +70,12 @@ struct GM {
 
 	int match() {
 		int matching = head = tail = 0;
-		for (int v = 0; v < sz(adj); v++) {
-			if (pairs[v] < sz(adj) || !augment(v)) continue;
+		for (int v = 0; v < ssize(adj); v++) {
+			if (pairs[v] < ssize(adj) || !augment(v)) continue;
 			matching++;
 			for (int i = 0; i < tail; i++)
 				label[que[i]] = label[pairs[que[i]]] = {-1, -1};
-			label[sz(adj)] = {-1, -1};
+			label[ssize(adj)] = {-1, -1};
 		}
 		return matching;
 	}

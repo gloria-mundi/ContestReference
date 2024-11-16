@@ -6,10 +6,10 @@ vector<vector<ll>> mat;
 constexpr ll mod = 1'000'000'007;
 
 vector<vector<ll>> inverseMat(const vector<vector<ll>>& m) {
-	int n = sz(m);
+	int n = ssize(m);
 	mat = m;
 	for (int i = 0; i < n; i++) {
-		if (sz(mat[i]) != n) cerr << "error: no square matrix" << FAIL;
+		if (ssize(mat[i]) != n) cerr << "error: no square matrix" << FAIL;
 		mat[i].resize(2*n);
 		mat[i][n+i] = 1;
 	}
@@ -26,10 +26,10 @@ vector<vector<ll>> inverseMat(const vector<vector<ll>>& m) {
 }
 
 vector<vector<ll>> mul(const vector<vector<ll>>& a, const vector<vector<ll>>& b) {
-	int n = sz(a);
-	int m = sz(b[0]);
-	int x = sz(b);
-	if (sz(a[0]) != sz(b)) cerr << "error: wrong dimensions" << FAIL;
+	int n = ssize(a);
+	int m = ssize(b[0]);
+	int x = ssize(b);
+	if (ssize(a[0]) != ssize(b)) cerr << "error: wrong dimensions" << FAIL;
 	vector<vector<ll>> res(n, vector<ll>(m));
 	for (int i = 0; i < n; i++) {
 		for (int j = 0; j < m; j++) {

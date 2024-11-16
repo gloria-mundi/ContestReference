@@ -47,7 +47,7 @@ void performance_test1() {
 		int i = Random::integer<int>(0, N);
 		auto [l, r] = Random::pair<int>(0, N + 1);
 		ll x = Random::integer<ll>(-1000, 1000);
-		
+
 		t.start();
 		tree.update(i, x);
 		hash ^= tree.query(l, r);
@@ -68,7 +68,7 @@ void stress_test2() {
 		vector<ll> naive(n);
 		SegTree tree(naive);
 		naive = Random::integers<ll>(n, -1000, 1000);
-		copy(all(naive), tree.tree.begin() + n);
+		ranges::copy(naive, tree.tree.begin() + n);
 		for (int operations = 0; operations < 1000; operations++) {
 			{
 				int l = Random::integer<int>(0, n + 1);
@@ -102,7 +102,7 @@ void performance_test2() {
 		int i = Random::integer<int>(0, N);
 		auto [l, r] = Random::pair<int>(0, N + 1);
 		ll x = Random::integer<ll>(-1000, 1000);
-		
+
 		t.start();
 		tree.modify(l, r, x);
 		hash ^= tree.query(i);

@@ -5,7 +5,7 @@ constexpr ll RandomQ = 318LL << 53;
 
 string thueMorse(ll n) {
 	string res = "a";
-	while (sz(res) < n) {
+	while (ssize(res) < n) {
 		string tmp = res;
 		for (char& c : tmp) c ^= 1;
 		res += tmp;
@@ -14,7 +14,7 @@ string thueMorse(ll n) {
 }
 
 auto getHash(const string& s) {
-	return Hash(s, RandomQ)(0, sz(s));
+	return Hash(s, RandomQ)(0, ssize(s));
 }
 
 void testThueMorse() {
@@ -22,13 +22,13 @@ void testThueMorse() {
 	set<string> expected;
 	string s = thueMorse(1000);
 	Hash h(s, RandomQ);
-	for (int l = 0; l < sz(s); l++) {
-		for (int r = l + 1; r <= sz(s); r++) {
+	for (int l = 0; l < ssize(s); l++) {
+		for (int r = l + 1; r <= ssize(s); r++) {
 			got.insert(h(l, r));
 			expected.insert(s.substr(l, r - l));
 		}
 	}
-	if (sz(got) != sz(expected)) cerr << "error: thueMorse" << FAIL;
+	if (ssize(got) != ssize(expected)) cerr << "error: thueMorse" << FAIL;
 	cerr << "thueMorse: ok" << endl;
 }
 
@@ -45,13 +45,13 @@ void testSmall() {
 	auto dfs = [&](auto&& self, string pref)->void {
 		expected++;
 		got.insert(getHash(pref));
-		if(sz(pref) >= 5) return;
+		if(ssize(pref) >= 5) return;
 		for (char c = 'a'; c <= 'z'; c++) {
 			self(self, pref + c);
 		}
 	};
 	dfs(dfs, "");
-	if (sz(got) != expected) cerr << "error: small" << FAIL;
+	if (ssize(got) != expected) cerr << "error: small" << FAIL;
 	cerr << "small: ok" << endl;
 }
 
@@ -60,13 +60,13 @@ void stress_test() {
 	set<string> expected;
 	string s = Random::string(1000, "abc");
 	Hash h(s, RandomQ);
-	for (int l = 0; l < sz(s); l++) {
-		for (int r = l + 1; r <= sz(s); r++) {
+	for (int l = 0; l < ssize(s); l++) {
+		for (int r = l + 1; r <= ssize(s); r++) {
 			got.insert(h(l, r));
 			expected.insert(s.substr(l, r - l));
 		}
 	}
-	if (sz(got) != sz(expected)) cerr << "error: stress test" << FAIL;
+	if (ssize(got) != ssize(expected)) cerr << "error: stress test" << FAIL;
 	cerr << "stress test: ok" << endl;
 }
 

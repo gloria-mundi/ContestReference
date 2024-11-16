@@ -1,7 +1,7 @@
 constexpr ll mod = 998244353, root = 3;
 
 void ntt(vector<ll>& a, bool inv = false) {
-	int n = sz(a);
+	int n = ssize(a);
 	auto b = a;
 	ll r = inv ? powMod(root, mod - 2, mod) : root;
 

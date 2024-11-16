@@ -26,11 +26,11 @@ struct Reroot {
 			pref.push_back(takeChild(v, u, w, dp[u]));
 		}
 		auto suf = pref;
-		partial_sum(all(pref), pref.begin(), comb);
+		partial_sum(begin(pref), end(pref), begin(pref), comb);
 		exclusive_scan(suf.rbegin(), suf.rend(),
 		               suf.rbegin(), E, comb);
 
-		for (int i = 0; i < sz(adj[v]); i++) {
+		for (int i = 0; i < ssize(adj[v]); i++) {
 			auto [u, w] = adj[v][i];
 			if (u == from) continue;
 			dp[v] = fin(v, comb(pref[i], suf[i + 1]));
@@ -40,7 +40,7 @@ struct Reroot {
 	}
 
 	auto solve() {
-		dp.assign(sz(adj), E);
+		dp.assign(ssize(adj), E);
 		dfs0(0);
 		dfs1(0);
 		return dp;

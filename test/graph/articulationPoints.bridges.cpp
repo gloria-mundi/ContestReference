@@ -7,10 +7,10 @@ struct edge {
 #undef Edge
 
 vector<bool> naiveBridges(const vector<pair<int, int>>& edges) {
-	vector<bool> res(sz(edges));
+	vector<bool> res(ssize(edges));
 
-	vector<int> seen(sz(adj), -1);
-	for (int i = 0; i < sz(edges); i++) {
+	vector<int> seen(ssize(adj), -1);
+	for (int i = 0; i < ssize(edges); i++) {
 		auto [a, b] = edges[i];
 		vector<int> todo = {a};
 		seen[a] = i;
@@ -40,14 +40,14 @@ void stress_test_bridges() {
 		adj.assign(n, {});
 		vector<pair<int, int>> edges;
 		g.forEdges([&](int a, int b){
-			adj[a].push_back({a, b, sz(edges)});
-			adj[b].push_back({b, a, sz(edges)});
+			adj[a].push_back({a, b, ssize(edges)});
+			adj[b].push_back({b, a, ssize(edges)});
 			edges.emplace_back(a, b);
 		});
 
 		auto expected = naiveBridges(edges);
 		find();
-		vector<bool> got(sz(edges));
+		vector<bool> got(ssize(edges));
 		for (auto e : bridges) {
 			if (got[e.id]) cerr << "error: duclicate" << FAIL;
 			got[e.id] = true;

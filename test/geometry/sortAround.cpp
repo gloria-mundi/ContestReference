@@ -24,7 +24,7 @@ void test_tiny() {
 	};
 	auto got = expected;
 	for (int i = 0; i < 100'000; i++) {
-		shuffle(all(got), Random::rng);
+		ranges::shuffle(got, Random::rng);
 		sortAround(0, got);
 		if (got != expected) cerr << "error" << FAIL;
 	}
@@ -51,8 +51,8 @@ void stress_test(ll range) {
 
 		auto isLeft = [&](pt p){return real(p - c) < 0 || (real(p - c) == 0 && imag(p - c) < 0);};
 		auto isCCW = [&](pt a, pt b){return cross(c, a, b) > 0;};
-		if (!is_partitioned(all(ps), isLeft)) cerr << "error 1" << FAIL;
-		auto mid = partition_point(all(ps), isLeft);
+		if (!ranges::is_partitioned(ps, isLeft)) cerr << "error 1" << FAIL;
+		auto mid = ranges::partition_point(ps, isLeft);
 		if (!is_sorted(ps.begin(), mid, isCCW)) cerr << "error 2" << FAIL;
 		if (!is_sorted(mid, ps.end(), isCCW)) cerr << "error 3" << FAIL;
 		queries += n;

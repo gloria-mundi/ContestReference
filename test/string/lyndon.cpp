@@ -3,8 +3,8 @@
 
 bool isLyndon(string_view s) {
 	string t = string(s) + string(s);
-	for (ll i = 1; i < sz(s); i++) {
-		if (s >= t.substr(i, sz(s))) return false;
+	for (ll i = 1; i < ssize(s); i++) {
+		if (s >= t.substr(i, ssize(s))) return false;
 	}
 	return !s.empty();
 }
@@ -12,8 +12,8 @@ bool isLyndon(string_view s) {
 vector<string> naive(ll n, char mi, char ma) {
 	vector<string> res;
 	auto dfs = [&](auto&& self, string pref)->void{
-		if (sz(pref) <= n && isLyndon(pref)) res.push_back(pref);
-		if (sz(pref) >= n) return;
+		if (ssize(pref) <= n && isLyndon(pref)) res.push_back(pref);
+		if (ssize(pref) >= n) return;
 		for (char c = mi; c <= ma; c++) {
 			self(self, pref + c);
 		}
@@ -39,7 +39,7 @@ void stress_test() {
 		auto got = fast(n, l, r);
 		auto expected = naive(n, l, r);
 		if (got != expected) cerr << "error" << FAIL;
-		queries += sz(expected);
+		queries += ssize(expected);
 	}
 	cerr << "tested random queries: " << queries << endl;
 }
@@ -50,7 +50,7 @@ void performance_test() {
 	t.start();
 	auto res = fast(N, 'a', 'f');
 	t.stop();
-	hash_t hash = sz(res);
+	hash_t hash = ssize(res);
 	if (t.time > 500) cerr << "too slow: " << t.time << FAIL;
 	cerr << "tested performance: " << t.time << "ms (hash: " << hash << ")" << endl;
 }

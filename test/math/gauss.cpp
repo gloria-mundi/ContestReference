@@ -7,10 +7,10 @@ vector<vector<double>> mat;
 #include <math/gauss.cpp>
 
 vector<vector<double>> inverseMat(const vector<vector<double>>& m) {
-	int n = sz(m);
+	int n = ssize(m);
 	mat = m;
 	for (int i = 0; i < n; i++) {
-		if (sz(mat[i]) != n) cerr << "error: no square matrix" << FAIL;
+		if (ssize(mat[i]) != n) cerr << "error: no square matrix" << FAIL;
 		mat[i].resize(2*n);
 		mat[i][n+i] = 1;
 	}
@@ -27,10 +27,10 @@ vector<vector<double>> inverseMat(const vector<vector<double>>& m) {
 }
 
 vector<vector<double>> mul(const vector<vector<double>>& a, const vector<vector<double>>& b) {
-	int n = sz(a);
-	int m = sz(b[0]);
-	int x = sz(b);
-	if (sz(a[0]) != sz(b)) cerr << "error: wrong dimensions" << FAIL;
+	int n = ssize(a);
+	int m = ssize(b[0]);
+	int x = ssize(b);
+	if (ssize(a[0]) != ssize(b)) cerr << "error: wrong dimensions" << FAIL;
 	vector<vector<double>> res(n, vector<double>(m));
 	for (int i = 0; i < n; i++) {
 		for (int j = 0; j < m; j++) {
@@ -48,21 +48,21 @@ void test_tiny() {
 		{0, 5, 6, 7},
 		{0, 0, 8, 9},
 	};
-	if (gauss(sz(mat)) != UNIQUE) cerr << "error: 1" << FAIL;
+	if (gauss(ssize(mat)) != UNIQUE) cerr << "error: 1" << FAIL;
 
 	mat = {
 		{-1,  1, 0, -1},
 		{ 2,  6, 0, 10},
 		{ 1, -2, 0,  0},
 	};
-	if (gauss(sz(mat)) != MULTIPLE) cerr << "error: 2" << FAIL;
+	if (gauss(ssize(mat)) != MULTIPLE) cerr << "error: 2" << FAIL;
 
 	mat = {
 		{-1,  1, 0, -1},
 		{ 2,  6, 0, 10},
 		{ 1, -2, 0,  1},
 	};
-	if (gauss(sz(mat)) != INCONSISTENT) cerr << "error: 3" << FAIL;
+	if (gauss(ssize(mat)) != INCONSISTENT) cerr << "error: 3" << FAIL;
 }
 
 void stress_test_inv() {

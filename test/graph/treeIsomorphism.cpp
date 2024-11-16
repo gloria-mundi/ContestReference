@@ -45,7 +45,7 @@ void stress_test_eq() {
 
 void test_tiny() {
 	vector<int> expected = {1,1,1,1,2,3,6,11,23}; //#A000055
-	for (int i = 1; i < sz(expected); i++) {
+	for (int i = 1; i < ssize(expected); i++) {
 		set<pair<int, int>> got;
 		tree t(i);
 
@@ -63,9 +63,9 @@ void test_tiny() {
 
 			got.insert(t.treeLabel());
 		}
-		if (sz(got) != expected[i]) cerr << i << ", got: " << sz(got) << ", expected: " << expected[i] << FAIL;
+		if (ssize(got) != expected[i]) cerr << i << ", got: " << ssize(got) << ", expected: " << expected[i] << FAIL;
 	}
-	cerr << "tested tiny: " << sz(expected) << endl;
+	cerr << "tested tiny: " << ssize(expected) << endl;
 }
 
 void stress_test_neq() {
@@ -110,7 +110,7 @@ void performance_test() {
 		tt.adj[b].push_back(a);
 	});
 
-	t.start();	
+	t.start();
 	auto [gotA, gotB] = tt.treeLabel();
 	t.stop();
 	hash_t hash = gotA + gotB;

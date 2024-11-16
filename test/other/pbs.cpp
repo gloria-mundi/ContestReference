@@ -49,7 +49,7 @@ void stress_test() {
         for (int i=1; i<n; i++) {
             edges.emplace_back(Random::integer(0, i), i);
         }
-        shuffle(all(edges), Random::rng);
+        ranges::shuffle(edges, Random::rng);
         queries.clear();
         for (int i=0; i<Q; i++) {
             auto x = Random::distinct(2, n);
@@ -80,7 +80,7 @@ void performance_test() {
     for (int i=1; i<n; i++) {
         edges.emplace_back(Random::integer(0, i), i);
     }
-    shuffle(all(edges), Random::rng);
+    ranges::shuffle(edges, Random::rng);
     queries.clear();
     for (int i=0; i<Q; i++) {
         auto x = Random::distinct(2, n);
@@ -91,7 +91,7 @@ void performance_test() {
     t.start();
     vector<int> ans = pbs(Q, MAX_OPERATIONS);
     t.stop();
-    ll hash = accumulate(all(ans), 0LL);
+    ll hash = accumulate(begin(ans), end(ans), 0LL);
 
 	if (t.time > 700) cerr << "too slow: " << t.time << FAIL;
     cerr << "tested performance: " << t.time << "ms (hash: " << hash << ")" << endl;

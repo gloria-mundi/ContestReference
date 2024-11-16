@@ -10,9 +10,9 @@ struct edge {
 vector<vector<int>> naiveBCC(int m) {
 	init(m);
 
-	vector<int> seen(sz(adj), -1);
+	vector<int> seen(ssize(adj), -1);
 	int run = 0;
-	for (int i = 0; i < sz(adj); i++) {
+	for (int i = 0; i < ssize(adj); i++) {
 		for (auto e : adj[i]) {
 			run++;
 			seen[i] = run;
@@ -36,9 +36,9 @@ vector<vector<int>> naiveBCC(int m) {
 	for (int i = 0; i < m; i++) {
 		res[findSet(i)].push_back(i);
 	}
-	for (auto& v : res) sort(all(v));
-	res.erase(remove_if(all(res), [](const vector<int>& v){return sz(v) <= 1;}), res.end());
-	sort(all(res));
+	for (auto& v : res) ranges::sort(v);
+	res.erase(begin(ranges::remove_if(res, [](const vector<int>& v){return ssize(v) <= 1;})), end(res));
+	ranges::sort(res);
 	return res;
 }
 
@@ -60,12 +60,12 @@ void stress_test_bcc() {
 
 		auto expected = naiveBCC(nextId);
 		find();
-		vector<vector<int>> got(sz(bcc));
-		for (int i = 0; i < sz(bcc); i++) {
+		vector<vector<int>> got(ssize(bcc));
+		for (int i = 0; i < ssize(bcc); i++) {
 			for (auto e : bcc[i]) got[i].push_back(e.id);
-			sort(all(got[i]));
+			ranges::sort(got[i]);
 		}
-		sort(all(got));
+		ranges::sort(got);
 
 		if (got != expected) cerr << "error" << FAIL;
 		queries += n;

@@ -2,8 +2,8 @@
 #include <string/kmp.cpp>
 
 vector<int> naive(string_view s) {
-	vector<int> res(sz(s) + 1, -1);
-	for (int i = 0; i < sz(s); i++) {
+	vector<int> res(ssize(s) + 1, -1);
+	for (int i = 0; i < ssize(s); i++) {
 		for (int j = 0; j <= i; j++)
 			if (s.substr(0, j) == s.substr(i-j+1, j))
 				res[i+1] = j;

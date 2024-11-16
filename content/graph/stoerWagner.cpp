@@ -7,7 +7,7 @@ vector<vector<Edge>> adj, tmp;
 vector<bool> erased;
 
 void merge(int u, int v) {
-	tmp[u].insert(tmp[u].end(), all(tmp[v]));
+	tmp[u].insert(end(tmp[u]), begin(tmp[v]), end(tmp[v]));
 	tmp[v].clear();
 	erased[v] = true;
 	for (auto& vec : tmp) {
@@ -19,13 +19,13 @@ void merge(int u, int v) {
 ll stoer_wagner() {
 	ll res = INF;
 	tmp = adj;
-	erased.assign(sz(tmp), false);
-	for (int i = 1; i < sz(tmp); i++) {
+	erased.assign(ssize(tmp), false);
+	for (int i = 1; i < ssize(tmp); i++) {
 		int s = 0;
 		while (erased[s]) s++;
 		priority_queue<pair<ll, int>> pq;
 		pq.push({0, s});
-		vector<ll> con(sz(tmp));
+		vector<ll> con(ssize(tmp));
 		ll cur = 0;
 		vector<pair<ll, int>> state;
 		while (!pq.empty()) {

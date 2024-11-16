@@ -3,7 +3,7 @@
 
 ll naive(const vector<ll>& v) {
 	ll res = 0;
-	for (ll i = 0; i < sz(v); i++) {
+	for (ll i = 0; i < ssize(v); i++) {
 		for (ll j = 0; j < i; j++) {
 			if (v[j] > v[i]) res++;
 		}
@@ -17,7 +17,7 @@ void stress_test() {
 		int n = Random::integer<int>(1, 100);
 		vector<ll> v(n);
 		for (ll j = 0; j < n; j++) v[j] = (j-10) * 100000 + Random::integer<ll>(0, 10000); //values must be unique ):
-		shuffle(all(v), Random::rng);
+		ranges::shuffle(v, Random::rng);
 		ll expected = naive(v);
 		ll got = mergeSort(v);
 		if (got != expected) {

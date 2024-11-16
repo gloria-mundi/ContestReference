@@ -7,7 +7,7 @@ while (true) {
 			focus.emplace_back((low[i] + high[i]) / 2, i);
 	}}
 	if (focus.empty()) break;
-	sort(all(focus));
+	ranges::sort(focus);
 
 	// reset simulation
 	for (int step = 0; auto [mid, i] : focus) {

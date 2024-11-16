@@ -1,4 +1,6 @@
 #include "../util.h"
+#define sz(X) (ll)::size(X)
+#define all(X) ::begin(X), ::end(X)
 constexpr ll EPS = 0;
 #define double ll
 #define polar polar<ll>
@@ -14,10 +16,10 @@ ll sgn(ll x) {
 //https://cp-algorithms.com/geometry/halfplane-intersection.html
 namespace cpalgo {
 	// Redefine epsilon and infinity as necessary. Be mindful of precision errors.
-	const long double eps = 1e-9, inf = 1e9; 
+	const long double eps = 1e-9, inf = 1e9;
 
 	// Basic point/vector struct.
-	struct Point { 
+	struct Point {
 
 		long double x, y;
 		explicit Point(long double x_ = 0, long double y_ = 0) : x(x_), y(y_) {}
@@ -26,23 +28,23 @@ namespace cpalgo {
 		// Addition, substraction, multiply by constant, dot product, cross product.
 
 		friend Point operator + (const Point& p, const Point& q) {
-			return Point(p.x + q.x, p.y + q.y); 
+			return Point(p.x + q.x, p.y + q.y);
 		}
 
-		friend Point operator - (const Point& p, const Point& q) { 
-			return Point(p.x - q.x, p.y - q.y); 
+		friend Point operator - (const Point& p, const Point& q) {
+			return Point(p.x - q.x, p.y - q.y);
 		}
 
-		friend Point operator * (const Point& p, const long double& k) { 
-			return Point(p.x * k, p.y * k); 
-		} 
+		friend Point operator * (const Point& p, const long double& k) {
+			return Point(p.x * k, p.y * k);
+		}
 
 		friend long double dot(const Point& p, const Point& q) {
 			return p.x * q.x + p.y * q.y;
 		}
 
-		friend long double cross(const Point& p, const Point& q) { 
-			return p.x * q.y - p.y * q.x; 
+		friend long double cross(const Point& p, const Point& q) {
+			return p.x * q.y - p.y * q.x;
 		}
 
 		friend std::ostream& operator<<(std::ostream& os, const Point& p) {
@@ -53,10 +55,10 @@ namespace cpalgo {
 	};
 
 	// Basic half-plane struct.
-	struct Halfplane { 
+	struct Halfplane {
 
 		// 'p' is a passing point of the line and 'pq' is the direction vector of the line.
-		Point p, pq; 
+		Point p, pq;
 		long double angle;
 
 		Halfplane() {}
@@ -66,16 +68,16 @@ namespace cpalgo {
 		Halfplane(array<pt, 2> ps) : Halfplane(ps[0], ps[1]) {}
 		Halfplane(hp h) : Halfplane(h.from, h.to) {}
 
-		// Check if point 'r' is outside this half-plane. 
+		// Check if point 'r' is outside this half-plane.
 		// Every half-plane allows the region to the LEFT of its line.
 		bool out(const Point& r) {
-			return cross(pq, r - p) < -eps; 
+			return cross(pq, r - p) < -eps;
 		}
 
-		// Comparator for sorting. 
-		bool operator < (const Halfplane& e) const { 
+		// Comparator for sorting.
+		bool operator < (const Halfplane& e) const {
 			return angle < e.angle;
-		} 
+		}
 
 		// Intersection point of the lines of two half-planes. It is assumed they're never parallel.
 		friend Point inter(const Halfplane& s, const Halfplane& t) {
@@ -89,13 +91,13 @@ namespace cpalgo {
 	};
 
 	// Actual algorithm
-	vector<Point> hp_intersect(vector<Halfplane>& H) { 
+	vector<Point> hp_intersect(vector<Halfplane>& H) {
 
 		/*Point box[4] = {  // Bounding box in CCW order
-			Point(inf, inf), 
-			Point(-inf, inf), 
-			Point(-inf, -inf), 
-			Point(inf, -inf) 
+			Point(inf, inf),
+			Point(-inf, inf),
+			Point(-inf, -inf),
+			Point(inf, -inf)
 		};
 
 		for(int i = 0; i<4; i++) { // Add bounding box half-planes.
@@ -181,7 +183,7 @@ void test_check(ll range) {
 		auto b = Random::line(range);
 		auto c = b;
 		while (cross(b[0] - b[1], c[0] - c[1]) == 0) c = Random::line(range);
-		
+
 		bool got = hp(a[0], a[1]).check(hp(b[0], b[1]), hp(c[0], c[1]));
 		bool expected = naiveCheck(a, b, c);
 

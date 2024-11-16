@@ -26,7 +26,7 @@ namespace Random {
 	vector<ll> partition(ll n, std::size_t k){//min = 0;
 		n += k;
 		vector<ll> res = Random::distinct<ll>(k-1, 1, n);
-		sort(all(res));
+		ranges::sort(res);
 		res.emplace_back(n);
 		ll last = 0;
 		for (std::size_t i = 0; i < k; i++) {

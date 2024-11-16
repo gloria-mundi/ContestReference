@@ -107,7 +107,7 @@ void test_uniqueAngle(ll range) {
 		if (it->second != expected) cerr << "error: inconsistent" << FAIL;
 		queries++;
 	}
-	cerr << "tested uniqueAngle: " << queries << " (" << sz(seen) << ")" << endl;
+	cerr << "tested uniqueAngle: " << queries << " (" << ssize(seen) << ")" << endl;
 }
 
 int main() {

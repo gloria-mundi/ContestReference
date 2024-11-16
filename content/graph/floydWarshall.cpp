@@ -2,16 +2,16 @@ vector<vector<ll>> dist; // Entfernung zwischen je zwei Punkten.
 vector<vector<int>> next;
 
 void floydWarshall() {
-	next.assign(sz(dist), vector<int>(sz(dist), -1));
-	for (int i = 0; i < sz(dist); i++) {
-		for (int j = 0; j < sz(dist); j++) {
+	next.assign(ssize(dist), vector<int>(ssize(dist), -1));
+	for (int i = 0; i < ssize(dist); i++) {
+		for (int j = 0; j < ssize(dist); j++) {
 			if (dist[i][j] < INF) {
 				next[i][j] = j;
 	}}}
 
-	for (int k = 0; k < sz(dist); k++) {
-		for (int i = 0; i < sz(dist); i++) {
-			for (int j = 0; j < sz(dist); j++) {
+	for (int k = 0; k < ssize(dist); k++) {
+		for (int i = 0; i < ssize(dist); i++) {
+			for (int j = 0; j < ssize(dist); j++) {
 				// only needed if dist can be negative
 				if (dist[i][k] == INF || dist[k][j] == INF) continue;
 				if (dist[i][j] > dist[i][k] + dist[k][j]) {

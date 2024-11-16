@@ -5,21 +5,21 @@
 #include <math/transforms/fftMul.cpp>
 
 vector<ll> from_cplx(const vector<cplx>& in) {
-	vector<ll> res(sz(in));
-	for (int i = 0; i < sz(in); i++) res[i] = llround(real(in[i]));
+	vector<ll> res(ssize(in));
+	for (int i = 0; i < ssize(in); i++) res[i] = llround(real(in[i]));
 	return res;
 }
 
 vector<ll> naive(const vector<ll>& a, const vector<ll>& b) {
 	vector<ll> res;
 	for (ll i = 1;; i *= 2) {
-		if (sz(a) + sz(b) <= i) {
+		if (ssize(a) + ssize(b) <= i) {
 			res.resize(i, 0);
 			break;
 		}
 	}
-	for (int i = 0; i < sz(a); i++) {
-		for (int j = 0; j < sz(b); j++) {
+	for (int i = 0; i < ssize(a); i++) {
+		for (int j = 0; j < ssize(b); j++) {
 			res[i+j] += a[i] * b[j];
 		}
 	}

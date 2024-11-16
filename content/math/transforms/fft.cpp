@@ -1,7 +1,7 @@
 using cplx = complex<double>;
 
 void fft(vector<cplx>& a, bool inv = false) {
-	int n = sz(a);
+	int n = ssize(a);
 	for (int i = 0, j = 1; j < n - 1; ++j) {
 		for (int k = n >> 1; k > (i ^= k); k >>= 1);
 		if (j < i) swap(a[i], a[j]);

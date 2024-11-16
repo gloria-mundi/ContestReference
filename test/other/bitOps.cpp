@@ -31,9 +31,7 @@ ll naive(ll x) {
 		bits.push_back(x & 1);
 		x >>= 1;
 	}
-	reverse(all(bits));
-	next_permutation(all(bits));
-	reverse(all(bits));
+	ranges::next_permutation(bits | views::reverse);
 	x = 0;
 	for (ll i = 0, j = 1; i < 64; i++, j <<= 1) {
 		if (bits[i] != 0) x |= j;

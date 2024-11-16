@@ -1,4 +1,4 @@
-sort(all(edges));
+ranges::sort(edges, less{});
 vector<Edge> mst;
 ll cost = 0;
 for (Edge& e : edges) {

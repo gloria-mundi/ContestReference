@@ -17,7 +17,7 @@ vector<ll> poly_inv(const vector<ll>& a, int n) {
 }
 
 vector<ll> poly_deriv(vector<ll> a) {
-	for (int i = 1; i < sz(a); i++)
+	for (int i = 1; i < ssize(a); i++)
 		a[i-1] = a[i] * i % mod;
 	a.pop_back();
 	return a;
@@ -25,11 +25,11 @@ vector<ll> poly_deriv(vector<ll> a) {
 
 vector<ll> poly_integr(vector<ll> a) {
 	static vector<ll> inv = {0, 1};
-	for (static int i = 2; i <= sz(a); i++)
+	for (static int i = 2; i <= ssize(a); i++)
 		inv.push_back(mod - mod / i * inv[mod % i] % mod);
 
 	a.push_back(0);
-	for (int i = sz(a) - 1; i > 0; i--)
+	for (int i = ssize(a) - 1; i > 0; i--)
 		a[i] = a[i-1] * inv[i] % mod;
 	a[0] = 0;
 	return a;
@@ -46,7 +46,7 @@ vector<ll> poly_exp(vector<ll> a, int n) {
 	for (int len = 1; len < n; len *= 2) {
 		vector<ll> p = poly_log(q, 2*len);
 		for (int i = 0; i < 2*len; i++)
-			p[i] = (mod - p[i] + (i < sz(a) ? a[i] : 0)) % mod;
+			p[i] = (mod - p[i] + (i < ssize(a) ? a[i] : 0)) % mod;
 		vector<ll> q2 = q;
 		q2.resize(2*len);
 		ntt(p), ntt(q2);

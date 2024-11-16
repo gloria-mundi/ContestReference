@@ -5,9 +5,9 @@ struct LCA {
 	SparseTable st; //sparse table @\sourceref{datastructures/sparseTable.cpp}@
 
 	void init(vector<vector<int>>& adj, int root) {
-		depth.assign(2 * sz(adj), 0);
-		visited.assign(2 * sz(adj), -1);
-		first.assign(sz(adj), 2 * sz(adj));
+		depth.assign(2 * ssize(adj), 0);
+		visited.assign(2 * ssize(adj), -1);
+		first.assign(ssize(adj), 2 * ssize(adj));
 		idx = 0;
 		dfs(adj, root);
 		st.init(depth);
@@ -18,7 +18,7 @@ struct LCA {
 		first[v] = min(idx, first[v]), idx++;
 
 		for (int u : adj[v]) {
-			if (first[u] == 2 * sz(adj)) {
+			if (first[u] == 2 * ssize(adj)) {
 				dfs(adj, u, d + 1);
 				visited[idx] = v, depth[idx] = d, idx++;
 	}}}

@@ -57,7 +57,7 @@ void performance_test() {
 	timer t;
 	t.start();
 	sieve();
-	hash_t hash = sz(primes);
+	hash_t hash = ssize(primes);
 	t.stop();
 	if (t.time > 500) cerr << "too slow: " << t.time << FAIL;
 	cerr << "tested performance: " << t.time << "ms (hash: " << hash << ")" << endl;

@@ -5,13 +5,13 @@
 bool isDeBruijn(string s, int n, int k) {
 	ll expected = 1;
 	for (ll i = 0; i < n; i++) expected *= k;
-	if (expected != sz(s)) return false;
+	if (expected != ssize(s)) return false;
 	s += s;
 	set<string_view> seen;
-	for (ll i = 0; 2*i < sz(s); i++) {
+	for (ll i = 0; 2*i < ssize(s); i++) {
 		seen.insert(string_view(s).substr(i, n));
 	}
-	return sz(seen) == expected;
+	return ssize(seen) == expected;
 }
 
 void stress_test() {
@@ -21,7 +21,7 @@ void stress_test() {
 		auto [l, r] = Random::pair<char>('b', 'f');
 		auto got = deBruijn(n, l, r);
 		if (!isDeBruijn(got, n, r - l + 1)) cerr << "error" << FAIL;
-		queries += sz(got);
+		queries += ssize(got);
 	}
 	cerr << "tested random queries: " << queries << endl;
 }
@@ -32,7 +32,7 @@ void performance_test() {
 	t.start();
 	auto res = deBruijn(N, '0', '1');
 	t.stop();
-	hash_t hash = sz(res);
+	hash_t hash = ssize(res);
 	if (t.time > 500) cerr << "too slow: " << t.time << FAIL;
 	cerr << "tested performance: " << t.time << "ms (hash: " << hash << ")" << endl;
 }

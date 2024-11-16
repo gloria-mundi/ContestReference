@@ -24,19 +24,19 @@ void stress_test() {
 				cur[j] = x;
 				expected.emplace_back(t, cur);
 			} else if (op <= 16) {
-				if (sz(expected) < 1) continue;
-				int j = Random::integer<int>(0, sz(expected));
+				if (ssize(expected) < 1) continue;
+				int j = Random::integer<int>(0, ssize(expected));
 				for (int k = 0; k < m; k++) {
 					if (got.get(k, expected[j].first) != expected[j].second[k]) cerr << "got: " << got.get(k, expected[j].first) << ", expected: " << expected[j].second[k] << FAIL;
 				}
 			} else {
-				if (sz(expected) < 1) continue;
-				int j = Random::integer<int>(0, sz(expected));
+				if (ssize(expected) < 1) continue;
+				int j = Random::integer<int>(0, ssize(expected));
 				got.reset(expected[j].first);
 				expected.resize(j + 1);
 				cur = expected.back().second;
 			}
-			
+
 		}
 		queries += n;
 	}

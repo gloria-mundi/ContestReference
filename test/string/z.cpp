@@ -2,9 +2,9 @@
 #include <string/z.cpp>
 
 vector<int> naive(const string& s) {
-	vector<int> res(sz(s));
-	for (int i = 1; i < sz(s); i++) {
-		while (i + res[i] < sz(s) && s[res[i]] == s[i + res[i]]) res[i]++;
+	vector<int> res(ssize(s));
+	for (int i = 1; i < ssize(s); i++) {
+		while (i + res[i] < ssize(s) && s[res[i]] == s[i + res[i]]) res[i]++;
 	}
 	return res;
 }

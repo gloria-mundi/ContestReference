@@ -7,9 +7,9 @@ constexpr ll INF = LL::INF;
 #include <graph/TSP.cpp>
 
 vector<int> naive() {
-	int n = sz(dist);
+	int n = ssize(dist);
 	vector<int> todo(n - 1);
-	iota(all(todo), 1);
+	iota(begin(todo), end(todo), 1);
 	vector<int> res;
 	ll best = LL::INF;
 	do {
@@ -26,7 +26,7 @@ vector<int> naive() {
 			res.insert(res.begin(), 0);
 			res.push_back(0);
 		}
-	} while (next_permutation(all(todo)));
+	} while (ranges::next_permutation(todo).found);
 	return res;
 }
 
@@ -39,7 +39,7 @@ void stress_test() {
 
 		auto expected = naive();
 		auto got = TSP();
-		
+
 		if (got != expected) cerr << "error" << FAIL;
 		queries += n;
 	}

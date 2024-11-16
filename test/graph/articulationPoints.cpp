@@ -7,10 +7,10 @@ struct edge {
 #undef Edge
 
 vector<bool> naiveArt() {
-	vector<bool> res(sz(adj));
+	vector<bool> res(ssize(adj));
 
-	vector<int> seen(sz(adj), -1);
-	for (int i = 0; i < sz(adj); i++) {
+	vector<int> seen(ssize(adj), -1);
+	for (int i = 0; i < ssize(adj); i++) {
 		if (adj[i].empty()) continue;
 		seen[i] = i;
 		vector<ll> todo = {adj[i][0].to};
@@ -72,9 +72,9 @@ void performance_test() {
 	});
 
 	t.start();
-	find();	
+	find();
 	t.stop();
-	hash_t hash = sz(bridges) + sz(bcc);
+	hash_t hash = ssize(bridges) + ssize(bcc);
 	if (t.time > 500) cerr << "too slow: " << t.time << FAIL;
 	cerr << "tested performance: " << t.time << "ms (hash: " << hash << ")" << endl;
 }

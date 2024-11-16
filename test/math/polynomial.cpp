@@ -11,7 +11,7 @@ poly randomPoly(int deg) {
 
 ll eval(const vector<ll>& p, ll x) {
 	ll res = 0;
-	for (ll i = 0, j = 1; i < sz(p); i++, j = (j * x) % mod) {
+	for (ll i = 0, j = 1; i < ssize(p); i++, j = (j * x) % mod) {
 		res += j * p[i];
 		res %= mod;
 	}
@@ -50,7 +50,7 @@ void test_add() {
 		auto c = a;
 		c += b;
 
-		if (sz(c) > sz(a) && sz(c) > sz(b)) cerr << "error: wrong degree" << FAIL;
+		if (ssize(c) > ssize(a) && ssize(c) > ssize(b)) cerr << "error: wrong degree" << FAIL;
 
 		for (int i = 0; i <= n + m + 7; i++) {
 			ll x = Random::integer<ll>(0, mod);
@@ -74,7 +74,7 @@ void test_mul() {
 		auto b = randomPoly(m);
 
 		auto c = a * b;
-		if (sz(c) > sz(a) + sz(b) - 1) cerr << "error: wrong degree" << FAIL;
+		if (ssize(c) > ssize(a) + ssize(b) - 1) cerr << "error: wrong degree" << FAIL;
 
 		for (int i = 0; i <= n + m + 7; i++) {
 			ll x = Random::integer<ll>(0, mod);
@@ -97,8 +97,8 @@ void test_shift() {
 		auto a = randomPoly(n);
 
 		auto b = a << m;
-		if (sz(b) > sz(a)) cerr << sz(a) << " " << sz(b) << endl;
-		if (sz(b) > sz(a)) cerr << "error: wrong degree" << FAIL;
+		if (ssize(b) > ssize(a)) cerr << ssize(a) << " " << ssize(b) << endl;
+		if (ssize(b) > ssize(a)) cerr << "error: wrong degree" << FAIL;
 
 		for (int i = 0; i <= n + 7; i++) {
 			ll x = Random::integer<ll>(0, mod);
@@ -126,8 +126,8 @@ void test_divmod() {
 		auto b = randomPoly(m);
 
 		auto [div, rem] = a.divmod(b);
-		if (sz(rem) > sz(b)) cerr << "error: wrong degree (rem)" << FAIL;
-		if (sz(div) > 1 + max<ll>(0, sz(a) - sz(b))) cerr << "error: wrong degree (div)" << FAIL;
+		if (ssize(rem) > ssize(b)) cerr << "error: wrong degree (rem)" << FAIL;
+		if (ssize(div) > 1 + max<ll>(0, ssize(a) - ssize(b))) cerr << "error: wrong degree (div)" << FAIL;
 
 		for (int i = 0; i <= n + m; i++) {
 			ll x = Random::integer<ll>(0, mod);
@@ -142,7 +142,7 @@ void test_divmod() {
 	}
 	cerr << "tested divmod: " << queries << endl;
 }
-	
+
 int main() {
 	test_eval();
 	test_add();

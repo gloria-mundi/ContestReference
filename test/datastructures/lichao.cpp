@@ -7,7 +7,7 @@ void stress_test(ll range) {
 	for (int tries = 0; tries < 1000; tries++) {
 		int n = Random::integer<int>(1, 100);
 		xs = Random::distinct<ll>(n, -range, range);
-		sort(all(xs));
+		ranges::sort(xs);
 
 		vector<ll> naive(n, INF);
 		Lichao tree;
@@ -42,7 +42,7 @@ constexpr int N = 200'000;
 void performance_test() {
 	timer t;
 	xs = Random::distinct<ll>(N, -1'000'000'000, 1'000'000'000);
-	sort(all(xs));
+	ranges::sort(xs);
 
 	t.start();
 	Lichao tree;

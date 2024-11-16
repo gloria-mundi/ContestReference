@@ -2,9 +2,9 @@
 #include <string/suffixArray.cpp>
 
 vector<int> naive(string_view s) {
-	vector<int> SA(sz(s));
-	iota(all(SA), 0);
-	sort(all(SA), [s](int a, int b){
+	vector<int> SA(ssize(s));
+	iota(begin(SA), end(SA), 0);
+	ranges::sort(SA, [s](int a, int b){
 		return s.substr(a) < s.substr(b);
 	});
 	return SA;
@@ -12,7 +12,7 @@ vector<int> naive(string_view s) {
 
 int lcp(string_view s, int x, int y) {
 	int res = 0;
-	while (x + res < sz(s) && y + res < sz(s) && s[x + res] == s[y + res]) res++;
+	while (x + res < ssize(s) && y + res < ssize(s) && s[x + res] == s[y + res]) res++;
 	return res;
 }
 
@@ -50,7 +50,7 @@ void performance_test() {
 	SuffixArray sa(s);
 	t.stop();
 	hash_t hash = 0;
-	for (int i = 0; i < sz(sa.SA); i++) hash += i*sa.SA[i];
+	for (int i = 0; i < ssize(sa.SA); i++) hash += i*sa.SA[i];
 	if (t.time > 500) cerr << "too slow: " << t.time << FAIL;
 	cerr << "tested performance: " << t.time << "ms (hash: " << hash << ")" << endl;
 }

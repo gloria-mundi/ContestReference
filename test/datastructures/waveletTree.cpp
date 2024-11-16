@@ -20,7 +20,7 @@ void stress_test() {
 				ll expected = -1;
 				if (x >= 0 && l + x < r) {
 					vector<ll> tmp(naive.begin() + l, naive.begin() + r);
-					std::sort(all(tmp));
+					ranges::sort(tmp);
 					expected = tmp[x];
 				}
 				if (got != expected) {
@@ -59,7 +59,7 @@ void performance_test() {
 		auto [l2, r2] = Random::pair<int>(0, N + 1);
 		int x1 = Random::integer<ll>(l1, r1 + 1);
 		ll x2 = Random::integer<ll>(-1000, 1000);
-		
+
 		t.start();
 		hash ^= tree.kth(l1, r1, x1);
 		hash ^= tree.countSmaller(l2, r2, x2);

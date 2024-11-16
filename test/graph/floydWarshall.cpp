@@ -40,7 +40,7 @@ void stress_test() {
 				if (path.empty()) continue;
 				if (path.front() != i) cerr << "error: start" << FAIL;
 				if (path.back() != k) cerr << "error: end" << FAIL;
-				for (int l = 1; l < sz(path); l++) {
+				for (int l = 1; l < ssize(path); l++) {
 					if (floydWarshall::dist[i][path[l-1]] +
 						orig[path[l-1]][path[l]] +
 						floydWarshall::dist[path[l]][k] !=
@@ -52,7 +52,7 @@ void stress_test() {
 		for (int i = 0; i < n; i++) {
 			auto got = floydWarshall::dist[i];
 			auto expected = bellmannFord(n, edges, i);
-			
+
 			if (got != expected) cerr << "error" << FAIL;
 			queries += n;
 		}

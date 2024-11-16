@@ -11,12 +11,12 @@ struct SuffixTree {
 	SuffixTree(const string& s_) : s(s_) {
 		needsSuffix = remainder = curVert = curEdge = curLen = 0;
 		pos = -1;
-		for (int i = 0; i < sz(s); i++) extend();
+		for (int i = 0; i < ssize(s); i++) extend();
 	}
 
 	int newVert(int start, int end) {
 		tree.push_back({start, end, 0, {}});
-		return sz(tree) - 1;
+		return ssize(tree) - 1;
 	}
 
 	void addSuffixLink(int vert) {
@@ -42,7 +42,7 @@ struct SuffixTree {
 		while (remainder) {
 			if (curLen == 0) curEdge = pos;
 			if (!tree[curVert].nxt.count(s[curEdge])) {
-				int leaf = newVert(pos, sz(s));
+				int leaf = newVert(pos, ssize(s));
 				tree[curVert].nxt[s[curEdge]] = leaf;
 				addSuffixLink(curVert);
 			} else {
@@ -56,7 +56,7 @@ struct SuffixTree {
 				int split = newVert(tree[nxt].start,
 				                    tree[nxt].start + curLen);
 				tree[curVert].nxt[s[curEdge]] = split;
-				int leaf = newVert(pos, sz(s));
+				int leaf = newVert(pos, ssize(s));
 				tree[split].nxt[s[pos]] = leaf;
 				tree[nxt].start += curLen;
 				tree[split].nxt[s[tree[nxt].start]] = nxt;

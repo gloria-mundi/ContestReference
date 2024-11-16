@@ -11,7 +11,7 @@ void bronKerboschRec(bits R, bits P, bits X) {
 	} else {
 		int q = min(P._Find_first(), X._Find_first());
 		bits cands = P & ~adj[q];
-		for (int i = 0; i < sz(adj); i++) if (cands[i]) {
+		for (int i = 0; i < ssize(adj); i++) if (cands[i]) {
 			R[i] = 1;
 			bronKerboschRec(R, P & adj[i], X & adj[i]);
 			R[i] = P[i] = 0;
@@ -20,5 +20,5 @@ void bronKerboschRec(bits R, bits P, bits X) {
 
 void bronKerbosch() {
 	cliques.clear();
-	bronKerboschRec({}, {(1ull << sz(adj)) - 1}, {});
+	bronKerboschRec({}, {(1ull << ssize(adj)) - 1}, {});
 }

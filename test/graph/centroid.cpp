@@ -13,9 +13,9 @@ int subtreeSize(int c, int p) {
 
 vector<int> naive() {
 	vector<int> res;
-	for (int i = 0; i < sz(adj); i++) {
+	for (int i = 0; i < ssize(adj); i++) {
 		bool isCentroid = true;
-		for (int j : adj[i]) isCentroid &= 2*subtreeSize(j, i) <= sz(adj);
+		for (int j : adj[i]) isCentroid &= 2*subtreeSize(j, i) <= ssize(adj);
 		if (isCentroid) res.push_back(i);
 	}
 	return res;
@@ -33,16 +33,16 @@ void stress_test() {
 			adj[a].push_back(b);
 			adj[b].push_back(a);
 		});
-		
+
 		auto expected = naive();
-		sort(all(expected));
+		ranges::sort(expected);
 
 		for (int i = 0; i < n; i++) {
 			auto [a, b] = find_centroid(i);
 			vector<int> got;
 			if (a >= 0) got.push_back(a);
 			if (b >= 0) got.push_back(b);
-			sort(all(got));
+			ranges::sort(got);
 
 			if (got != expected) cerr << "error" << FAIL;
 		}
@@ -63,7 +63,7 @@ void performance_test() {
 		adj[b].push_back(a);
 	});
 
-	t.start();	
+	t.start();
 	auto [gotA, gotB] = find_centroid();
 	t.stop();
 	hash_t hash = gotA + gotB;

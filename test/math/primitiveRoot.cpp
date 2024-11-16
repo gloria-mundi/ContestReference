@@ -63,7 +63,7 @@ void stress_test2() {
 		map<ll, int> facts;
 		factor(x, facts);
 		if (x % 2 == 0) facts.erase(facts.find(2));
-		bool expected = sz(facts) == 1;
+		bool expected = ssize(facts) == 1;
 		if (x % 4 == 0) expected = false;
 		if (x == 2 || x == 4) expected = true;
 

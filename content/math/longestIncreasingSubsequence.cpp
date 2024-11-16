@@ -1,8 +1,8 @@
 vector<int> lis(vector<ll>& a) {
-	int n = sz(a), len = 0;
+	int n = ssize(a), len = 0;
 	vector<ll> dp(n, INF), dp_id(n), prev(n);
 	for (int i = 0; i < n; i++) {
-		int pos = lower_bound(all(dp), a[i]) - dp.begin();
+		int pos = ranges::lower_bound(dp, a[i]) - begin(dp);
 		dp[pos] = a[i];
 		dp_id[pos] = i;
 		prev[i] = pos ? dp_id[pos - 1] : -1;

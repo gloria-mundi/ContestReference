@@ -8,12 +8,12 @@ int s, t;
 vector<int> pt, dist;
 
 void addEdge(int u, int v, ll c) {
-	adj[u].push_back({v, (int)sz(adj[v]), 0, c});
-	adj[v].push_back({u, (int)sz(adj[u]) - 1, 0, 0});
+	adj[u].push_back({v, (int)ssize(adj[v]), 0, c});
+	adj[v].push_back({u, (int)ssize(adj[u]) - 1, 0, 0});
 }
 
 bool bfs() {
-	dist.assign(sz(adj), -1);
+	dist.assign(ssize(adj), -1);
 	dist[s] = 0;
 	queue<int> q({s});
 	while (!q.empty() && dist[t] < 0) {
@@ -28,7 +28,7 @@ bool bfs() {
 
 ll dfs(int v, ll flow = INF) {
 	if (v == t || flow == 0) return flow;
-	for (; pt[v] < sz(adj[v]); pt[v]++) {
+	for (; pt[v] < ssize(adj[v]); pt[v]++) {
 		Edge& e = adj[v][pt[v]];
 		if (dist[e.to] != dist[v] + 1) continue;
 		ll cur = dfs(e.to, min(e.c - e.f, flow));
@@ -44,7 +44,7 @@ ll maxFlow(int source, int target) {
 	s = source, t = target;
 	ll flow = 0;
 	while (bfs()) {
-		pt.assign(sz(adj), 0);
+		pt.assign(ssize(adj), 0);
 		ll cur;
 		do {
 			cur = dfs(s);

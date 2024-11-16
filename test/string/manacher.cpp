@@ -2,16 +2,16 @@
 #include <string/manacher.cpp>
 
 vector<int> naive(string_view s) {
-	vector<int> res(2 * sz(s) + 1);
-	for (int i = 0; i < sz(s); i++) { //odd palindromes
+	vector<int> res(2 * ssize(s) + 1);
+	for (int i = 0; i < ssize(s); i++) { //odd palindromes
 		int j = 2*i+1;
-		while (i+res[j] < sz(s) && i-res[j] >= 0 && s[i-res[j]] == s[i+res[j]]) res[j]++;
+		while (i+res[j] < ssize(s) && i-res[j] >= 0 && s[i-res[j]] == s[i+res[j]]) res[j]++;
 		res[j]*=2;
 		res[j]--;
 	}
-	for (int i = 0; i <= sz(s); i++) { //even palindromes
+	for (int i = 0; i <= ssize(s); i++) { //even palindromes
 		int j = 2*i;
-		while (i+res[j] < sz(s) && i-res[j]-1 >= 0 && s[i-res[j]-1] == s[i+res[j]]) res[j]++;
+		while (i+res[j] < ssize(s) && i-res[j]-1 >= 0 && s[i-res[j]-1] == s[i+res[j]]) res[j]++;
 		res[j] *= 2;
 	}
 	return res;

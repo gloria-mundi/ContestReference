@@ -10,7 +10,7 @@ constexpr ll INF = LL::INF;
 //strict convex hull
 double naive(const vector<pt>& ps) {
 	double opt = LL::INF;
-	for (ll i = 0; i < sz(ps); i++) {
+	for (ll i = 0; i < ssize(ps); i++) {
 		for (ll j = 0; j < i; j++) {
 			opt = min(opt, norm(ps[i] - ps[j]));
 		}

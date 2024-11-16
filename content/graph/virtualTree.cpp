@@ -2,14 +2,14 @@
 vector<int> in, out;
 
 void virtualTree(vector<int> ind) { // indices of used nodes
-	sort(all(ind), [&](int x, int y) { return in[x] < in[y]; });
-	for (int i = 1, n = sz(ind); i < n; i++) {
+	ranges::sort(ind, {}, [&](int x) { return in[x]; });
+	for (int i = 1, n = ssize(ind); i < n; i++) {
 		ind.push_back(lca(ind[i - 1], ind[i]));
 	}
-	sort(all(ind), [&](int x, int y) { return in[x] < in[y]; });
-	ind.erase(unique(all(ind)), ind.end());
+	ranges::sort(ind, {}, [&](int x) { return in[x]; });
+	ind.erase(begin(ranges::unique(ind)), end(ind));
 
-	int n = sz(ind);
+	int n = ssize(ind);
 	vector<vector<int>> tree(n);
 	vector<int> st = {0};
 	for (int i = 1; i < n; i++) {
