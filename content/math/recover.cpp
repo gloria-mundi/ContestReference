@@ -1,4 +1,4 @@
-ll sq(ll x) {return x*x;}
+ll sq(ll x) { return x*x; }
 
 array<ll, 2> recover(ll c, ll m) {
 	array<ll, 2> u = {m, 0}, v = {c, 1};

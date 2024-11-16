@@ -13,7 +13,7 @@ auto bitonicTSP() {
 				dp[i] = opt;
 				pre[i] = j;
 	}}}
-	// return dp.back(); // Länger der Tour
+	// return dp.back(); // Länge der Tour
 
 	int j, n = sz(dist) - 1;
 	vector<int> ut, lt = {n, n - 1};

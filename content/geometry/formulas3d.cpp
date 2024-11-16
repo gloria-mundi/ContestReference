@@ -2,20 +2,20 @@
 auto operator|(pt3 a, pt3 b) {
 	return a.x * b.x + a.y*b.y + a.z*b.z;
 }
-auto dot(pt3 a, pt3 b) {return a|b;}
+auto dot(pt3 a, pt3 b) { return a|b; }
 
 // Kreuzprodukt
-pt3 operator*(pt3 a, pt3 b) {return {a.y*b.z - a.z*b.y,
-                                     a.z*b.x - a.x*b.z,
-                                     a.x*b.y - a.y*b.x};}
-pt3 cross(pt3 a, pt3 b) {return a*b;}
+pt3 operator*(pt3 a, pt3 b) { return {a.y*b.z - a.z*b.y,
+                                      a.z*b.x - a.x*b.z,
+                                      a.x*b.y - a.y*b.x}; }
+pt3 cross(pt3 a, pt3 b) { return a*b; }
 
 // Länge von a
-double abs(pt3 a) {return sqrt(dot(a, a));}
-double abs(pt3 a, pt3 b) {return abs(b - a);}
+double abs(pt3 a) { return sqrt(dot(a, a)); }
+double abs(pt3 a, pt3 b) { return abs(b - a); }
 
 // Mixedprodukt
-auto mixed(pt3 a, pt3 b, pt3 c) {return a*b|c;};
+auto mixed(pt3 a, pt3 b, pt3 c) { return a*b|c; }
 
 // orientierung von p zu der Ebene durch a, b, c
 // -1 => gegen den Uhrzeigersinn,

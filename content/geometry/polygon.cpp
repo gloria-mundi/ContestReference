@@ -91,8 +91,8 @@ double dist(const vector<pt>& ps, vector<pt> qs) {
 	return intersect ? 0 : res;
 }
 
-bool left(pt of, pt p) {return cross(p, of) < 0 ||
-                       (cross(p, of) == 0 && dot(p, of) > 0);}
+bool left(pt of, pt p) { return cross(p, of) < 0 ||
+                         (cross(p, of) == 0 && dot(p, of) > 0); }
 
 // convex hulls without duplicates, hull[0] == hull.back() and
 // hull[0] must be a convex point (with angle < pi)

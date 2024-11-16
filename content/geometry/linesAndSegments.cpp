@@ -66,7 +66,7 @@ vector<pt> segmentIntersection2(pt a, pt b, pt c, pt d) {
 	double x = cross(b - a, d - c);
 	double y = cross(c - a, d - c);
 	double z = cross(b - a, a - c);
-	if (x < 0) {x = -x; y = -y; z = -z;}
+	if (x < 0) { x = -x; y = -y; z = -z; }
 	if (y < -EPS || y-x > EPS || z < -EPS || z-x > EPS) return {};
 	if (x > EPS) return {a + y/x*(b - a)};
 	vector<pt> result;

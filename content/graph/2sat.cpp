@@ -4,19 +4,19 @@ struct sat2 {
 
 	sat2(int vars) : n(vars*2), adj(n) {}
 
-	static int var(int i) {return i << 1;} // use this!
+	static int var(int i) { return i << 1; } // use this!
 
 	void addImpl(int a, int b) {
 		adj[a].push_back(b);
 		adj[1^b].push_back(1^a);
 	}
-	void addEquiv(int a, int b) {addImpl(a, b); addImpl(b, a);}
-	void addOr(int a, int b) {addImpl(1^a, b);}
-	void addXor(int a, int b) {addOr(a, b); addOr(1^a, 1^b);}
-	void addTrue(int a) {addImpl(1^a, a);}
-	void addFalse(int a) {addTrue(1^a);}
-	void addAnd(int a, int b) {addTrue(a); addTrue(b);}
-	void addNand(int a, int b) {addOr(1^a, 1^b);}
+	void addEquiv(int a, int b) { addImpl(a, b); addImpl(b, a); }
+	void addOr(int a, int b) { addImpl(1^a, b);}
+	void addXor(int a, int b) { addOr(a, b); addOr(1^a, 1^b); }
+	void addTrue(int a) { addImpl(1^a, a);}
+	void addFalse(int a) { addTrue(1^a);}
+	void addAnd(int a, int b) { addTrue(a); addTrue(b); }
+	void addNand(int a, int b) { addOr(1^a, 1^b); }
 
 	bool solve() {
 		scc(); //scc code von oben

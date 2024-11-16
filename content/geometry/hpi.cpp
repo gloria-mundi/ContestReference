@@ -1,6 +1,6 @@
 constexpr ll INF = 0x1FFF'FFFF'FFFF'FFFF; //THIS CODE IS WIP
 
-bool left(pt p) {return real(p) < 0 || 
+bool left(pt p) {return real(p) < 0 ||
 					   (real(p) == 0 && imag(p) < 0);}
 struct hp {
 	pt from, to;
@@ -11,7 +11,7 @@ struct hp {
 	bool dummy() const {return from == to;}
 	pt dir() const {return dummy() ? to : to - from;}
 	bool operator<(const hp& o) const {
-		if (left(dir()) != left(o.dir())) 
+		if (left(dir()) != left(o.dir()))
 			return left(dir()) > left(o.dir());
 		return cross(dir(), o.dir()) > 0;
 	}

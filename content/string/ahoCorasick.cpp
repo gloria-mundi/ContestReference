@@ -4,7 +4,7 @@ struct AhoCorasick {
 		int suffix = 0, ch, cnt = 0;
 		array<int, ALPHABET_SIZE> nxt = {};
 
-		vert(int p, int c) : suffix(-p), ch(c) {fill(all(nxt), -1);}
+		vert(int p, int c): suffix(-p), ch(c) { fill(all(nxt), -1); }
 	};
 	vector<vert> aho = {{0, -1}};
 

@@ -31,21 +31,21 @@ ll stoer_wagner() {
 		while (!pq.empty()) {
 			int c = pq.top().second;
 			pq.pop();
-			if (con[c] < 0) continue; //already seen
+			if (con[c] < 0) continue; // already seen
 			con[c] = -1;
 			for (auto e : tmp[c]) {
-				if (con[e.to] >= 0) {//add edge to cut
+				if (con[e.to] >= 0) { // add edge to cut
 					con[e.to] += e.cap;
 					pq.push({con[e.to], e.to});
 					cur += e.cap;
-				} else if (e.to != c) {//remove edge from cut
+				} else if (e.to != c) { // remove edge from cut
 					cur -= e.cap;
 			}}
 			state.push_back({cur, c});
 		}
 		int t = state.back().second;
 		state.pop_back();
-		if (state.empty()) return 0; //graph is not connected?!
+		if (state.empty()) return 0; // graph is not connected?!
 		merge(state.back().second, t);
 		res = min(res, state.back().first);
 	}

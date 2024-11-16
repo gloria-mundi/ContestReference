@@ -28,5 +28,5 @@ struct LCA {
 		return visited[st.queryIdempotent(first[u], first[v] + 1)];
 	}
 
-	ll getDepth(int v) {return depth[first[v]];}
+	ll getDepth(int v) { return depth[first[v]]; }
 };

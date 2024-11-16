@@ -4,15 +4,15 @@ struct poly {
 	poly(int deg = 0) : data(1 + deg) {}
 	poly(initializer_list<ll> _data) : data(_data) {}
 
-	int size() const {return sz(data);}
+	int size() const { return sz(data); }
 
 	void trim() {
 		for (ll& x : data) x = (x % mod + mod) % mod;
 		while (size() > 1 && data.back() == 0) data.pop_back();
 	}
 
-	ll& operator[](int x) {return data[x];}
-	const ll& operator[](int x) const {return data[x];}
+	ll& operator[](int x) { return data[x]; }
+	const ll& operator[](int x) const { return data[x]; }
 
 	ll operator()(int x) const {
 		ll res = 0;

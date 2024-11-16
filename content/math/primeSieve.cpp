@@ -8,7 +8,7 @@ bool isPrime(ll x) {
 }
 
 void primeSieve() {
-	for (ll i = 3; i < N; i += 2) {// i * i < N reicht für isPrime
+	for (ll i = 3; i < N; i += 2) { // i * i < N reicht für isPrime
 		if (!isNotPrime[i / 2]) {
 			primes.push_back(i); // optional
 			for (ll j = i * i; j < N; j+= 2 * i) {

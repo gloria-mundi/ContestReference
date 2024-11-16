@@ -7,9 +7,9 @@ struct bigint {
 
 	bigint() : sign(1) {}
 
-	bigint(ll v) {*this = v;}
+	bigint(ll v) { *this = v; }
 
-	bigint(const string &s) {read(s);}
+	bigint(const string &s) { read(s); }
 
 	void operator=(ll v) {
 		sign = 1;

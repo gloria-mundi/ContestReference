@@ -31,7 +31,7 @@
 	\begin{tabularx}{\linewidth}{|Ll|}
 		\hline
 		Bit an Position j lesen & \code{(x \& (1 << j)) != 0} \\
-		Bit an Position j setzten & \code{x |= (1 << j)} \\
+		Bit an Position j setzen & \code{x |= (1 << j)} \\
 		Bit an Position j löschen & \code{x \&= ~(1 << j)} \\
 		Bit an Position j flippen & \code{x ^= (1 << j)} \\
 		Anzahl an führenden nullen	($x \neq 0$) & \code{__builtin_clzll(x)} \\
@@ -211,7 +211,7 @@
 	Berechnung: Maximales Matching in bipartitem Graphen.
 	Dupliziere jedes $s \in S$ in $u_s$ und $v_s$.
 	Falls $x \leq y$, füge Kante $u_x \to v_y$ hinzu.
-	Wenn Matching zu langsam ist, versuche Struktur des Posets auszunutzen und evtl. anders eine maximale Anitkette zu finden.
+	Wenn Matching zu langsam ist, versuche Struktur des Posets auszunutzen und evtl. anders eine maximale Antikette zu finden.
 	
 	\item \textbf{\textsc{Turan}'s-Theorem:}
 	Die Anzahl an Kanten in einem Graphen mit $n$ Knoten der keine clique der größe $x+1$ enthält ist:

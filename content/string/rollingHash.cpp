@@ -14,5 +14,5 @@ struct Hash {
 		return (pref[r] - mul(power[r-l], pref[l]) + M) % M;
 	}
 
-	static ll mul(__int128 a, ll b) {return a * b % M;}
+	static ll mul(__int128 a, ll b) { return a * b % M; }
 };

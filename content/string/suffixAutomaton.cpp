@@ -4,7 +4,7 @@ struct SuffixAutomaton {
 	struct State {
 		int len, link = -1;
 		array<int, ALPHABET_SIZE> nxt; // map if large Alphabet
-		State(int l) : len(l) {fill(all(nxt), -1);}
+		State(int l): len(l) { fill(all(nxt), -1); }
 	};
 
 	vector<State> st = {State(0)};

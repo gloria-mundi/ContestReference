@@ -6,20 +6,17 @@ constexpr double PIU = acos(-1.0l); // PIL < PI < PIU
 constexpr double PIL = PIU-2e-19l;
 
 // Winkel zwischen Punkt und x-Achse in [-PI, PI].
-double angle(pt a) {return arg(a);}
+double angle(pt a) { return arg(a); }
 
 // rotiert Punkt im Uhrzeigersinn um den Ursprung.
-pt rotate(pt a, double theta) {return a * polar(1.0, theta);}
+pt rotate(pt a, double theta) { return a * polar(1.0, theta); }
 
 // Skalarprodukt.
-auto dot(pt a, pt b) {return real(conj(a) * b);}
-
-// abs()^2.(pre c++20)
-auto norm(pt a) {return dot(a, a);}
+auto dot(pt a, pt b) { return real(conj(a) * b); }
 
 // Kreuzprodukt, 0, falls kollinear.
-auto cross(pt a, pt b) {return imag(conj(a) * b);}
-auto cross(pt p, pt a, pt b) {return cross(a - p, b - p);}
+auto cross(pt a, pt b) { return imag(conj(a) * b); }
+auto cross(pt p, pt a, pt b) { return cross(a - p, b - p); }
 
 //  1 => c links von a->b
 //  0 => a, b und c kolliniear

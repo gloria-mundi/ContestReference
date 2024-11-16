@@ -8,7 +8,7 @@ struct SuffixArray {
 		P(__lg(2 * n - 1) + 1, vector<int>(n)) {
 		P[0].assign(all(s));
 		iota(all(SA), 0);
-		sort(all(SA), [&](int a, int b) {return s[a] < s[b];});
+		sort(all(SA), [&](int a, int b) { return s[a] < s[b]; });
 		vector<int> x(n);
 		for (int k = 1, c = 1; c < n; k++, c *= 2) {
 			iota(all(x), n - c);
@@ -19,7 +19,7 @@ struct SuffixArray {
 			partial_sum(all(cnt), begin(cnt));
 			for (int i : x | views::reverse) SA[--cnt[P[k-1][i]]] = i;
 
-			auto p = [&](int i) {return i < n ? P[k-1][i] : -1;};
+			auto p = [&](int i) { return i < n ? P[k-1][i] : -1; };
 			for (int i = 1; i < n; i++) {
 				int a = SA[i-1], b = SA[i];
 				P[k][b] = P[k][a] + (p(a) != p(b) || p(a+c) != p(b+c));
@@ -27,7 +27,8 @@ struct SuffixArray {
 		for (int i = 1; i < n; i++) LCP[i] = lcp(SA[i-1], SA[i]);
 	}
 
-	int lcp(int x, int y) {//x & y are text-indices, not SA-indices
+	// x & y are text-indices, not SA-indices
+	int lcp(int x, int y) {
 		if (x == y) return n - x;
 		int res = 0;
 		for (int i = sz(P) - 1; i >= 0 && max(x, y) + res < n; i--) {

@@ -1,5 +1,5 @@
 // Mittelpunkt des Dreiecks abc.
-pt centroid(pt a, pt b, pt c) {return (a + b + c) / 3.0;}
+pt centroid(pt a, pt b, pt c) { return (a + b + c) / 3.0; }
 
 // Flächeninhalt eines Dreicks bei bekannten Eckpunkten.
 double area(pt a, pt b, pt c) {
@@ -30,7 +30,7 @@ pt circumCenter(pt a, pt b, pt c) {
 // -1 => p außerhalb Kreis durch a,b,c
 //  0 => p auf Kreis durch a,b,c
 //  1 => p im Kreis durch a,b,c
-int insideOutCenter(pt a, pt b, pt c, pt p) {// braucht lll
+int insideOutCenter(pt a, pt b, pt c, pt p) { // braucht lll
 	return ccw(a,b,c) * sgn(imag((c-b)*conj(p-c)*(a-p)*conj(b-a)));
 }
 

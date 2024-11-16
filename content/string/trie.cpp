@@ -3,7 +3,7 @@ constexpr int ALPHABET_SIZE = 2;
 struct node {
 	int words, ends;
 	array<int, ALPHABET_SIZE> nxt;
-	node() : words(0), ends(0) {fill(all(nxt), -1);}
+	node(): words(0), ends(0) { fill(all(nxt), -1); }
 };
 vector<node> trie = {node()};
 

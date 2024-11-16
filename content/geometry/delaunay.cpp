@@ -3,7 +3,8 @@ using pt = complex<lll>;
 
 constexpr pt INF_PT = pt(2e18, 2e18);
 
-bool circ(pt p, pt a, pt b, pt c) {// p in circle(A,B,C), ABC must be ccw
+// p in circle(A,B,C), ABC must be ccw
+bool circ(pt p, pt a, pt b, pt c) {
 	return imag((c-b)*conj(p-c)*(a-p)*conj(b-a)) < 0;
 }
 
@@ -12,10 +13,10 @@ struct QuadEdge {
 	QuadEdge* onext = nullptr;
 	pt orig = INF_PT;
 	bool used = false;
-	QuadEdge* rev() const {return rot->rot;}
-	QuadEdge* lnext() const {return rot->rev()->onext->rot;}
-	QuadEdge* oprev() const {return rot->onext->rot;}
-	pt dest() const {return rev()->orig;}
+	QuadEdge* rev() const { return rot->rot; }
+	QuadEdge* lnext() const { return rot->rev()->onext->rot; }
+	QuadEdge* oprev() const { return rot->onext->rot; }
+	pt dest() const { return rev()->orig; }
 };
 
 deque<QuadEdge> edgeData;

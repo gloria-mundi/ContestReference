@@ -1,4 +1,4 @@
-ll sqrtMod(ll a, ll p) {// teste mit legendre ob lösung existiert
+ll sqrtMod(ll a, ll p) { // teste mit Legendre ob Lösung existiert
 	if (a < 2) return a;
 	ll t = 0;
 	while (legendre((t*t-4*a) % p, p) >= 0) t = rng() % p;

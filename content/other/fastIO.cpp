@@ -16,7 +16,7 @@ void printPositive(int n) {
 }
 
 void fastprint(int n) {
-	if(n == 0) {putchar('0'); return;}
+	if(n == 0) { putchar('0'); return; }
 	if (n < 0) {
 		putchar('-');
 		printPositive(-n);

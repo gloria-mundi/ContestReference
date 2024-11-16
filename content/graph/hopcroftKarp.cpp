@@ -5,14 +5,14 @@ vector<int> pairs, dist, ptr;
 bool bfs(int l) {
 	queue<int> q;
 	for(int v = 0; v < l; v++) {
-		if (pairs[v] < 0) {dist[v] = 0; q.push(v);}
+		if (pairs[v] < 0) { dist[v] = 0; q.push(v); }
 		else dist[v] = -1;
 	}
 	bool exist = false;
 	while(!q.empty()) {
 		int v = q.front(); q.pop();
 		for (int u : adj[v]) {
-			if (pairs[u] < 0) {exist = true; continue;}
+			if (pairs[u] < 0) { exist = true; continue; }
 			if (dist[pairs[u]] < 0) {
 				dist[pairs[u]] = dist[v] + 1;
 				q.push(pairs[u]);
