@@ -7,7 +7,7 @@ void stress_test() {
 		ll n = Random::integer<ll>(2, 1'000'000'000);
 		ll x = 0;
 		do {
-			x = Random::integer<ll>(0, n);
+			x = Random::integer<ll>(0, 1'000'000'000);
 		} while (gcd(x, n) != 1);
 		ll y = multInv(x, n);
 		ll got = (x*y) % n;
