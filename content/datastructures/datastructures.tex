@@ -10,7 +10,7 @@
 	
 	\subsubsection{Lazy Propagation}
 	Assignment modifications, sum queries \\
-	\method{lower\_bound}{erster Index in $[l, r)$ $\geq x$ (erfordert max-combine)}{\log(n)}
+	\method{binary\_search}{kleinstes $x$ in $[l, r]$ mit $f(\text{query}(l, x))$ (monoton in $x$)}{\log(n)}
 	\sourcecode{datastructures/lazyPropagation.cpp}
 \end{algorithm}
 

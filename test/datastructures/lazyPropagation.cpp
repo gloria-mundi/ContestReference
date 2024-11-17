@@ -34,6 +34,39 @@ void stress_test() {
 	cerr << "tested random queries: " << queries << endl;
 }
 
+void stress_test_binary_search() {
+	ll queries = 0;
+	for (int tries = 0; tries < 100; tries++) {
+		int n = Random::integer<int>(10, 100);
+		vector<ll> naive = Random::integers<ll>(n, 0, 1000);
+		SegTree tree(naive);
+		for (int operations = 0; operations < 1000; operations++) {
+			{
+				int l = Random::integer<int>(0, n + 1);
+				int r = Random::integer<int>(0, n + 1);
+				//if (l > r) swap(l, r);
+				ll x = Random::integer<ll>(0, 1000);
+				tree.update(l, r, x);
+				for (int j = l; j < r; j++) naive[j] = x;
+			}
+			{
+				queries++;
+				int l = Random::integer<int>(0, n + 1);
+				int r = Random::integer<int>(0, n + 1);
+				ll x = Random::integer<ll>(0, 10000);
+				//if (l > r) swap(l, r);
+				int got = tree.binary_search(l, r, [x](ll v) { return v >= x; });
+				ll sum;
+				int j;
+				for (j = l, sum = 0; j < r && sum < x; j++) sum += naive[j];
+				int expected = sum >= x ? j : -1;
+				if (got != expected) cerr << "got: " << got << ", expected: " << expected << FAIL;
+			}
+		}
+	}
+	cerr << "tested random binary searches: " << queries << endl;
+}
+
 void performance_test() {
 	timer t;
 	t.start();
@@ -55,7 +88,31 @@ void performance_test() {
 	cerr << "tested performance: " << t.time << "ms (hash: " << hash << ")" << endl;
 }
 
+void performance_test_binary_search() {
+	timer t;
+	t.start();
+	vector<ll> tmp(N);
+	SegTree tree(tmp);
+	t.stop();
+	hash_t hash = 0;
+	for (int operations = 0; operations < N; operations++) {
+		auto [l1, r1] = Random::pair<int>(0, N + 1);
+		auto [l2, r2] = Random::pair<int>(0, N + 1);
+		ll x1 = Random::integer<ll>(0, 1000);
+		ll x2 = Random::integer<ll>(0, 1000 * N);
+
+		t.start();
+		tree.update(l1, r1, x1);
+		hash ^= tree.binary_search(l2, r2, [x2](ll v) { return v >= x2; });
+		t.stop();
+	}
+	if (t.time > 2000) cerr << "too slow: " << t.time << FAIL;
+	cerr << "tested performance: " << t.time << "ms (hash: " << hash << ")" << endl;
+}
+
 int main() {
 	stress_test();
+	stress_test_binary_search();
 	performance_test();
+	performance_test_binary_search();
 }

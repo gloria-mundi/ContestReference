@@ -63,21 +63,23 @@ struct SegTree {
 	}
 
 	// Optional:
-	int lower_bound(int l, int r, T x) {
+	int binary_search(int l, int r, auto &&f) {
+		if (f(E)) return l;
 		l += n, r += n;
-		push(l), push(r - 1);
+		push(l), push(r);
 		int a[64] = {}, lp = 0, rp = 64;
 		for (; l < r; l /= 2, r /= 2) {
 			if (l&1) a[lp++] = l++;
 			if (r&1) a[--rp] = --r;
 		}
-		for (int i : a) if (i != 0 && tree[i] >= x) { // Modify this
+		T x = E, y = x;
+		for (int i : a) if (i != 0 && f(x = comb(y = x, tree[i]))) {
 			while (i < n) {
 				push_down(i);
-				if (tree[2 * i] >= x) i = 2 * i; // And this
-				else i = 2 * i + 1;
+				if (f(x = comb(y, tree[2*i]))) i = 2 * i;
+				else i = 2 * i + 1, y = x;
 			}
-			return i - n;
+			return i - n + 1;
 		}
 		return -1;
 	}
