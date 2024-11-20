@@ -36,7 +36,7 @@ struct cycles {
 				cur[id].flip();
 	}}}
 
-	bool isCycle(cycle cur) { // cycle must be constrcuted from base
+	bool isCycle(cycle cur) {// cycle must be constructed from base
 		if (cur.none()) return false;
 		init(ssize(adj)); // union find @\sourceref{datastructures/unionFind.cpp}@
 		for (int i = 0; i < ssize(edges); i++) {

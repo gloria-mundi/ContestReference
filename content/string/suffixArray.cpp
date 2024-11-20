@@ -31,7 +31,7 @@ struct SuffixArray {
 	int lcp(int x, int y) {
 		if (x == y) return n - x;
 		int res = 0;
-		for (int i = ssize(P) - 1; i >= 0 && max(x, y) + res < n; i--) {
+		for (int i = ssize(P)-1; i >= 0 && max(x, y) + res < n; i--){
 			if (P[i][x + res] == P[i][y + res]) res |= 1 << i;
 		}
 		return res;

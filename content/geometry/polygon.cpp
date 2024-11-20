@@ -66,7 +66,7 @@ vector<pt> minkowski(vector<pt> ps, vector<pt> qs) {
 	ps.push_back(ps[1]);
 	qs.push_back(qs[1]);
 	vector<pt> res;
-	for (ll i = 0, j = 0; i + 2 < ssize(ps) || j + 2 < ssize(qs);) {
+	for (ll i = 0, j = 0; i+2 < ssize(ps) || j+2 < ssize(qs);) {
 		res.push_back(ps[i] + qs[j]);
 		auto c = cross(ps[i + 1] - ps[i], qs[j + 1] - qs[j]);
 		if(c >= 0) i++;
