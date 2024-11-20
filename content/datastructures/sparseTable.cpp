@@ -16,7 +16,7 @@ struct SparseTable {
 				st[j + 1][i] = better(st[j][i] , st[j][i + (1 << j)]);
 	}}}
 
-	int queryIdempotent(int l, int r) {
+	int query(int l, int r) {
 		if (r <= l) return -1;
 		int j = __lg(r - l); //31 - builtin_clz(r - l);
 		return better(st[j][l] , st[j][r - (1 << j)]);

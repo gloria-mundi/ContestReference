@@ -25,7 +25,7 @@ struct LCA {
 
 	int getLCA(int u, int v) {
 		if (first[u] > first[v]) swap(u, v);
-		return visited[st.queryIdempotent(first[u], first[v] + 1)];
+		return visited[st.query(first[u], first[v] + 1)];
 	}
 
 	ll getDepth(int v) { return depth[first[v]]; }

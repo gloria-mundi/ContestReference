@@ -14,7 +14,7 @@ void stress_test() {
 			int l = Random::integer<int>(0, n+1);
 			int r = Random::integer<int>(0, n+1);
 
-			ll got = st.queryIdempotent(l, r);
+			ll got = st.query(l, r);
 			ll expected = r <= l ? -1 : l;
 			for (int j = l; j < r; j++) {
 				if (naive[j] < naive[expected]) expected = j;
@@ -38,7 +38,7 @@ void performance_test() {
 		auto [l, r] = Random::pair<int>(0, N+1);
 
 		t.start();
-		hash += st.queryIdempotent(l, r);
+		hash += st.query(l, r);
 		t.stop();
 	}
 	if (t.time > 500) cerr << "too slow: " << t.time << FAIL;
