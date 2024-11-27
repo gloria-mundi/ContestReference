@@ -13,21 +13,21 @@ void stress_test() {
 		int n = Random::integer<int>(2, 30);
 		int m = Random::integer<int>(n-1, max<int>(n, min<int>(500, n*(n-1) / 2 + 1)));
 
-		vector<vector<path>> adj(n);
+		vector<vector<pair<int, ll>>> adj(n);
 		vector<edge> edges;
 
 		Graph<NoData, true> g(n);
 		g.erdosRenyi(m);
 		g.forEdges([&](int a, int b){
 			ll w = Random::integer<ll>(1, 1'000'000'000'000ll);
-			adj[a].push_back({w, b});
+			adj[a].emplace_back(b, w);
 			edges.push_back({a, b, w});
 		});
 
 		for (int i = 0; i < n; i++) {
 			auto got = dijkstra(adj, i);
 			auto expected = bellmannFord(n, edges, i);
-			
+
 			if (got != expected) cerr << "error" << FAIL;
 			queries += n;
 		}
@@ -41,12 +41,12 @@ void performance_test() {
 	timer t;
 	Graph<NoData> g(N);
 	g.erdosRenyi(M);
-	vector<vector<path>> adj(N);
+	vector<vector<pair<int, ll>>> adj(N);
 	g.forEdges([&](int a, int b){
 		ll w1 = Random::integer<ll>(1, 1'000'000'000'000ll);
 		ll w2 = Random::integer<ll>(1, 1'000'000'000'000ll);
-		adj[a].push_back({w1, b});
-		adj[b].push_back({w2, a});
+		adj[a].emplace_back(b, w1);
+		adj[b].emplace_back(a, w2);
 	});
 
 	t.start();

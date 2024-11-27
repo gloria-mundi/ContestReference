@@ -1,21 +1,18 @@
-using path = pair<ll, int>; //dist, destination
+using Dist = ll;
 
-auto dijkstra(const vector<vector<path>>& adj, int start) {
-	priority_queue<path, vector<path>, greater<path>> pq;
-	vector<ll> dist(ssize(adj), INF);
-	vector<int> prev(ssize(adj), -1);
-	dist[start] = 0; pq.emplace(0, start);
+auto dijkstra(vector<vector<pair<int, Dist>>> &adj, int start) {
+	priority_queue<pair<Dist, int>> pq;
+	vector<Dist> dist(ssize(adj), INF);
+	dist[start] = 0, pq.emplace(0, start);
 
-	while (!pq.empty()) {
-		auto [dv, v] = pq.top(); pq.pop();
-		if (dv > dist[v]) continue; // WICHTIG!
+	while (!empty(pq)) {
+		auto [du, u] = pq.top();
+		du = -du, pq.pop();
+		if (du > dist[u]) continue; // WICHTIG!
 
-		for (auto [du, u] : adj[v]) {
-			ll newDist = dv + du;
-			if (newDist < dist[u]) {
-				dist[u] = newDist;
-				prev[u] = v;
-				pq.emplace(dist[u], u);
-	}}}
-	return dist; //return prev;
+		for (auto [v, d]: adj[u]) {
+			Dist dv = du + d;
+			if (dv < dist[v]) dist[v] = dv, pq.emplace(-dv, v);
+	}}
+	return dist;
 }
