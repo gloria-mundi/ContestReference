@@ -392,16 +392,19 @@ so gilt
 	\end{methods}
 	\sourcecode{math/binomial1.cpp}
 
+	\optional{
+	\begin{methods}
+		\method{calc\_binom}{berechnet Primfaktoren vom Binomialkoeffizient}{n\*\log(n)}
+	\end{methods}
+	\opthint \\
+	\textbf{WICHTIG:} braucht alle Primzahlen $\leq n$
+	\sourcecode{math/binomial2.cpp}
+	}
+
     \begin{methods}
 		\method{calc\_binom}{berechnet Binomialkoeffizient modulo Primzahl $p$}{p-n}
 	\end{methods}
 	\sourcecode{math/binomial3.cpp}
-
-%	\begin{methods}
-%		\method{calc\_binom}{berechnet Primfaktoren vom Binomialkoeffizient}{n}
-%	\end{methods}
-%	\textbf{WICHTIG:} braucht alle Primzahlen $\leq n$
-%	\sourcecode{math/binomial2.cpp}
 %\end{algorithm}
 
 \paragraph{\textsc{Catalan}-Zahlen}
