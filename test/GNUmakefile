@@ -28,7 +28,7 @@ awk/%: %.awk ../content/%
 	awk -f $*.awk < ../content/$* > $@
 
 %.d: %.cpp $(addprefix awk/,$(AWK))
-	$(CXX) -M -MT '$*.test $*.d' -MF $@ $<
+	$(CXX) -M -MP -MT '$*.test $*.d' -MF $@ $<
 
 .PHONY: test clean
 .SECONDARY: $(TESTS:=.test) $(addprefix awk/,$(AWK))

@@ -20,7 +20,7 @@ cleanpdf:
 	cd content && $(LATEXMK) -r latexmk.opt -C
 
 cleantest:
-	+-gmake -C clean
+	+-gmake -C test clean
 
 FORCE:
 .PHONY: all pdf test clean cleanpdf cleantest FORCE
