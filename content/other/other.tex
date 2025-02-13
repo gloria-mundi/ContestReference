@@ -123,7 +123,7 @@
 		c'(s',v)&=\sum_{u\in{}V}d(u,v)&c'(v,t')&=\sum_{u\in{}V}d(v,u)\\[-0.5ex]
 		c'(u,v)&=c(u,v)-d(u,v)&c'(t,s)&=x
 	\end{align*}
-	Löse Fluss auf $G'$ mit \textsc{Dinic's Algorithmus}, wenn alle Kanten von $s'$ saturiert sind ist der Fluss in $G$ gültig. $x$ beschränkt den Fluss in $G$ (Binary-Search für minflow, $\infty$ sonst).
+	Löse Fluss auf $G'$ mit \textsc{Dinitz's Algorithmus}, wenn alle Kanten von $s'$ saturiert sind ist der Fluss in $G$ gültig. $x$ beschränkt den Fluss in $G$ (Binary-Search für minflow, $\infty$ sonst).
 	\item \textbf{\textsc{Johnson}s Reweighting Algorithm:}
 	Initialisiere alle Entfernungen mit \texttt{d[i] = 0}. Berechne mit \textsc{Bellmann-Ford} kürzeste Entfernungen.
 	Falls es einen negativen Zyklus gibt abrrechen.

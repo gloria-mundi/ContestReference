@@ -215,12 +215,12 @@ Sei $a_{ij}$ die Adjazenzmatrix von $G$ \textcolor{gray}{(mit $a_{ii} = 1$)}, da
 \sourcecode{graph/pushRelabel.cpp}
 }
 
-\subsubsection{\textsc{Dinic}'s Algorithm mit Capacity Scaling}
+\subsubsection{\textsc{Dinitz}'s Algorithm mit Capacity Scaling}
 \begin{methods}
 	\method{maxFlow}{doppelt so schnell wie \textsc{Ford-Fulkerson}}{\abs{V}^2\cdot\abs{E}}
 	\method{addEdge}{fügt eine \textbf{gerichtete} Kante ein}{1}
 \end{methods}
-\sourcecode{graph/dinicScaling.cpp}
+\sourcecode{graph/dinitzScaling.cpp}
 
 \begin{algorithm}{Min-Cost-Max-Flow}
 	\begin{methods}

@@ -1,6 +1,6 @@
 #include "../util.h"
-namespace dinic {
-#include <graph/dinicScaling.cpp>
+namespace dinitz {
+#include <graph/dinitzScaling.cpp>
 }
 
 namespace pushRelabel {
@@ -13,20 +13,20 @@ void stress_test() {
 		int n = Random::integer<int>(2, 30);
 		int m = Random::integer<int>(n-1, max<int>(n, min<int>(500, n*(n-1) / 2 + 1)));
 
-		dinic::adj.assign(n, {});
+		dinitz::adj.assign(n, {});
 		pushRelabel::adj.assign(n, {});
 
 		Graph<NoData, true> g(n);
 		g.erdosRenyi(m);
 		g.forEdges([](int a, int b){
 			ll w = Random::integer<ll>(1, 1'000'000'000'000ll);
-			dinic::addEdge(a, b, w);
+			dinitz::addEdge(a, b, w);
 			pushRelabel::addEdge(a, b, w);
 		});
 
-		ll got = dinic::maxFlow(0, n - 1);
+		ll got = dinitz::maxFlow(0, n - 1);
 		ll expected = pushRelabel::maxFlow(0, n - 1);
-		
+
 		if (got != expected) cerr << "got: " << got << ", expected: " << expected << FAIL;
 		queries += n;
 	}
@@ -36,7 +36,7 @@ void stress_test() {
 constexpr int N = 50000;
 constexpr int M = 200000;
 void performance_test() {
-	using namespace dinic;
+	using namespace dinitz;
 	timer t;
 	Graph<NoData> g(N);
 	g.erdosRenyi(M);
