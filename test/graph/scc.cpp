@@ -1,6 +1,5 @@
 #include "../util.h"
 #include <graph/scc.cpp>
-#include <datastructures/unionFind.cpp>
 
 void stress_test() {
 	ll queries = 0;
@@ -16,37 +15,27 @@ void stress_test() {
 		});
 		scc();
 
-		init(n);
-		vector<ll> seen(n);
-		int tmpCounter = 0;
-		auto reach = [&](int a, int b) {
-			tmpCounter++;
-			seen[a] = tmpCounter;
-			vector<int> todo = {a};
-			while (seen[b] != tmpCounter && !todo.empty()) {
-				a = todo.back();
-				todo.pop_back();
-				g.forOut(a, [&](int /**/, int x){
-					if (seen[x] != tmpCounter) {
-						seen[x] = tmpCounter;
-						todo.push_back(x);
-					}
+		auto reach = [&](int a) -> vector<bool> {
+			vector<bool> seen(n);
+			auto dfs = [&](auto &&self, int u) -> void {
+				if (seen[u]) return;
+				seen[u] = true;
+				g.forOut(u, [&](int, int v) {
+					self(self, v);
 				});
-			}
-			return seen[b] == tmpCounter;
+			};
+			dfs(dfs, a);
+			return seen;
 		};
-		for (int a = 0; a < n; a++) {
-			for (int b = 0; b < a; b++) {
-				if (findSet(a) == findSet(b)) continue;
-				if (reach(a, b) && reach(b, a)) unionSets(a, b);
-			}
-		}
 
 		for (int a = 0; a < n; a++) {
-			for (int b = 0; b <= a; b++) {
-				bool got = idx[a] == idx[b];
-				bool expected = findSet(a) == findSet(b);
-				if (got != expected) cerr << "got: " << got << ", expected: " << expected << FAIL;
+			vector<bool> reacha = reach(a);
+			for (int b = 0; b < n; b++) {
+				if (idx[a] == idx[b]) {
+					if (!reacha[b]) cerr << a << " and " << b << " should be in different SCCs" << FAIL;
+				} else if (idx[a] < idx[b]) {
+					if (reacha[b]) cerr << a << " should come before " << b << " in topological order" << FAIL;
+				}
 			}
 		}
 		queries += n;
@@ -66,7 +55,7 @@ void performance_test() {
 	});
 
 	t.start();
-	scc();	
+	scc();
 	t.stop();
 	hash_t hash = 0;
 	for (int x : idx) hash += x;
