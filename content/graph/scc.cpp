@@ -14,7 +14,7 @@ void visit(int v) {
 	if (old == low[v]) {
 		sccs.emplace_back(begin(s) + old, end(s));
 		for (int u: sccs.back()) idx[u] = ssize(sccs)-1;
-		s.erase(begin(s) + old, end(s));
+		s.resize(old);
 }}
 
 void scc() {
