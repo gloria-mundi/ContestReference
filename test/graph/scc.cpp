@@ -28,7 +28,16 @@ void stress_test() {
 			return seen;
 		};
 
+		vector<int> seen(n);
+		for (int i = 0; i < ssize(sccs); i++) {
+			for (int v: sccs[i]) {
+				if (idx[v] != i) cerr << v << " is in scc " << i << ", but idx[" << v << "] = " << idx[v] << FAIL;
+				seen[v]++;
+			}
+		}
+
 		for (int a = 0; a < n; a++) {
+			if (seen[a] != 1) cerr << a << " occurs " << seen[a] << " times in sccs" << FAIL;
 			vector<bool> reacha = reach(a);
 			for (int b = 0; b < n; b++) {
 				if (idx[a] == idx[b]) {
