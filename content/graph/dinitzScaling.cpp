@@ -43,7 +43,8 @@ ll dfs(int v, ll flow) {
 ll maxFlow(int source, int target) {
 	s = source, t = target;
 	ll flow = 0;
-	// lim = 1 may be faster if capacities are small
+	// If capacities are small, may want to disable scaling:
+	//   Run bfs with lim = 1, and dfs with lim = INF.
 	for (ll lim = (1LL << 62); lim >= 1; lim /= 2) {
 		while (bfs(lim)) {
 			pt.assign(ssize(adj), 0);
