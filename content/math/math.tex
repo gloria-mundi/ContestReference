@@ -323,6 +323,12 @@ sich alle Lösungen von $x^2-ny^2=c$ berechnen durch:
 \begin{algorithm}{Polynome, FFT, NTT \& andere Transformationen}
 	\label{fft}
 	Multipliziert Polynome $A$ und $B$.
+	\ifthenelse{\isundefined{\srclink}}{}{%
+		\hfill
+		\begin{ocg}[printocg=never]{Source links}{srclinks}{1}%
+			\href{\srclink{math/transforms/}}{\faExternalLink}%
+		\end{ocg}%
+	}
 	\begin{itemize}
 		\item $\deg(A \cdot B) = \deg(A) + \deg(B)$
 		\item Vektoren \code{a} und \code{b} müssen mindestens Größe
@@ -332,8 +338,6 @@ sich alle Lösungen von $x^2-ny^2=c$ berechnen durch:
 		\item \emph{or} Transform berechnet sum over subsets
 			$\rightarrow$ inverse für inclusion/exclusion
 	\end{itemize}
-	%\sourcecode{math/fft.cpp}
-	%\sourcecode{math/ntt.cpp}
 	\sourcecode{math/transforms/fft.cpp}
 	\sourcecode{math/transforms/ntt.cpp}
 	\sourcecode{math/transforms/bitwiseTransforms.cpp}
