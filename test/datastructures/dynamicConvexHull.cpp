@@ -29,7 +29,7 @@ void stress_test(ll range) {
 
 				ll got = hd.query(x);
 				ll expected = naive[0](x);
-				for (auto l : naive) expected = max(expected, l(x));
+				for (auto l : naive) expected = min(expected, l(x));
 
 				if (got != expected) cerr << "got: " << got << ", expected: " << expected << FAIL;
 				queries++;
@@ -49,7 +49,7 @@ void performance_test() {
 		ll m = Random::integer<ll>(-1'000'000'000, 1'000'000'000);
 		ll c = Random::integer<ll>(-1'000'000'000, 1'000'000'000);
 		ll x = Random::integer<ll>(-1'000'000'000, 1'000'000'000);
-		
+
 		t.start();
 		hd.add(m, c);
 		hash += hd.query(x);

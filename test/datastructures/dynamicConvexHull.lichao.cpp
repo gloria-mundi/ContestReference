@@ -16,11 +16,11 @@ void stress_test(ll range) {
 			ll m = Random::integer<ll>(-range, range);
 			ll c = Random::integer<ll>(-range, range);
 			hd.add(m, c);
-			lichao.insert({-m, -c});
+			lichao.insert({m, c});
 
 			for (ll x : xs) {
 				ll gotA = hd.query(x);
-				ll gotB = -lichao.query(x);
+				ll gotB = lichao.query(x);
 
 				if (gotA != gotB) cerr << "gotA: " << gotA << ", gotB: " << gotB << FAIL;
 				queries++;
