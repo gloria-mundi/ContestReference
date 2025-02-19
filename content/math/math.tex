@@ -28,19 +28,22 @@
 \end{algorithm}
 \columnbreak
 
-\subsection{Mod-Exponent und Multiplikation über $\boldsymbol{\mathbb{F}_p}$}
-%\vspace{-1.25em}
-%\begin{multicols}{2}
-\method{mulMod}{berechnet $a \cdot b \bmod n$}{\log(b)}
-\sourcecode{math/modMulIterativ.cpp}
-%	\vfill\null\columnbreak
-\method{powMod}{berechnet $a^b \bmod n$}{\log(b)}
-\sourcecode{math/modPowIterativ.cpp}
-%\end{multicols}
-%\vspace{-2.75em}
-\begin{itemize}
-	\item für $a > 10^9$ \code{__int128} oder \code{modMul} benutzten!
-\end{itemize}
+\subsection{Potenzen in $\boldsymbol{\mathbb{Z}/n\mathbb{Z}}$}
+	\begin{methods}
+		\method{powMod}{berechnet $a^b \bmod n$}{\log(b)}
+	\end{methods}
+	\sourcecode{math/modPowIterativ.cpp}
+	\begin{itemize}
+		\item für $a > 10^9$ \code{__int128} oder \code{modMul} benutzten!
+	\end{itemize}
+
+\optional{
+\subsection{Multiplikation in $\boldsymbol{\mathbb{Z}/n\mathbb{Z}}$ \opthint}
+	\begin{methods}
+		\method{mulMod}{berechnet $a \cdot b \bmod n$}{\log(b)}
+	\end{methods}
+	\sourcecode{math/modMulIterativ.cpp}
+}
 
 \begin{algorithm}{ggT, kgV, erweiterter euklidischer Algorithmus}
 	\runtime{\log(a) + \log(b)}
