@@ -144,7 +144,7 @@
 	Im Residualgraphen:
 	\begin{itemize}
 		\item Das Vertex-Cover sind die Knoten inzident zu den Brücken. \emph{oder}
-		\item Die Knoten in \texttt{A}, die \emph{nicht} von \texttt{s} erreichbar sind und die Knoten in \texttt{B}, die von \texttt{erreichbar} sind.
+		\item Die Knoten in \texttt{A}, die \emph{nicht} von \texttt{s} erreichbar sind und die Knoten in \texttt{B}, die von \texttt{s} erreichbar sind.
 	\end{itemize}
 
 	\item \textbf{Allgemeiner Graph:}
@@ -153,7 +153,7 @@
 
 	\item \textbf{Bipartiter Graph:}
 	Min Vertex Cover (kleinste Menge Knoten, die alle Kanten berühren) = Max Matching.
-	Richte Kanten im Matching von $B$ nach $A$ und sonst von $A$ nach $B$, makiere alle Knoten die von einem ungematchten Knoten in $A$ erreichbar sind, das Vertex Cover sind die makierten Knoten aus $B$ und die unmakierten Knoten aus $A$.
+	Richte Kanten im Matching von $B$ nach $A$ und sonst von $A$ nach $B$, markiere alle Knoten die von einem ungematchten Knoten in $A$ erreichbar sind, das Vertex Cover sind die markierten Knoten aus $B$ und die unmarkierten Knoten aus $A$.
 
 	\item \textbf{Bipartites Matching mit Gewichten auf linken Knoten:}
 	Minimiere Matchinggewicht.
@@ -313,3 +313,5 @@
 		\item Unsicher bei benutzten STL-Funktionen?
 	\end{itemize}
 \end{itemize}
+
+%\input{other/simd}
