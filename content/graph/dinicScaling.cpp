@@ -43,6 +43,7 @@ ll dfs(int v, ll flow) {
 ll maxFlow(int source, int target) {
 	s = source, t = target;
 	ll flow = 0;
+	// set lim = 1 and use dfs(s, INF) to disable scaling
 	for (ll lim = (1LL << 62); lim >= 1; lim /= 2) {
 		while (bfs(lim)) {
 			pt.assign(sz(adj), 0);

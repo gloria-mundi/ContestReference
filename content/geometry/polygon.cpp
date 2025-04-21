@@ -23,7 +23,7 @@ ll windingNumber(pt p, const vector<pt>& poly) {
 	return res;
 }
 
-// check if point is inside polygon (any polygon)
+// check if p is inside poly (any polygon poly[0] == poly.back())
 bool inside(pt p, const vector<pt>& poly) {
 	bool in = false;
 	for (int i = 0; i + 1 < sz(poly); i++) {
