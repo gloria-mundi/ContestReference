@@ -9,7 +9,6 @@ auto bellmannFord(int n, vector<edge>& edges, int start) {
 				dist[e.to] = dist[e.from] + e.cost;
 				prev[e.to] = e.from;
 	}}}
-
 	for (edge& e : edges) {
 		if (dist[e.from] != INF &&
 		    dist[e.from] + e.cost < dist[e.to]) {
