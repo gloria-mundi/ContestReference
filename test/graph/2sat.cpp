@@ -1,9 +1,6 @@
 #include "../util.h"
 #include <graph/scc.cpp>
-#define static vector<vector<int>> adj; static // hacky...
 #include <graph/2sat.cpp>
-#undef static
-#undef adj
 
 struct RandomClause {
 	int a, b;

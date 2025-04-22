@@ -1,10 +1,8 @@
+constexpr int var(int i) {return i << 1;} // use this!
 struct sat2 {
 	int n; // + scc variablen
 	vector<int> sol;
-
 	sat2(int vars) : n(vars*2), adj(n) {}
-
-	static int var(int i) { return i << 1; } // use this!
 
 	void addImpl(int a, int b) {
 		adj[a].push_back(b);
