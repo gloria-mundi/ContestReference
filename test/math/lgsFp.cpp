@@ -1,9 +1,12 @@
 #include "../util.h"
 #include <math/shortModInv.cpp>
 vector<vector<ll>> mat;
-#include <math/lgsFp.cpp>
-
 constexpr ll mod = 1'000'000'007;
+namespace lgs {
+	int n, m;
+	#include <math/lgsFp.cpp>
+}
+
 
 vector<vector<ll>> inverseMat(const vector<vector<ll>>& m) {
 	int n = sz(m);
@@ -13,7 +16,9 @@ vector<vector<ll>> inverseMat(const vector<vector<ll>>& m) {
 		mat[i].resize(2*n);
 		mat[i][n+i] = 1;
 	}
-	gauss(n, mod);
+	lgs::n = sz(mat);
+	lgs::m = sz(mat[0]);
+	lgs::gauss();
 	vector<vector<ll>> res(m);
 	for (int i = 0; i < n; i++) {
 		res[i] = vector<ll>(mat[i].begin() + n, mat[i].end());
@@ -52,7 +57,9 @@ void test_square() {
 		vector<vector<ll>> m(n);
 		for (auto& v : m) v = Random::integers<ll>(n, 0, mod);
 		mat = m;
-		gauss(n, mod);
+		lgs::n = sz(mat);
+		lgs::m = sz(mat[0]);
+		lgs::gauss();
 
 		for (int i = 0; i < n; i++) {
 			for (int j = 0; j < n; j++) {
@@ -97,9 +104,11 @@ void performance_test() {
 	vector<vector<ll>> m(N);
 	for (auto& v : m) v = Random::integers<ll>(N, 0, mod);
 	mat = m;
+	lgs::n = sz(mat);
+	lgs::m = sz(mat[0]);
 
 	t.start();
-	gauss(N, mod);
+	lgs::gauss();
 	t.stop();
 	hash_t hash = 0;
 	for (int i = 0; i < N; i++) {
