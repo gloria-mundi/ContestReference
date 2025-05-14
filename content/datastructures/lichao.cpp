@@ -1,5 +1,5 @@
 vector<ll> xs; // IMPORTANT: Initialize before constructing!
-int findX(int i) {return lower_bound(all(xs), i) - begin(xs);}
+int findX(ll i) {return lower_bound(all(xs), i) - begin(xs);}
 
 struct Fun { // Default: Linear function. Change as needed. 
 	ll m, c;
