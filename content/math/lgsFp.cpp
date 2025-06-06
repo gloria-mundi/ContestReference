@@ -13,7 +13,7 @@ void gauss(int n, int m) {
 			if (i == r) continue;
 			f = mat[i][c];
 			for (int j = c; j < m; j++) {
-				mat[i][j] = (mat[i][j] - f * mat[r][j] % mod + mod) % mod;
+				mat[i][j] = (mat[i][j] - f*mat[r][j] % mod + mod) % mod;
 		}}
 		pivots.push_back(c);
 		if (++r == n) break;
