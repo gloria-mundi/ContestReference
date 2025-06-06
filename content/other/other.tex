@@ -18,9 +18,9 @@
 	\begin{expandtable}
 		\begin{tabularx}{\linewidth}{|lR|}
 			\hline
-			Addition & \code{__builtin_saddll_overflow(a, b, &c)} \\
-			Subtraktion & \code{__builtin_ssubll_overflow(a, b, &c)} \\
-			Multiplikation & \code{__builtin_smulll_overflow(a, b, &c)} \\
+			Addition & \code{__builtin_saddll_overflow(a, b, \&c)} \\
+			Subtraktion & \code{__builtin_ssubll_overflow(a, b, \&c)} \\
+			Multiplikation & \code{__builtin_smulll_overflow(a, b, \&c)} \\
 			\hline
 		\end{tabularx}
 	\end{expandtable}
@@ -30,9 +30,9 @@
 	\begin{expandtable}
 	\begin{tabularx}{\linewidth}{|Ll|}
 		\hline
-		Bit an Position j lesen & \code{(x & (1 << j)) != 0} \\
+		Bit an Position j lesen & \code{(x \& (1 << j)) != 0} \\
 		Bit an Position j setzten & \code{x |= (1 << j)} \\
-		Bit an Position j löschen & \code{x &= ~(1 << j)} \\
+		Bit an Position j löschen & \code{x \&= ~(1 << j)} \\
 		Bit an Position j flippen & \code{x ^= (1 << j)} \\
 		Anzahl an führenden nullen	($x \neq 0$) & \code{__builtin_clzll(x)} \\
 		Anzahl an schließenden nullen ($x \neq 0$) & \code{__builtin_ctzll(x)} \\
