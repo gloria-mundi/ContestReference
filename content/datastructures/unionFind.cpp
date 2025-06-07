@@ -1,26 +1,26 @@
-// unions[i] >= 0 => unions[i] =  parent
-// unions[i]  < 0 => unions[i] = -size
-vector<int> unions;
+struct UnionFind {
+	vector<int> unions; // unions[i] = parent or unions[i] = -size
 
-void init(int n) { //Initialisieren
-	unions.assign(n, -1);
-}
+	UnionFind(int n): unions(n, -1) {}
 
-int findSet(int a) { // Pfadkompression
-	if (unions[a] < 0) return a;
-	return unions[a] = findSet(unions[a]);
-}
+	int find(int a) {
+		return unions[a] < 0 ? a : unions[a] = find(unions[a]);
+	}
 
-void linkSets(int a, int b) { // Union by size.
-	if (unions[b] > unions[a]) swap(a, b);
-	unions[b] += unions[a];
-	unions[a] = b;
-}
+	bool link(int a, int b) {
+		if ((a = find(a)) == (b = find(b))) return false;
+		if (unions[b] > unions[a]) swap(a, b);
+		unions[b] += unions[a];
+		unions[a] = b;
+		return true;
+	}
 
-void unionSets(int a, int b) { // Diese Funktion aufrufen.
-	if (findSet(a) != findSet(b)) linkSets(findSet(a), findSet(b));
-}
+	int size(int a) {
+		return -unions[find(a)];
+	}
 
-int size(int a) {
-	return -unions[findSet(a)];
-}
+	int add() {
+		unions.push_back(-1);
+		return ssize(unions) - 1;
+	}
+};

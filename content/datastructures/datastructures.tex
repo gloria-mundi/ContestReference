@@ -123,11 +123,12 @@
 
 \begin{algorithm}{Union-Find}
 	\begin{methods}
-		\method{init}{legt $n$ einzelne Unions an}{n}
-		\method{findSet}{findet den Repräsentanten}{\log(n)}
-		\method{unionSets}{vereint 2 Mengen}{\log(n)}
+		\method{UnionFind}{legt $n$ einzelne Elemente an}{n}
+		\method{find}{findet den Repräsentanten}{\log(n)}
+		\method{link}{vereint 2 Mengen}{\log(n)}
 		\method{size}{zählt Elemente in Menge, die $a$ enthält}{\log(n)}
-		\method{m\*findSet + n\*unionSets}{Folge von Befehlen}{n+m\*\alpha(n)}
+		\method{add}{fügt neues einzelnes Element ein}{1}
+		\method{m\*find + n\*link}{Folge von Befehlen}{n+m\*\alpha(n)}
 	\end{methods}
 	\sourcecode{datastructures/unionFind.cpp}
 \end{algorithm}

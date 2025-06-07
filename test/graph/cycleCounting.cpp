@@ -6,18 +6,14 @@ int naive(const vector<pair<int, int>>& edges, int n) {
 	int res = 0;
 	for (int i = 1; i < (1ll << ssize(edges)); i++) {
 		vector<int> deg(n);
-		init(n);
+		UnionFind uf(n);
 		int cycles = 0;
 		for (int j = 0; j < ssize(edges); j++) {
 			if (((i >> j) & 1) != 0) {
 				auto [a, b] = edges[j];
 				deg[a]++;
 				deg[b]++;
-				if (findSet(a) != findSet(b)) {
-					unionSets(a, b);
-				} else {
-					cycles++;
-				}
+				if (!uf.link(a, b)) cycles++;
 			}
 		}
 		bool ok = cycles == 1;

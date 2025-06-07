@@ -1,8 +1,5 @@
 #include "../util.h"
-struct UF {
-	UF(int n) {init(n);}
-	#include <datastructures/unionFind.cpp>
-};
+#include <datastructures/unionFind.cpp>
 
 struct Naive {
 	vector<vector<int>> adj;
@@ -28,15 +25,18 @@ struct Naive {
 		}
 	}
 
-	int findSet(int a) {
+	int find(int a) {
 		int res = a;
 		dfs(a, [&](int x){res = min(res, x);});
 		return res;
 	}
 
-	void unionSets(int a, int b) {
+	bool link(int a, int b) {
+		bool linked = false;
+		dfs(a, [&](int x) { linked |= x == b; });
 		adj[a].push_back(b);
 		adj[b].push_back(a);
+		return !linked;
 	}
 
 	int size(int a) {
@@ -44,22 +44,38 @@ struct Naive {
 		dfs(a, [&](int /**/){res++;});
 		return res;
 	}
+
+	int add() {
+		int idx = ssize(adj);
+		adj.emplace_back();
+		seen.push_back(counter);
+		return idx;
+	}
 };
 
 void stress_test() {
 	ll queries = 0;
 	for (int tries = 0; tries < 200; tries++) {
 		int n = Random::integer<int>(1, 100);
-		UF uf(n);
+		UnionFind uf(n);
 		Naive naive(n);
-		for (int i = 0; i < n; i++) {
+		int rounds = n;
+		for (int i = 0; i < rounds; i++) {
 			for (int j = 0; j < 10; j++) {
 				int a = Random::integer<int>(0, n);
 				int b = Random::integer<int>(0, n);
-				uf.unionSets(a, b);
-				naive.unionSets(a, b);
+				auto got = uf.link(a, b);
+				auto expected = naive.link(a, b);
+				if (got != expected) cerr << "got: " << got << ", expected: " << expected << FAIL;
 			}
-			UF tmp = uf;
+			{
+				auto got = uf.add();
+				auto expected = naive.add();
+				assert(expected == n);
+				if (got != expected) cerr << "got: " << got << ", expected: " << expected << FAIL;
+				n++;
+			}
+			UnionFind tmp = uf;
 			for (int j = 0; j < n; j++) {
 				{
 					auto got = tmp.size(j);
@@ -69,8 +85,8 @@ void stress_test() {
 				{
 					int a = Random::integer<int>(0, n);
 					int b = Random::integer<int>(0, n);
-					bool got = tmp.findSet(a) == tmp.findSet(b);
-					bool expected = naive.findSet(a) == naive.findSet(b);
+					bool got = tmp.find(a) == tmp.find(b);
+					bool expected = naive.find(a) == naive.find(b);
 					if (got != expected) cerr << "got: " << got << ", expected: " << expected << FAIL;
 				}
 			}
@@ -84,7 +100,7 @@ constexpr int N = 2'000'000;
 void performance_test() {
 	timer t;
 	t.start();
-	UF uf(N);
+	UnionFind uf(N);
 	t.stop();
 	hash_t hash = 0;
 	for (int operations = 0; operations < N; operations++) {
@@ -92,9 +108,9 @@ void performance_test() {
 		int j = Random::integer<int>(0, N);
 		int k = Random::integer<int>(0, N);
 		int l = Random::integer<int>(0, N);
-		
+
 		t.start();
-		uf.unionSets(i, j);
+		uf.link(i, j);
 		hash += uf.size(k);
 		hash += uf.size(l);
 		t.stop();

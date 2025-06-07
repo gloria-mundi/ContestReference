@@ -10,11 +10,13 @@
 	Für jeden Kreis $K$ im Graphen gilt:
 	Die schwerste Kante auf dem Kreis ist nicht Teil des minimalen Spannbaums.
 
-	\subsection{\textsc{Kruskal}}
-	\begin{methods}[ll]
-		berechnet den Minimalen Spannbaum & \runtime{\abs{E}\cdot\log(\abs{E})} \\
-	\end{methods}
-	\sourcecode{graph/kruskal.cpp}
+	\optional{
+		\subsubsection{\textsc{Kruskal}'s Algorithm \opthint}
+		\begin{methods}[ll]
+			berechnet den Minimalen Spannbaum & \runtime{\abs{E}\cdot\log(\abs{E})} \\
+		\end{methods}
+		\sourcecode{graph/kruskal.cpp}
+	}
 \end{algorithm}
 
 \begin{algorithm}{Heavy-Light Decomposition}

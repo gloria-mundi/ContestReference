@@ -38,13 +38,11 @@ struct cycles {
 
 	bool isCycle(cycle cur) {// cycle must be constructed from base
 		if (cur.none()) return false;
-		init(ssize(adj)); // union find @\sourceref{datastructures/unionFind.cpp}@
+		UnionFind uf(ssize(adj)); // union find @\sourceref{datastructures/unionFind.cpp}@
 		for (int i = 0; i < ssize(edges); i++) {
 			if (cur[i]) {
 				cur[i] = false;
-				if (findSet(edges[i].first) ==
-				    findSet(edges[i].second)) break;
-				unionSets(edges[i].first, edges[i].second);
+				if (!uf.link(edges[i].first, edges[i].second)) break;
 		}}
 		return cur.none();
 	}

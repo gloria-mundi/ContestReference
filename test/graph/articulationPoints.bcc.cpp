@@ -8,7 +8,7 @@ struct edge {
 #include <datastructures/unionFind.cpp>
 
 vector<vector<int>> naiveBCC(int m) {
-	init(m);
+	UnionFind uf(m);
 
 	vector<int> seen(ssize(adj), -1);
 	int run = 0;
@@ -28,13 +28,13 @@ vector<vector<int>> naiveBCC(int m) {
 				}
 			}
 			for (auto ee : adj[i]) {
-				if (seen[ee.to] == run) unionSets(ee.id, e.id);
+				if (seen[ee.to] == run) uf.link(ee.id, e.id);
 			}
 		}
 	}
 	vector<vector<int>> res(m);
 	for (int i = 0; i < m; i++) {
-		res[findSet(i)].push_back(i);
+		res[uf.find(i)].push_back(i);
 	}
 	for (auto& v : res) ranges::sort(v);
 	res.erase(begin(ranges::remove_if(res, [](const vector<int>& v){return ssize(v) <= 1;})), end(res));

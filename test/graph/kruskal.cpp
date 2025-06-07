@@ -1,22 +1,19 @@
 #include "../util.h"
 #include <datastructures/unionFind.cpp>
 
-struct edge {
+#define Edge Edge_ // we have a struct named Edge in util.h
+
+struct Edge {
 	int from, to;
 	ll cost;
-	bool operator<(const edge& o) const {
+	bool operator<(const Edge& o) const {
 		return cost > o.cost;
 	}
 };
-ll kruskal(vector<edge>& edges, int n) {
-	init(n);
-	#define Edge edge
-	#include <graph/kruskal.cpp>
-	#undef Edge
-	return cost;
-}
 
-ll prim(vector<edge>& edges, int n) {
+#include <graph/kruskal.cpp>
+
+ll prim(vector<Edge>& edges, int n) {
 	vector<vector<pair<ll, int>>> adj(n);
 	for (auto [a, b, d] : edges) {
 		adj[a].emplace_back(d, b);
@@ -51,13 +48,14 @@ void stress_test() {
 
 		Graph<NoData> g(n);
 		g.erdosRenyi(m);
-		vector<edge> edges;
+		vector<Edge> edges;
 		g.forEdges([&](int a, int b){
 			ll w = Random::integer<ll>(-1'000'000'000ll, 1'000'000'000ll);
 			edges.push_back({a, b, w});
 		});
 
-		ll got = kruskal(edges, n);
+		vector<Edge> mst;
+		ll got = kruskal(n, edges, mst);
 		ll expected = prim(edges, n);
 
 		if (got != expected) cerr << "got: " << got << ", expected: " << expected << FAIL;
@@ -72,14 +70,15 @@ void performance_test() {
 	timer t;
 	Graph<NoData> g(N);
 	g.erdosRenyi(M);
-	vector<edge> edges;
+	vector<Edge> edges;
 	g.forEdges([&](int a, int b){
 		ll w = Random::integer<ll>(-1'000'000'000ll, 1'000'000'000ll);
 		edges.push_back({a, b, w});
 	});
 
 	t.start();
-	hash_t hash = kruskal(edges, N);
+	vector<Edge> mst;
+	hash_t hash = kruskal(N, edges, mst);
 	t.stop();
 	if (t.time > 1000) cerr << "too slow: " << t.time << FAIL;
 	cerr << "tested performance: " << t.time << "ms (hash: " << hash << ")" << endl;
