@@ -1,9 +1,11 @@
 #include "../util.h"
 #include <math/shortModInv.cpp>
 vector<vector<ll>> mat;
-#include <math/lgsFp.cpp>
-
 constexpr ll mod = 1'000'000'007;
+namespace lgs {
+	#include <math/lgsFp.cpp>
+}
+
 
 vector<vector<ll>> inverseMat(const vector<vector<ll>>& m) {
 	int n = ssize(m);
@@ -13,7 +15,7 @@ vector<vector<ll>> inverseMat(const vector<vector<ll>>& m) {
 		mat[i].resize(2*n);
 		mat[i][n+i] = 1;
 	}
-	gauss(n, mod);
+	lgs::gauss(ssize(mat), ssize(mat[0]));
 	vector<vector<ll>> res(m);
 	for (int i = 0; i < n; i++) {
 		res[i] = vector<ll>(mat[i].begin() + n, mat[i].end());
@@ -52,7 +54,7 @@ void test_square() {
 		vector<vector<ll>> m(n);
 		for (auto& v : m) v = Random::integers<ll>(n, 0, mod);
 		mat = m;
-		gauss(n, mod);
+		lgs::gauss(ssize(mat), ssize(mat[0]));
 
 		for (int i = 0; i < n; i++) {
 			for (int j = 0; j < n; j++) {
@@ -99,7 +101,7 @@ void performance_test() {
 	mat = m;
 
 	t.start();
-	gauss(N, mod);
+	lgs::gauss(ssize(mat), ssize(mat[0]));
 	t.stop();
 	hash_t hash = 0;
 	for (int i = 0; i < N; i++) {
