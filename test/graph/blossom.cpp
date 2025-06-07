@@ -1,6 +1,6 @@
 #include "../util.h"
 namespace tutte {
-void gauss(int n, ll mod);
+vector<int> gauss(vector<vector<ll>> &mat);
 #include <graph/matching.cpp>
 #include <math/shortModInv.cpp>
 #include <math/lgsFp.cpp>
@@ -15,20 +15,20 @@ void stress_test() {
 
 		GM blossom(n);
 		srand(Random::rng());
-		tutte::adj.assign(n, {});
+		vector<vector<int>> adj(n);
 
 		Graph<NoData> g(n);
 		g.erdosRenyi(m);
 		g.forEdges([&](int a, int b){
-			tutte::adj[a].push_back(b);
-			tutte::adj[b].push_back(a);
+			adj[a].push_back(b);
+			adj[b].push_back(a);
 
 			blossom.adj[a].push_back(b);
 			blossom.adj[b].push_back(a);
 		});
 
 		ll got = blossom.match();
-		ll expected = tutte::max_matching();
+		ll expected = tutte::max_matching(adj);
 
 		vector<bool> seen(n);
 		ll got2 = 0;

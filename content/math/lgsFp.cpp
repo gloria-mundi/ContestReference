@@ -1,6 +1,7 @@
-vector<int> pivots; // ith pivot is in ith row
-void gauss(int n, int m) {
-	for (int r = 0, c = 0; c < m; c++) {
+vector<int> gauss(vector<vector<ll>> &mat) {
+	int n = ssize(mat), m = ssize(mat[0]);
+	vector<int> pivots; // ith pivot is in ith row
+	for (int r = 0, c = 0; r < n && c < m; c++) {
 		for (int i = r; i < n; i++) {
 			if (mat[i][c] != 0){
 				swap(mat[r], mat[i]);
@@ -16,5 +17,7 @@ void gauss(int n, int m) {
 				mat[i][j] = (mat[i][j] - f*mat[r][j] % mod + mod) % mod;
 		}}
 		pivots.push_back(c);
-		if (++r == n) break;
-}} // no solution if pivots.back() == m-1
+		r++;
+	}
+	return pivots; // no solution if pivots.back() == m-1
+}

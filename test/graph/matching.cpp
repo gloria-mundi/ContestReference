@@ -1,6 +1,6 @@
 #include "../util.h"
 namespace tutte {
-void gauss(int n, ll mod);
+vector<int> gauss(vector<vector<ll>> &mat);
 #include <graph/matching.cpp>
 #include <math/shortModInv.cpp>
 #include <math/lgsFp.cpp>
@@ -15,19 +15,19 @@ void stress_test() {
 
 		GM blossom(n);
 		srand(Random::rng());
-		tutte::adj.assign(n, {});
+		vector<vector<int>> adj(n);
 
 		Graph<NoData> g(n);
 		g.erdosRenyi(m);
 		g.forEdges([&](int a, int b){
-			tutte::adj[a].push_back(b);
-			tutte::adj[b].push_back(a);
+			adj[a].push_back(b);
+			adj[b].push_back(a);
 
 			blossom.adj[a].push_back(b);
 			blossom.adj[b].push_back(a);
 		});
 
-		ll got = tutte::max_matching();
+		ll got = tutte::max_matching(adj);
 		ll expected = blossom.match();
 
 		if (got != expected) cerr << "got: " << got << ", expected: " << expected << FAIL;
@@ -43,14 +43,14 @@ void performance_test() {
 	Graph<NoData> g(N);
 	g.erdosRenyi(M);
 	srand(Random::rng());
-	tutte::adj.assign(N, {});
+	vector<vector<int>> adj(N);
 	g.forEdges([&](int a, int b){
-			tutte::adj[a].push_back(b);
-			tutte::adj[b].push_back(a);
+			adj[a].push_back(b);
+			adj[b].push_back(a);
 	});
 
 	t.start();
-	hash_t hash = tutte::max_matching();
+	hash_t hash = tutte::max_matching(adj);
 	t.stop();
 	if (t.time > 500) cerr << "too slow: " << t.time << FAIL;
 	cerr << "tested performance: " << t.time << "ms (hash: " << hash << ")" << endl;

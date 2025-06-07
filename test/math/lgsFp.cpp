@@ -1,6 +1,5 @@
 #include "../util.h"
 #include <math/shortModInv.cpp>
-vector<vector<ll>> mat;
 constexpr ll mod = 1'000'000'007;
 namespace lgs {
 	#include <math/lgsFp.cpp>
@@ -9,22 +8,18 @@ namespace lgs {
 
 vector<vector<ll>> inverseMat(const vector<vector<ll>>& m) {
 	int n = ssize(m);
-	mat = m;
+	vector<vector<ll>> mat = m;
 	for (int i = 0; i < n; i++) {
 		if (ssize(mat[i]) != n) cerr << "error: no square matrix" << FAIL;
 		mat[i].resize(2*n);
 		mat[i][n+i] = 1;
 	}
-	lgs::gauss(ssize(mat), ssize(mat[0]));
-	vector<vector<ll>> res(m);
+	vector<int> pivots = lgs::gauss(mat);
 	for (int i = 0; i < n; i++) {
-		res[i] = vector<ll>(mat[i].begin() + n, mat[i].end());
-		for (int j = 0; j < n; j++) {
-			if (j != i && mat[i][j] != 0) cerr << "error: not full rank?" << FAIL;
-			if (j == i && mat[i][j] != 1) cerr << "error: not full rank?" << FAIL;
-		}
+		if (pivots[i] != i) cerr << "error: not full rank?" << FAIL;
+		mat[i].erase(begin(mat[i]), begin(mat[i]) + n);
 	}
-	return res;
+	return mat;
 }
 
 vector<vector<ll>> mul(const vector<vector<ll>>& a, const vector<vector<ll>>& b) {
@@ -53,18 +48,17 @@ void test_square() {
 
 		vector<vector<ll>> m(n);
 		for (auto& v : m) v = Random::integers<ll>(n, 0, mod);
-		mat = m;
-		lgs::gauss(ssize(mat), ssize(mat[0]));
+		lgs::gauss(m);
 
 		for (int i = 0; i < n; i++) {
 			for (int j = 0; j < n; j++) {
-				hash += mat[i][j];
+				hash += m[i][j];
 			}
 		}
 
 		queries += n;
 	}
-	cerr << "tested sqaures: " << queries << " (hash: " << hash << ")" << endl;;
+	cerr << "tested squares: " << queries << " (hash: " << hash << ")" << endl;;
 }
 
 void stress_test_inv() {
@@ -82,8 +76,7 @@ void stress_test_inv() {
 
 		for (int i = 0; i < n; i++) {
 			for (int j = 0; j < n; j++) {
-				if (i == j && prod[i][j] != 1) cerr << "error: not inverted" << FAIL;
-				if (i != j && prod[i][j] != 0) cerr << "error: not inverted" << FAIL;
+				if (prod[i][j] != (i == j)) cerr << "error: not inverted" << FAIL;
 			}
 		}
 
@@ -98,15 +91,14 @@ void performance_test() {
 
 	vector<vector<ll>> m(N);
 	for (auto& v : m) v = Random::integers<ll>(N, 0, mod);
-	mat = m;
 
 	t.start();
-	lgs::gauss(ssize(mat), ssize(mat[0]));
+	lgs::gauss(m);
 	t.stop();
 	hash_t hash = 0;
 	for (int i = 0; i < N; i++) {
 		for (int j = 0; j < N; j++) {
-			hash += mat[i][j];
+			hash += m[i][j];
 		}
 	}
 	if (t.time > 500) cerr << "too slow: " << t.time << FAIL;
