@@ -9,11 +9,11 @@ void stress_test() {
 		Graph<NoData, true> g(n);
 		g.erdosRenyi(m);
 
-		adj.assign(n, {});
-		g.forEdges([](int a, int b){
+		vector<vector<int>> adj(n);
+		g.forEdges([&](int a, int b){
 			adj[a].push_back(b);
 		});
-		scc();
+		SCC scc(adj);
 
 		auto reach = [&](int a) -> vector<bool> {
 			vector<bool> seen(n);
@@ -29,9 +29,9 @@ void stress_test() {
 		};
 
 		vector<int> seen(n);
-		for (int i = 0; i < ssize(sccs); i++) {
-			for (int v: sccs[i]) {
-				if (idx[v] != i) cerr << v << " is in scc " << i << ", but idx[" << v << "] = " << idx[v] << FAIL;
+		for (int i = 0; i < ssize(scc.sccs); i++) {
+			for (int v: scc.sccs[i]) {
+				if (scc.idx[v] != i) cerr << v << " is in scc " << i << ", but idx[" << v << "] = " << scc.idx[v] << FAIL;
 				seen[v]++;
 			}
 		}
@@ -40,9 +40,9 @@ void stress_test() {
 			if (seen[a] != 1) cerr << a << " occurs " << seen[a] << " times in sccs" << FAIL;
 			vector<bool> reacha = reach(a);
 			for (int b = 0; b < n; b++) {
-				if (idx[a] == idx[b]) {
+				if (scc.idx[a] == scc.idx[b]) {
 					if (!reacha[b]) cerr << a << " and " << b << " should be in different SCCs" << FAIL;
-				} else if (idx[a] < idx[b]) {
+				} else if (scc.idx[a] < scc.idx[b]) {
 					if (reacha[b]) cerr << a << " should come before " << b << " in topological order" << FAIL;
 				}
 			}
@@ -58,16 +58,16 @@ void performance_test() {
 	timer t;
 	Graph<NoData, true> g(N);
 	g.erdosRenyi(M);
-	adj.assign(N, {});
-	g.forEdges([](int a, int b){
+	vector<vector<int>> adj(N);
+	g.forEdges([&](int a, int b){
 		adj[a].push_back(b);
 	});
 
 	t.start();
-	scc();
+	SCC scc(adj);
 	t.stop();
 	hash_t hash = 0;
-	for (int x : idx) hash += x;
+	for (int x : scc.idx) hash += x;
 	if (t.time > 500) cerr << "too slow: " << t.time << FAIL;
 	cerr << "tested performance: " << t.time << "ms (hash: " << hash << ")" << endl;
 }

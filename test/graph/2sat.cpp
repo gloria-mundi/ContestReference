@@ -25,7 +25,7 @@ struct RandomClause {
 		return false;
 	}
 
-	void add(sat2& sat) const {
+	void add(SAT2& sat) const {
 		int va = a;
 		int vb = b;
 		if (type == 0) sat.addImpl(va, vb);
@@ -80,9 +80,8 @@ void stress_test() {
 		vector<RandomClause> clauses;
 		for (int i = 0; i < m; i++) clauses.emplace_back(n);
 
-		sat2 sat(n);
+		SAT2 sat(n);
 		for (auto& c : clauses) c.add(sat);
-		adj = sat.adj;
 
 		bool got = sat.solve();
 		bool expected = naive(n, clauses);
@@ -113,11 +112,8 @@ void performance_test() {
 	vector<RandomClause> clauses;
 	for (int i = 0; i < M; i++) clauses.emplace_back(N);
 	t.start();
-	sat2 sat(N);
+	SAT2 sat(N);
 	for (auto& c : clauses) c.add(sat);
-	t.stop();
-	adj = sat.adj;
-	t.start();
 	hash_t hash = sat.solve();
 	t.stop();
 	if (t.time > 500) cerr << "too slow: " << t.time << FAIL;
