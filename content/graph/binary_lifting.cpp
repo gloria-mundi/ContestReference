@@ -3,7 +3,7 @@ struct Lift {
 
 	Lift(vector<vector<int>> &adj, int root):
 			dep(adj.size()), par(adj.size()), jmp(adj.size(), root) {
-		auto dfs = [&](auto &self, int u, int p, int d) -> void {
+		auto dfs = [&](auto &&self, int u, int p, int d) -> void {
 			dep[u] = d, par[u] = p;
 			jmp[u] = dep[p] + dep[jmp[jmp[p]]] == 2*dep[jmp[p]]
 			       ? jmp[jmp[p]] : p;

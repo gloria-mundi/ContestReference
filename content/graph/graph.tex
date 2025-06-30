@@ -118,7 +118,7 @@
 \subsubsection{\textsc{Floyd-Warshall}-Algorithmus}
 \method{floydWarshall}{kürzeste Pfade oder negative Kreise finden}{\abs{V}^3}
 \begin{itemize}
-	\item \code{dist[i][i] = 0, dist[i][j] = edge\{j, j\}.weight} oder \code{INF}
+	\item \code{dist[i][i] = 0, dist[i][j] = edge\{i, j\}.weight} oder \code{INF}
 	\item \code{i} liegt auf einem negativen Kreis $\Leftrightarrow$ \code{dist[i][i] < 0}.
 \end{itemize}
 \sourcecode{graph/floydWarshall.cpp}
@@ -140,12 +140,12 @@ Sei $a_{ij}$ die Adjazenzmatrix von $G$ \textcolor{gray}{(mit $a_{ii} = 1$)}, da
 \begin{algorithm}{Dynamic Connectivity}
 	\begin{methods}
 		\method{Constructor}{erzeugt Baum ($n$ Knoten, $m$ updates)}{n+m}
-		\method{addEdge}{fügt Kannte ein,\code{id}=delete Zeitpunkt}{\log(n)}
+		\method{addEdge}{fügt Kante ein, \code{id} = delete-Zeitpunkt}{\log(n)}
 		\method{eraseEdge}{entfernt Kante \code{id}}{\log(n)}
 	\end{methods}
 	\sourcecode{graph/connect.cpp}
 \end{algorithm}
-\clearpage
+\columnbreak
 
 
 

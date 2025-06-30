@@ -15,11 +15,11 @@ struct UnionFind {
 		return true;
 	}
 
-	int size(int a) {
+	int size(int a) { // optional
 		return -unions[find(a)];
 	}
 
-	int add() {
+	int add() { // optional
 		unions.push_back(-1);
 		return ssize(unions) - 1;
 	}
