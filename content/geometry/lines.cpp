@@ -8,9 +8,9 @@ line pointsToLine(pt p1, pt p2) { // vertikale Gerade: b = 1 oder b = 0
 	if (abs(real(p1 - p2)) < EPS) {
 		l.a = 1; l.b = 0.0; l.c = -real(p1);
 	} else {
-		l.a = -imag(p1 - p2) / real(p1 - p2);
+		l.a = imag(p2 - p1) / real(p1 - p2);
 		l.b = 1.0;
-		l.c = -(l.a * real(p1)) - imag(p1);
+		l.c = -l.a * real(p1) - imag(p1);
 	}
 	return l;
 }
