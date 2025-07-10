@@ -30,9 +30,9 @@ vector<int> naive(const vector<ll>& a) {
 	return res;
 }
 
-void stress_test() {
+void stress_test(ll LIM) {
 	ll queries = 0;
-	for (ll i = 0; i < 10'000; i++) {
+	for (ll i = 0; i < LIM; i++) {
 		int n = Random::integer<int>(1, 12);
 		auto a = Random::integers<ll>(n, -10, 10);
 		auto expected = naive<true>(a);
@@ -40,7 +40,7 @@ void stress_test() {
 		if (got != expected) cerr << "error: strict" << FAIL;
 		queries += n;
 	}
-	for (ll i = 0; i < 10'000; i++) {
+	for (ll i = 0; i < LIM; i++) {
 		int n = Random::integer<int>(1, 12);
 		auto a = Random::integers<ll>(n, -10, 10);
 		auto expected = naive<false>(a);
@@ -71,6 +71,7 @@ void performance_test() {
 }
 
 int main() {
-	stress_test();
+	stress_test(1'000);
+	if (!sanitize) stress_test(10'000);
 	if (!sanitize) performance_test();
 }
