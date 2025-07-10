@@ -27,7 +27,7 @@ void test_subsets() {
 
 ll naive(ll x) {
 	vector<ll> bits;
-	for (ll i = 0; i < 64; i++) {
+	for (ll i = 0; i < 63; i++) {
 		bits.push_back(x & 1);
 		x >>= 1;
 	}
@@ -35,7 +35,7 @@ ll naive(ll x) {
 	next_permutation(all(bits));
 	reverse(all(bits));
 	x = 0;
-	for (ll i = 0, j = 1; i < 64; i++, j <<= 1) {
+	for (ll i = 0, j = 1; i < 63; i++, j <<= 1) {
 		if (bits[i] != 0) x |= j;
 	}
 	return x;

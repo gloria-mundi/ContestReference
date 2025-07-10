@@ -14,7 +14,7 @@ void stress_test() {
 			k++;
 			expected = (expected + a) % n;
 		} while (k < 100);
-		queries += n;
+		queries++;
 	}
 	cerr << "tested queries: " << queries << endl;
 }
@@ -28,7 +28,7 @@ void stress_test_large() {
 		ll expected = (lll)a * b % n;
 		auto got = mulMod(a, b, n);
 		if (got != expected) cerr << "got: " << got << ", expected: " << expected << FAIL;
-		queries += n;
+		queries++;
 	}
 	cerr << "tested queries: " << queries << endl;
 }
@@ -52,6 +52,6 @@ void performance_test() {
 int main() {
 	stress_test();
 	stress_test_large();
-	performance_test();
+	if (!sanitize) performance_test();
 }
 

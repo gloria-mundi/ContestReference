@@ -4,6 +4,13 @@ using namespace std;
 #define all(x) std::begin(x), std::end(x)
 #define sz(x) (ll)std::size(x)
 
+#ifdef SANITIZE
+	constexpr bool sanitize = true;
+#else
+	constexpr bool sanitize = false;
+#endif
+
+
 using ll = long long;
 using lll = __int128;
 using ld = long double;

@@ -16,7 +16,7 @@ jobs:
         os: [ubuntu-latest, ubuntu-22.04]
     name: Test graph (${{ matrix.os }})
     runs-on: ${{ matrix.os }}
-    timeout-minutes: 10
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
       - run: ./test/test.sh graph

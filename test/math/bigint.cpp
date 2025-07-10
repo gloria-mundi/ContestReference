@@ -35,9 +35,9 @@ struct modInt {
 constexpr ll MOD = 1'394'633'899;
 constexpr ll POOL = 8;
 
-void stress_test() {
+void stress_test(int LIM) {
 	int queries = 0;
-	for (int tries = 0; tries < 1000; tries++) {
+	for (int tries = 0; tries < LIM; tries++) {
 		vector<modInt<MOD>> expectedPool(POOL);
 		vector<bigint> gotPool(POOL);
 		for (int i = 0; i < POOL; i++) {
@@ -117,6 +117,7 @@ void stress_test() {
 }
 	
 int main() {
-	stress_test();
+	stress_test(100);
+	if (!sanitize) stress_test(1000);
 }
 

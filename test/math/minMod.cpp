@@ -86,7 +86,7 @@ void performance_test_firstVal() {
 int main() {
 	stress_test_minMod();
 	stress_test_firstVal();
-	performance_test_minMod();
-	performance_test_firstVal();
+	if (!sanitize) performance_test_minMod();
+	if (!sanitize) performance_test_firstVal();
 }
 

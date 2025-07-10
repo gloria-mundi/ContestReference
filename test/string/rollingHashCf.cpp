@@ -39,13 +39,13 @@ void testTiny() {
 	cerr << "tiny: ok" << endl;
 }
 
-void testSmall() {
+void testSmall(int depth) {
 	set<decltype(getHash(""))> got;
 	ll expected = 0;
 	auto dfs = [&](auto&& self, string pref)->void {
 		expected++;
 		got.insert(getHash(pref));
-		if(sz(pref) >= 5) return;
+		if(sz(pref) >= depth) return;
 		for (char c = 'a'; c <= 'z'; c++) {
 			self(self, pref + c);
 		}
@@ -88,7 +88,7 @@ void performance_test() {
 int main() {
 	testThueMorse();
 	testTiny();
-	testSmall();
+	testSmall(sanitize ? 4 : 5);
 	stress_test();
-	performance_test();
+	if (!sanitize) performance_test();
 }

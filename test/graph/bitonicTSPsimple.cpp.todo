@@ -1,15 +1,15 @@
 #include "../util.h"
 namespace got {
-#include <graph/bitonicTSP.cpp>
+#include <graph/bitonicTSPsimple.cpp>
 }
 namespace expected {
-#include <graph/bitonicTSPsimple.cpp>
+#include <graph/bitonicTSP.cpp>
 }
 
 void stress_test() {
 	ll queries = 0;
 	for (int tries = 0; tries < 200'000; tries++) {
-		int n = Random::integer<int>(1, 30);
+		int n = Random::integer<int>(2, 30);
 
 		vector<vector<double>> dist(n);
 		for (auto& v : dist) v = Random::reals<double>(n, 0, 1e18);
@@ -18,7 +18,7 @@ void stress_test() {
 		expected::dist = dist;
 
 		auto got = got::bitonicTSP();
-		auto expected = got::bitonicTSP();
+		auto expected = expected::bitonicTSP();
 
 		if (got != expected) cerr << "error" << FAIL;
 		queries += n;
@@ -27,7 +27,7 @@ void stress_test() {
 }
 
 //this is an easy graph...
-constexpr int N = 5'000;
+constexpr int N = 2'000;
 void performance_test() {
 	timer t;
 	got::dist = vector<vector<double>>(N);
@@ -45,5 +45,5 @@ void performance_test() {
 
 int main() {
 	stress_test();
-	performance_test();
+	if (!sanitize) performance_test();
 }

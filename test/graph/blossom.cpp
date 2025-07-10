@@ -1,6 +1,6 @@
 #include "../util.h"
 namespace tutte {
-void gauss(int n, ll mod);
+void gauss(int n, int m);
 #include <graph/matching.cpp>
 #include <math/shortModInv.cpp>
 #include <math/lgsFp.cpp>
@@ -72,5 +72,5 @@ void performance_test() {
 
 int main() {
 	stress_test();
-	performance_test();
+	if (!sanitize) performance_test();
 }

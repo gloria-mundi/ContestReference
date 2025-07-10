@@ -41,6 +41,6 @@ void performance_test() {
 
 int main() {
 	stress_test();
-	performance_test();
+	if (!sanitize) performance_test();
 }
 

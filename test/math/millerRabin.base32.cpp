@@ -132,6 +132,6 @@ void performance_test() {
 int main() {
 	extra_tests();
 	stress_test();
-	performance_test();
+	if (!sanitize) performance_test();
 }
 

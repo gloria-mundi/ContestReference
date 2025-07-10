@@ -1,4 +1,4 @@
-constexpr int MOD=1'000'000'007, I=10;
+constexpr int mod=1'000'000'007, I=10;
 vector<vector<ll>> adj, mat;
 
 int max_matching() {
@@ -9,10 +9,10 @@ int max_matching() {
 			mat[v].assign(sz(adj), 0);
 			for (int u : adj[v]) {
 				if (u < v) {
-					mat[v][u] = rand() % (MOD - 1) + 1;
-					mat[u][v] = MOD - mat[v][u];
+					mat[v][u] = rand() % (mod - 1) + 1;
+					mat[u][v] = mod - mat[v][u];
 		}}}
-		gauss(sz(adj), MOD); //LGS @\sourceref{math/lgsFp.cpp}@
+		gauss(sz(mat), sz(mat[0])); //LGS @\sourceref{math/lgsFp.cpp}@
 		int rank = 0;
 		for (auto& row : mat) {
 			if (*max_element(all(row)) != 0) rank++;

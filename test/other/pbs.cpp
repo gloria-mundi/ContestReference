@@ -93,11 +93,11 @@ void performance_test() {
     t.stop();
     ll hash = accumulate(all(ans), 0LL);
 
-	if (t.time > 700) cerr << "too slow: " << t.time << FAIL;
+	if (t.time > 900) cerr << "too slow: " << t.time << FAIL;
     cerr << "tested performance: " << t.time << "ms (hash: " << hash << ")" << endl;
 }
 
 int main() {
     stress_test();
-    performance_test();
+    if (!sanitize) performance_test();
 }

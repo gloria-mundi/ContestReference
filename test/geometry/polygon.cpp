@@ -26,9 +26,9 @@ double distToSegment(pt a, pt b, pt p) {
 #include <geometry/polygon.cpp>
 #include "../geometry.h"
 
-void test_area(ll range) {
+void test_area(ll LIM, ll range) {
 	int queries = 0;
-	for (int tries = 0; tries < 100'000; tries++) {
+	for (int tries = 0; tries < LIM; tries++) {
 		int n = Random::integer(3, 30);
 		auto ps = Random::polygon(n, range);
 		ps.push_back(ps[0]);
@@ -49,9 +49,9 @@ bool ptLess(pt a, pt b) {
 	return imag(a) < imag(b);
 }
 
-void test_windingNumber(ll range) {
+void test_windingNumber(ll LIM, ll range) {
 	int queries = 0;
-	for (int tries = 0; tries < 100'000; tries++) {
+	for (int tries = 0; tries < LIM; tries++) {
 		int n = Random::integer(3, 8);
 		auto ps = Random::polygon(n, range);
 		ps.push_back(ps[0]);
@@ -62,7 +62,7 @@ void test_windingNumber(ll range) {
 			ll expected = 0;
 			bool onBorder = false;
 			for (int j = 0; j < n; j++) {
-				int cur = details::lineSegmentIntersection(p, p + pt(1, 2'000'000'007), ps[j], ps[j+1]);
+				int cur = details::lineSegmentIntersection(p, {real(p)+1, 1'000'000'007}, ps[j], ps[j+1]);
 				if (ptLess(ps[j], ps[j+1])) expected -= cur;
 				else expected += cur;
 				onBorder |= pointOnSegment(ps[j], ps[j+1], p);
@@ -79,9 +79,9 @@ void test_windingNumber(ll range) {
 	cerr << "tested windingNumber: " << queries << endl;
 }
 
-void test_inside(ll range) {
+void test_inside(ll LIM, ll range) {
 	int queries = 0;
-	for (int tries = 0; tries < 100'000; tries++) {
+	for (int tries = 0; tries < LIM; tries++) {
 		int n = Random::integer(3, 30);
 		auto ps = Random::polygon(n, range);
 		ps.push_back(ps[0]);
@@ -92,7 +92,7 @@ void test_inside(ll range) {
 			ll count = 0;
 			bool onBorder = false;
 			for (int j = 0; j < n; j++) {
-				count += details::lineSegmentIntersection(p, p + pt(1, 2'000'000'007), ps[j], ps[j+1]);
+				count += details::lineSegmentIntersection(p, {real(p)+1, 1'000'000'007}, ps[j], ps[j+1]);
 				onBorder |= pointOnSegment(ps[j], ps[j+1], p);
 			}
 			bool expected = (count % 2) && !onBorder;
@@ -105,9 +105,9 @@ void test_inside(ll range) {
 	cerr << "tested inside: " << queries << endl;
 }
 
-void test_insideConvex(ll range) {
+void test_insideConvex(ll LIM, ll range) {
 	int queries = 0;
-	for (int tries = 0; tries < 100'000; tries++) {
+	for (int tries = 0; tries < LIM; tries++) {
 		int n = Random::integer(3, 30);
 		auto ps = Random::convex(n, range);
 
@@ -145,9 +145,9 @@ bool insideOrOnConvex(pt p, const vector<pt>& hull) {
 	return cross(hull[l], hull[r], p) >= 0;
 }
 
-void test_minkowski(ll range) {
+void test_minkowski(ll LIM, ll range) {
 	int queries = 0;
-	for (int tries = 0; tries < 100'000; tries++) {
+	for (int tries = 0; tries < LIM; tries++) {
 		int n = Random::integer(3, 30);
 		auto A = Random::convex(n, range);
 		int m = Random::integer(3, 30);
@@ -192,10 +192,10 @@ double naive_dist(const vector<pt>& ps, const vector<pt>& qs) {
 	return res;
 }
 
-void test_dist(ll range) {
+void test_dist(ll LIM, ll range) {
 	int queries = 0;
 	int pos = 0;
-	for (int tries = 0; tries < 100'000; tries++) {
+	for (int tries = 0; tries < LIM; tries++) {
 		int n = Random::integer(3, 10);
 		auto A = Random::convex(n, range / 3);
 		int m = Random::integer(3, 10);
@@ -215,9 +215,9 @@ void test_dist(ll range) {
 	cerr << "tested dist: " << queries << " (" << pos << ")" << endl;
 }
 
-void test_extremal(ll range) {
+void test_extremal(ll LIM, ll range) {
 	int queries = 0;
-	for (int tries = 0; tries < 100'000; tries++) {
+	for (int tries = 0; tries < LIM; tries++) {
 		int n = Random::integer(3, 30);
 		auto ps = Random::convex(n, range);
 		ps.push_back(ps[0]);
@@ -238,9 +238,9 @@ void test_extremal(ll range) {
 	cerr << "tested extremal: " << queries << endl;
 }
 
-void test_intersect(ll range) {
+void test_intersect(ll LIM, ll range) {
 	int queries = 0;
-	for (int tries = 0; tries < 100'000; tries++) {
+	for (int tries = 0; tries < LIM; tries++) {
 		int n = Random::integer(3, 10);
 		auto ps = Random::convex(n, range);
 		ps.push_back(ps[0]);
@@ -277,20 +277,21 @@ void test_intersect(ll range) {
 }
 
 int main() {
-	test_area(100);
-	test_area(1'000'000'000);
-	test_windingNumber(100);
-	test_windingNumber(1'000'000'000);
-	test_inside(100);
-	test_inside(1'000'000'000);
-	test_insideConvex(100);
-	test_insideConvex(1'000'000'000);
-	test_minkowski(100);
-	test_minkowski(500'000'000);
-	test_dist(100);
-	test_dist(1'000'000'000);
-	test_extremal(100);
-	test_extremal(1'000'000'000);
-	test_intersect(100);
-	test_intersect(1'000'000'000);
+	ll LIM = sanitize ? 4'000 : 100'000;
+	test_area(LIM, 100);
+	test_area(LIM, 1'000'000'000);
+	test_windingNumber(LIM, 100);
+	test_windingNumber(LIM, 1'000'000'000);
+	test_inside(LIM, 100);
+	test_inside(LIM, 1'000'000'000);
+	test_insideConvex(LIM, 100);
+	test_insideConvex(LIM, 1'000'000'000);
+	test_minkowski(LIM, 100);
+	test_minkowski(LIM, 500'000'000);
+	test_dist(LIM, 100);
+	test_dist(LIM, 1'000'000'000);
+	test_extremal(LIM, 100);
+	test_extremal(LIM, 1'000'000'000);
+	test_intersect(LIM, 100);
+	test_intersect(LIM, 1'000'000'000);
 }

@@ -115,8 +115,8 @@ void performance_test2() {
 int main() {
 	cerr << "point update + range query:" << endl;
 	stress_test1();
-	performance_test1();
+	if (!sanitize) performance_test1();
 	cerr << "range update + point query" << endl;
 	stress_test2();
-	performance_test2();
+	if (!sanitize) performance_test2();
 }

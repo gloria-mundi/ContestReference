@@ -6,7 +6,7 @@ ll memoC[N];
 
 void init() {
 	primeSieve(); // @\sourceref{math/primeSieve.cpp}@
-	for (ll i = 0; i < N; i++) {
+	for (ll i = 1; i < N; i++) {
 		memoC[i] = memoC[i - 1];
 		if (isPrime(i)) memoC[i]++;
 	}

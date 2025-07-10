@@ -59,6 +59,6 @@ int main() {
 	stress_test([](ll p){return sqrtl(p);});
 	stress_test([](ll p){return min<ll>(10, p - 1);});
 	stress_test([](ll p){return min<ll>(p - 1, sqrtl(p) + 100);});
-	performance_test();
+	if (!sanitize) performance_test();
 }
 

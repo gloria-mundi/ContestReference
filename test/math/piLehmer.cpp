@@ -36,7 +36,8 @@ void performance_test() {
 }
 
 int main() {
-	performance_test();
+	if (!sanitize) performance_test();
+	if (sanitize) lehmer::init();
 	stress_test();
 }
 

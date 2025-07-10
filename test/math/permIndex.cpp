@@ -2,9 +2,9 @@
 #include <datastructures/pbds.cpp>
 #include <math/permIndex.cpp>
 
-void stress_test() {
+void stress_test(int LIM) {
 	ll queries = 0;
-	for (ll i = 0; i < 10'000; i++) {
+	for (int i = 0; i < LIM; i++) {
 		int n = Random::integer<int>(1, 100);
 		vector<ll> cur(n);
 		iota(all(cur), 0);
@@ -33,7 +33,8 @@ void performance_test() {
 }
 
 int main() {
-	stress_test();
-	performance_test();
+	stress_test(1'000);
+	if (!sanitize) stress_test(10'000);
+	if (!sanitize) performance_test();
 }
 

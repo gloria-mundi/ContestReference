@@ -79,7 +79,7 @@ void performance_test_minrotation() {
 
 int main() {
 	stress_test_duval();
-	performance_test_duval();
+	if (!sanitize) performance_test_duval();
 	stress_test_minrotation();
-	performance_test_minrotation();
+	if (!sanitize) performance_test_minrotation();
 }

@@ -130,5 +130,5 @@ int main() {
 	stress_test_independent(100);
 	stress_test_independent(1'000);
 	stress_test_independent(1'000'000);
-	performance_test();
+	if (!sanitize) performance_test();
 }

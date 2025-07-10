@@ -4,11 +4,14 @@ cd "$(dirname "$0")"
 ulimit -s 4000000
 export MALLOC_PERTURB_="$((2#01011001))"
 shopt -s lastpipe
+export UBSAN_OPTIONS=halt_on_error=1:print_stacktrace=1
 
 declare -A cppstandard
 cppstandard["string/suffixArray.cpp"]="gnu++20"
 cppstandard["other/pbs.cpp"]="gnu++20"
 seedmacro=""
+compilerflags="-O2"
+debugflags="-O2 -fsanitize=address,undefined"
 
 process_awk() {
     awk_file=$(realpath --relative-to="${PWD}" "${1}")
@@ -22,13 +25,24 @@ process_awk() {
 test_file() {
     file=$(realpath --relative-to="${PWD}" "${1}")
     echo "$file:"
-    echo "compiling..."
+
+    echo "compiling with sanitizer..."
     std="gnu++17"
     if [[ -v cppstandard[$file] ]]; then
         std=${cppstandard[$file]}
     fi
-    g++ -std=$std "$file" -I ./awk/ -I ../content/ -O2 -Wall -Wextra -Wshadow -Werror $seedmacro
-    echo "running..."
+    g++ -std=$std "$file" -I ./awk/ -I ../content/ $debugflags -Wall -Wextra -Wshadow -Werror -DSANITIZE $seedmacro
+    echo "running with sanitizer..."
+    timeout --foreground 90s ./a.out
+    rm ./a.out
+
+    echo "compiling -O2..."
+    std="gnu++17"
+    if [[ -v cppstandard[$file] ]]; then
+        std=${cppstandard[$file]}
+    fi
+    g++ -std=$std "$file" -I ./awk/ -I ../content/ $compilerflags -Wall -Wextra -Wshadow -Werror $seedmacro
+    echo "running -O2..."
     timeout --foreground 60s ./a.out
     echo ""
     rm ./a.out
@@ -92,6 +106,8 @@ if [ "$#" -ne 0 ]; then
             coverage
         elif [[ $arg == --seed=* ]]; then
             seedmacro="-DSEED=${arg:7}ll"
+        elif [[ $arg == "--debug" ]]; then
+            debugflags="-g -fsanitize=address,undefined"
         elif [ -d "$arg" ]; then
             dir=$(realpath --relative-to="${PWD}" "$arg")
             find . -type f -path "./${dir}/*.cpp" -not -path './awk/*' -print0 | sort -z | while read -d $'\0' file
@@ -102,6 +118,7 @@ if [ "$#" -ne 0 ]; then
             test_file "$arg"
         else
             echo "did not recognize: $arg"
+            exit 1
         fi
     done
 else
