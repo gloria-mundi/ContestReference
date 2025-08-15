@@ -451,7 +451,7 @@ Die Anzahl der Permutationen von $\{1,1, \ldots, n,n\}$ mit genau $k$ Anstiegen.
 Die Anzahl der Permutationen von $\{1, \ldots, n\}$ mit genau $k$ Zyklen.
 Es gibt zwei Möglichkeiten für die $n$-te Zahl. Entweder sie bildet einen eigene Zyklus, oder sie kann an jeder Position in jedem Zyklus einsortiert werden.
 \[\stirlingI{0}{0} = 1 \qquad
-\stirlingI{n}{0} = \stirlingI{0}{n} = 0 \qquad
+\stirlingI{n}{0} = \stirlingI{0}{k} = 0 \qquad
 \stirlingI{n}{k} = \stirlingI{n-1}{k-1} + (n-1) \stirlingI{n-1}{k}\]
 \begin{itemize}
 	\item Formel erlaubt berechnung ohne Division in \runtime{n^2}
@@ -476,7 +476,7 @@ Dazu kommt der Fall, dass die $n$ in ihrer eigenen Teilmenge (alleine) steht.
 \paragraph{\textsc{Bell}-Zahlen}
 Anzahl der Partitionen von $\{1, \ldots, n\}$.
 Wie \textsc{Stirling}-Zahlen 2. Ordnung ohne Limit durch $k$.
-\[B_1 = 1 \qquad
+\[B_0 = 1 \qquad
 B_n = \sum\limits_{k = 0}^{n - 1} B_k\binom{n-1}{k}
 = \sum\limits_{k = 0}^{n}\stirlingII{n}{k}\qquad\qquad B_{p^m+n}\equiv m\cdot B_n + B_{n+1} \bmod{p}\]
 
