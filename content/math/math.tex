@@ -418,8 +418,7 @@ $1,~1,~2,~5,~14,~42,~132,~429,~1430,~4862,~16796,~58786,~208012,~742900$
 \[C_0 = 1\qquad C_n = \sum\limits_{k = 0}^{n - 1} C_kC_{n - 1 - k} =
 \frac{1}{n + 1}\binom{2n}{n} = \frac{4n - 2}{n+1} \cdot C_{n-1}\]
 \begin{itemize}
-	\item Formel $1$ erlaubt Berechnung ohne Division in \runtime{n^2}
-	\item Formel $2$ und $3$ erlauben Berechnung in \runtime{n}
+	\item Formel $1$ ohne Division in \runtime{n^2}, Formel $2$ und $3$ in \runtime{n}
 \end{itemize}
 
 \paragraph{\textsc{Catalan}-Convolution}
@@ -439,8 +438,7 @@ Dabei wird entweder ein Anstieg in zwei gesplitted oder ein Anstieg um $n$ ergä
 \eulerI{n}{k} = (k+1) \eulerI{n-1}{k} + (n-k) \eulerI{n-1}{k-1}=
 \sum_{i=0}^{k} (-1)^i\binom{n+1}{i}(k+1-i)^n\]
 \begin{itemize}
-	\item Formel $1$ erlaubt Berechnung ohne Division in \runtime{n^2}
-	\item Formel $2$ erlaubt Berechnung in \runtime{n\log(n)}
+	\item Formel $1$ohne Division in \runtime{n^2}, Formel $2$ erlaubt Berechnung in \runtime{n\log(n)}
 \end{itemize}
 
 \paragraph{\textsc{Euler}-Zahlen 2. Ordnung:}
@@ -449,7 +447,7 @@ $|~1~|~1,~0~|~1,~2,~0~|~1,~8,~6,~0~|~1,~22,~58,~24,~0~|$
 Die Anzahl der Permutationen von $\{1,1, \ldots, n,n\}$ mit genau $k$ Anstiegen.
 \[\eulerII{n}{0} = 1 \qquad\eulerII{n}{n} = 0 \qquad\eulerII{n}{k} = (k+1) \eulerII{n-1}{k} + (2n-k-1) \eulerII{n-1}{k-1}\]
 \begin{itemize}
-	\item Formel erlaubt Berechnung ohne Division in \runtime{n^2}
+	\item Formel ohne Division in \runtime{n^2}
 \end{itemize}
 
 \paragraph{\textsc{Stirling}-Zahlen 1. Ordnung:}
@@ -461,7 +459,7 @@ Es gibt zwei Möglichkeiten für die $n$-te Zahl. Entweder sie bildet einen eige
 \stirlingI{n}{0} = \stirlingI{0}{k} = 0 \qquad
 \stirlingI{n}{k} = \stirlingI{n-1}{k-1} + (n-1) \stirlingI{n-1}{k}\]
 \begin{itemize}
-	\item Formel erlaubt berechnung ohne Division in \runtime{n^2}
+	\item Formel ohne Division in \runtime{n^2}
 \end{itemize}
 \[\sum_{k=0}^{n}\pm\stirlingI{n}{k}x^k=x(x-1)(x-2)\cdots(x-n+1)\]
 \begin{itemize}
@@ -479,8 +477,7 @@ Dazu kommt der Fall, dass die $n$ in ihrer eigenen Teilmenge (alleine) steht.
 \stirlingII{n}{k} = k \stirlingII{n-1}{k} + \stirlingII{n-1}{k-1} =
 \frac{1}{k!} \sum\limits_{i=0}^{k} (-1)^{k-i}\binom{k}{i}i^n\]
 \begin{itemize}
-	\item Formel $1$ erlaubt Berechnung ohne Division in \runtime{n^2}
-	\item Formel $2$ erlaubt Berechnung in \runtime{n\log(n)}
+	\item Formel $1$ ohne Division in \runtime{n^2}, Formel $2$ in \runtime{n\log(n)}
 \end{itemize}
 
 \paragraph{\textsc{Bell}-Zahlen:}
@@ -488,24 +485,33 @@ $1,~1,~2,~5,~15,~52,~203,~877,~4140,~21147,~115975,~678570,~4213597$
 
 Anzahl der Partitionen von $\{1, \ldots, n\}$.
 Wie \textsc{Stirling}-Zahlen 2. Ordnung ohne Limit durch $k$.
+\vspace{-0.2cm}%
 \[B_0 = 1 \qquad
 B_n = \sum\limits_{k = 0}^{n - 1} B_k\binom{n-1}{k}
 = \sum\limits_{k = 0}^{n}\stirlingII{n}{k}\qquad\qquad B_{p^m+n}\equiv m\cdot B_n + B_{n+1} \bmod{p}\]
+\begin{itemize}
+	\item Alternative: $B(n) = \mathrm{EGF}\big(e^{e^n-1}\big)$ (\code{poly_exp} auf Seite \pageref{code:math/transforms/seriesOperations.cpp})
+\end{itemize}
 
-\paragraph{Partitions:}
+\paragraph{$\boldsymbol{k}$ Partitions:}
 $|~1~|~0,~1~|~0,~1,~1~|~0,~1,~1,~1~|~0,~1,~2,~1,~1~|~0,~1,~2,~2,~1,~1~|~0,~1,~3,~3,~2,~1,~1~|$
 
 Die Anzahl der Partitionen von $n$ in genau $k$ positive Summanden.
-Die Anzahl der Partitionen von $n$ mit Elementen aus ${1,\dots,k}$.
+Die Anzahl der Partitionen von $n$ mit größtem Elementen $k$.
 \begin{align*}
-	p_0(0)=1 \qquad p_k(n)&=0 \text{ für } k > n \text{ oder } n \leq 0 \text{ oder } k \leq 0\\
-	p_k(n)&= p_k(n-k) + p_{k-1}(n-1)\\[2pt]
-	p(n)=\sum_{k=1}^{n} p_k(n)&=p_n(2n)=\sum\limits_{k=1}^\infty(-1)^{k+1}\bigg[p\bigg(n - \frac{k(3k-1)}{2}\bigg) + p\bigg(n - \frac{k(3k+1)}{2}\bigg)\bigg]
+	p_0(0)=1 \qquad p_k(n)&=0 \text{ für } k > n \text{ oder } n \leq 0 \text{ oder } k \leq 0\\[-2pt]
+	p_k(n)&= p_k(n-k) + p_{k-1}(n-1)\\[-0.55cm]
 \end{align*}
 \begin{itemize}
-	\item $p(n)$: $1,~1,~2,~3,~5,~7,~11,~15,~22,~30,~42,~56,~77,~101,~135,~176,~231,~297,~385,~490,~627,~792$
-	\item in Formel $3$ kann abgebrochen werden wenn $\frac{k(3k-1)}{2} > n$.
-	\item Die Anzahl der Partitionen von $n$ in bis zu $k$ positive Summanden ist $\sum\limits_{i=0}^{k}p_i(n)=p_k(n+k)$.
+	\item Anzahl der Partitionen von $n$ in bis zu $k$ Summanden: $\sum\limits_{i=0}^{k}p_i(n)=p_k(n+k)$
+\end{itemize}
+
+\paragraph{Partitions:}
+$1,~1,~2,~3,~5,~7,~11,~15,~22,~30,~42,~56,~77,~101,~135,~176,~231,~297,~385,~490,~627$
+\[p(n)=\sum_{k=1}^{n} p_k(n)=p_n(2n)=\sum\limits_{k=1}^\infty(-1)^{k+1}\bigg[p\bigg(n - \frac{k(3k-1)}{2}\bigg) + p\bigg(n - \frac{k(3k+1)}{2}\bigg)\bigg]\]
+\begin{itemize}
+	\item Rekursion abbrechen wenn argument negativ wird $\Longrightarrow$ Laufzeit $\runtime{\sqrt{n}}$
+	\item Alternative: $p(n) = \mathrm{OGF(A)}^{-1}$ mit $A\mkern-1mu\big[\frac{k(3k\pm1)}{2}\big]\coloneqq(-1)^k$  (\code{poly_inv} auf Seite \pageref{code:math/transforms/seriesOperations.cpp})
 \end{itemize}
 
 \subsection{The Twelvefold Way \textnormal{(verteile $n$ Bälle auf $k$ Boxen)}}
