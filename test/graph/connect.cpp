@@ -45,9 +45,9 @@ struct Naive {
 	}
 };
 
-void stress_test() {
+void stress_test(int lim) {
 	ll queries = 0;
-	for (int tries = 0; tries < 2'000; tries++) {
+	for (int tries = 0; tries < lim; tries++) {
 		int n = Random::integer<int>(2, 30);
 		int m = Random::integer<int>(30, 300);
 
@@ -135,6 +135,6 @@ void performance_test() {
 }
 
 int main() {
-	stress_test();
+	stress_test(sanitize ? 1'000 : 2'000);
 	if (!sanitize) performance_test();
 }
