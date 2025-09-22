@@ -21,6 +21,6 @@ void unionSets(int a, int b) { // Diese Funktion aufrufen.
 	if (findSet(a) != findSet(b)) linkSets(findSet(a), findSet(b));
 }
 
-int size(int a) {
+int size(int a) { // optional
 	return -unions[findSet(a)];
 }
