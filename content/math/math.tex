@@ -389,19 +389,19 @@ so gilt
 	
 	\begin{methods}
 		\method{precalc}{berechnet $n!$ und $n!^{-1}$ vor}{\mathit{lim}}
-		\method{calc\_binom}{berechnet Binomialkoeffizient}{1}
+		\method{binom}{berechnet Binomialkoeffizient}{1}
 	\end{methods}
 	\sourcecode{math/binomial0.cpp}
 	Falls $n >= p$ for $\mathit{mod}=p^k$ berechne \textit{fac} und \textit{inv} aber teile $p$ aus $i$ und berechne die häufigkeit von $p$ in $n!$ als $\sum\limits_{i=1}\big\lfloor\frac{n}{p^i}\big\rfloor$
 
     \begin{methods}
-		\method{calc\_binom}{berechnet Binomialkoeffizient $(n \le 61)$}{k}
+		\method{binom}{berechnet Binomialkoeffizient $(n \le 61)$}{k}
 	\end{methods}
 	\sourcecode{math/binomial1.cpp}
 
 	\optional{
 	\begin{methods}
-		\method{calc\_binom}{berechnet Primfaktoren vom Binomialkoeffizient}{n\*\log(n)}
+		\method{binom}{berechnet Primfaktoren vom Binomialkoeffizient}{n\*\log(n)}
 	\end{methods}
 	\opthint \\
 	\textbf{WICHTIG:} braucht alle Primzahlen $\leq n$
@@ -409,7 +409,7 @@ so gilt
 	}
 
     \begin{methods}
-		\method{calc\_binom}{berechnet Binomialkoeffizient modulo Primzahl $p$}{p-n}
+		\method{binom}{berechnet Binomialkoeffizient modulo Primzahl $p$}{p-n}
 	\end{methods}
 	\sourcecode{math/binomial3.cpp}
 %\end{algorithm}
