@@ -8,7 +8,7 @@ void precalc() {
 	for (int i = lim - 1; i > 0; i--) inv[i-1] = inv[i] * i % mod;
 }
 
-ll calc_binom(ll n, ll k) {
+ll binom(ll n, ll k) {
 	if (n < 0 || n < k || k < 0) return 0;
 	return (fac[n] * inv[n-k] % mod) * inv[k] % mod;
 }

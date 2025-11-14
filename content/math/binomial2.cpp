@@ -20,7 +20,7 @@ ll binomPPow(ll n, ll k, ll p) {
 	return res;
 }
 
-ll calc_binom(ll n, ll k) {
+ll binom(ll n, ll k) {
 	if (k > n) return 0;
 	ll res = 1;
 	k = min(k, n - k);

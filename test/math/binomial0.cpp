@@ -4,15 +4,14 @@
 constexpr ll mod = 1'394'633'899;
 #include <math/binomial0.cpp>
 
-
 void stress_test() {
 	vector<ll> last = {1};
 	ll queries = 0;
 	for (ll i = 0; i < 10'000; i++) {
 		for (ll j = 0; j <= i; j++) {
-			ll got = calc_binom(i, j);
+			ll got = binom(i, j);
 			ll expected = last[j];
-			if (got != expected) cerr << "calc_binom(" << i << ", " << j << "), got: " << got << ", expected: " << expected << FAIL;
+			if (got != expected) cerr << "binom(" << i << ", " << j << "), got: " << got << ", expected: " << expected << FAIL;
 		}
 		queries += ssize(last);
 
