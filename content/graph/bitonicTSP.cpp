@@ -1,6 +1,6 @@
 vector<vector<double>> dist; // Initialisiere mit Entfernungen zwischen Punkten.
 
-auto bitonicTSP() {
+auto bitonicTSP() { // n >= 2
 	vector<double> dp(ssize(dist), HUGE_VAL);
 	vector<int> pre(ssize(dist)); // nur für Tour
 	dp[0] = 0; dp[1] = 2 * dist[0][1]; pre[1] = 0;

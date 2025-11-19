@@ -71,5 +71,5 @@ int main() {
 	stress_test(100);
 	stress_test(1'000);
 	stress_test(1'000'000);
-	performance_test();
+	if (!sanitize) performance_test();
 }

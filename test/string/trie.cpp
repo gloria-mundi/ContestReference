@@ -30,7 +30,8 @@ void stress_test() {
 constexpr int N = 10'000;
 void performance_test() {
 	timer t;
-	trie = {node()};
+	trie.clear();
+	trie.emplace_back();
 	hash_t hash = 0;
 	for (int tries = 0; tries < N; tries++) {
 		{
@@ -54,5 +55,5 @@ void performance_test() {
 
 int main() {
 	stress_test();
-	performance_test();
+	if (!sanitize) performance_test();
 }

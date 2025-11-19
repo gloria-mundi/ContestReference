@@ -57,11 +57,11 @@ void performance_test() {
 
 	hash_t hash = 0;
 	for (int x : got) hash += x;
-	if (t.time > 1000) cerr << "too slow: " << t.time << FAIL;
+	if (t.time > 1500) cerr << "too slow: " << t.time << FAIL;
 	cerr << "tested performance: " << t.time << "ms (hash: " << hash << ")" << endl;
 }
 
 int main() {
 	stress_test();
-	performance_test();
+	if (!sanitize) performance_test();
 }

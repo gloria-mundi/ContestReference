@@ -68,9 +68,9 @@ bool inOutCirc(pt a, pt b, pt c, pt p) {
 }
 
 
-void stress_test(ll range) {
+void stress_test(ll LIM, ll range) {
 	ll queries = 0;
-	for (int tries = 0; tries < 100'000; tries++) {
+	for (int tries = 0; tries < LIM; tries++) {
 		int n = Random::integer<int>(3, 30);
 		auto ps = Random::points<lll>(n, -range, range);
 		bool skip = true;
@@ -136,8 +136,14 @@ void performance_test() {
 }
 
 int main() {
-	stress_test(10);
-	stress_test(10'000);
-	stress_test(1'000'000'000);
-	performance_test();
+	if (!sanitize) {
+		stress_test(100'000, 10);
+		stress_test(100'000, 10'000);
+		stress_test(100'000, 1'000'000'000);
+		performance_test();
+	} else {
+		stress_test(10'000, 10);
+		stress_test(10'000, 10'000);
+		stress_test(10'000, 1'000'000'000);
+	}
 }

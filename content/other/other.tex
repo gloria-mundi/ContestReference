@@ -151,7 +151,7 @@
 	Das Komplement eines Vertex-Cover ist ein Independent Set.
 	$\Rightarrow$ Max Weight Independent Set ist Komplement von Min Weight Vertex Cover.
 
-	\item \textbf{Bipartiter Graph:}
+	\item \textbf{Bipartiter Graph (Satz von \textsc{König}):}
 	Min Vertex Cover (kleinste Menge Knoten, die alle Kanten berühren) = Max Matching.
 	Richte Kanten im Matching von $B$ nach $A$ und sonst von $A$ nach $B$, markiere alle Knoten die von einem ungematchten Knoten in $A$ erreichbar sind, das Vertex Cover sind die markierten Knoten aus $B$ und die unmarkierten Knoten aus $A$.
 
@@ -186,15 +186,19 @@
 	\item \textbf{\textsc{Bertrand}sches Postulat:}
 	Für alle $n \in \mathbb{N}$ gilt: Ex existiert eine Primzahl $p$ mit $n < p \leq 2n$.
 
-	\item \textbf{Satz von \textsc{Kirchhoff}:}
+	\item \textbf{Satz von \textsc{Kirchhoff} (Anzahl Spannbäume):}
 	Sei $G$ ein zusammenhängender, ungerichteter Graph evtl. mit Mehrfachkanten.
-	Sei $A$ die Adjazenzmatrix von $G$.
+	Sei $A$ die Adjazenzmatrix von~$G$.
 	Dabei ist $a_{ij}$ die Anzahl der Kanten zwischen Knoten $i$ und $j$.
-	Sei $B$ eine Diagonalmatrix, $b_{ii}$ sei der Grad von Knoten $i$.
+	Sei $B$ eine Diagonalmatrix mit $b_{ii}$ Grad von Knoten $i$.
 	Definiere $R = B - A$.
-	Alle Kofaktoren von $R$ sind gleich und die Anzahl der Spannbäume von $G$.
+	Entferne $k$-te Zeile und $k$-te Spalte ($k$ beliebig) und berechne Betrag der Determinante.
+	Das Ergebnis ist die Anzahl der Spannbäume von $G$.
 	\newline
-	Entferne letzte Zeile und Spalte und berechne Betrag der Determinante.
+	Funktioniert auch für gerichtete Graphen: $b_{ii}$ ist der Outdegree und man
+	berechnet die Determinante nach Entfernen der $k$-ten Zeile und Spalte.
+	Das Ergebnis ist die Anzahl an gerichteten Spannbäumen mit Wurzel $k$,
+	sodass jeder Knoten einen Pfad zu $k$ hat.
 
 	\item \textbf{\textsc{Dilworth}'s Theorem:}
 	Sei $S$ eine Menge und $\leq$ eine partielle Ordnung ($S$ ist ein Poset).
@@ -205,10 +209,15 @@
 	Es gilt: Die Größe der längsten Antikette gleicht der Größe der kleinsten Partition.
 	$\Rightarrow$ \emph{Weite} des Poset.
 	\newline
-	Berechnung: Maximales Matching in bipartitem Graphen.
+	Berechnung der minimalen Partition: Maximales Matching in bipartitem Graphen.
 	Dupliziere jedes $s \in S$ in $u_s$ und $v_s$.
 	Falls $x \leq y$, füge Kante $u_x \to v_y$ hinzu.
-	Wenn Matching zu langsam ist, versuche Struktur des Posets auszunutzen und evtl. anders eine maximale Antikette zu finden.
+	Wenn $u_x$ mit $v_y$ gematched wird, sind $x$ und $y$ in derselben Kette.
+	\newline
+	Berechnung der maximalen Antikette: Verwende Satz von König, um ein
+	minimales Vertexcover des bipartiten Graphen zu finden.
+	Ersetze $u_x, v_x$ durch $x$ und erhalte so minimales Vertexcover vom Poset.
+	Das Komplement davon ist eine maximale Antikette.
 	
 	\item \textbf{\textsc{Tur\'an}'s Theorem:}
 	Die Anzahl an Kanten in einem Graphen mit $n$ Knoten der keine clique der größe $x+1$ enthält ist:

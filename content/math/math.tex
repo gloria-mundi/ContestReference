@@ -414,7 +414,8 @@ so gilt
 	\sourcecode{math/binomial3.cpp}
 %\end{algorithm}
 
-\paragraph{\textsc{Catalan}-Zahlen}
+\paragraph{\textsc{Catalan}-Zahlen:}
+$1,~1,~2,~5,~14,~42,~132,~429,~1430,~4862,~16796,~58786,~208012,~742900$
 \begin{itemize}
 	\item Die \textsc{Catalan}-Zahl $C_n$ gibt an:
 	\begin{itemize}
@@ -429,18 +430,19 @@ so gilt
 \[C_0 = 1\qquad C_n = \sum\limits_{k = 0}^{n - 1} C_kC_{n - 1 - k} =
 \frac{1}{n + 1}\binom{2n}{n} = \frac{4n - 2}{n+1} C_{n-1} \sim \frac{4^n}{n^{3/2} \sqrt{\pi}}\]
 \begin{itemize}
-	\item Formel $1$ erlaubt Berechnung ohne Division in \runtime{n^2}
-	\item Formel $2$ und $3$ erlauben Berechnung in \runtime{n}
+	\item Formel $1$ ohne Division in \runtime{n^2}, Formel $2$ und $3$ in \runtime{n}
 \end{itemize}
 
 \paragraph{\textsc{Catalan}-Convolution}
 \begin{itemize}
-	\item Anzahl an Klammerausdrücken mit $n+k$ Klammerpaaren, die mit $(^k$ beginnen.
+	\item Anzahl an Klammerausdrücken mit $n+k$ Klammerpaaren, die mit $\texttt{(}^k$ beginnen.
 \end{itemize}
 \[C^k_0 = 1\qquad C^k_n = \sum\limits_{\mathclap{a_0+a_1+\dots+a_k=n}} C_{a_0}C_{a_1}\cdots C_{a_k} =
 \frac{k+1}{n+k+1}\binom{2n+k}{n} = \frac{(2n+k-1)(2n+k)}{n(n+k+1)} C_{n-1}\]
 
-\paragraph{\textsc{Euler}-Zahlen}
+\paragraph{\textsc{Euler}-Zahlen:}
+$|~1~|~1~|~1,~1~|~1,~4,~1~|~1,~11,~11,~1~|~1,~26,~66,~26,~1~|$
+
 Die Anzahl der Permutationen von $\{1, \ldots, n\}$ mit genau $k$ Anstiegen.
 Für die $n$-te Zahl gibt es $n$ mögliche Positionen zum Einfügen.
 Dabei wird entweder ein Anstieg in zwei gesplitted oder ein Anstieg um $n$ ergänzt.
@@ -452,11 +454,13 @@ Dabei wird entweder ein Anstieg in zwei gesplitted oder ein Anstieg um $n$ ergä
 	\left(\sum_{i=0}^\infty (-1)^i \binom{n+1}{i} x^i\right)
 \]
 
-\paragraph{\textsc{Stirling}-Zahlen 1. Art}
+\paragraph{\textsc{Stirling}-Zahlen 1. Art:}
+$|~1~|~0,~1~|~0,~1,~1~|~0,~2,~3,~1~|~0,~6,~11,~6,~1~|$
+
 Die Anzahl der Permutationen von $\{1, \ldots, n\}$ mit genau $k$ Zyklen.
 Es gibt zwei Möglichkeiten für die $n$-te Zahl. Entweder sie bildet einen eigenen Zyklus, oder sie kann an jeder Position in jedem Zyklus einsortiert werden.
 \[\stirlingI{0}{0} = 1 \qquad
-\stirlingI{n}{0} = \stirlingI{0}{n} = 0 \qquad
+\stirlingI{n}{0} = \stirlingI{0}{k} = 0 \qquad
 \stirlingI{n}{k} = \stirlingI{n-1}{k-1} + (n-1) \stirlingI{n-1}{k}\]
 \[
 \stirlingI{n}{k}
@@ -464,7 +468,9 @@ Es gibt zwei Möglichkeiten für die $n$-te Zahl. Entweder sie bildet einen eige
 = n! [x^{n-k}] \frac{1}{k!} \left(\sum_{i=0}^\infty \frac{1}{i+1}x^i\right)^k
 \]
 
-\paragraph{\textsc{Stirling}-Zahlen 2. Art}
+\paragraph{\textsc{Stirling}-Zahlen 2. Art:}
+$|~1~|~0,~1~|~0,~1,~1~|~0,~1,~3,~1~|~0,~1,~7,~6,~1~|$
+
 Die Anzahl der Möglichkeiten $n$ Elemente in $k$ nichtleere Teilmengen zu zerlegen.
 Es gibt $k$ Möglichkeiten die $n$ in eine $n-1$-Partition einzuordnen.
 Dazu kommt der Fall, dass die $n$ in ihrer eigenen Teilmenge (alleine) steht.
@@ -479,7 +485,9 @@ Dazu kommt der Fall, dass die $n$ in ihrer eigenen Teilmenge (alleine) steht.
 = n! [x^{n-k}] \frac{1}{k!} \left(\sum_{i=0}^\infty \frac{1}{(i+1)!}x^i\right)^k
 \]
 
-\paragraph{\textsc{Bell}-Zahlen}
+\paragraph{\textsc{Bell}-Zahlen:}
+$1,~1,~2,~5,~15,~52,~203,~877,~4140,~21147,~115975,~678570,~4213597$
+
 Anzahl der Partitionen von $\{1, \ldots, n\}$.
 Wie \textsc{Stirling}-Zahlen 2. Art ohne Limit durch $k$.
 \[B_1 = 1 \qquad
@@ -489,12 +497,20 @@ B_n = \sum\limits_{k = 0}^{n - 1} B_k\binom{n-1}{k}
 \qquad
 B_{p^m+n}\equiv m\cdot B_n + B_{n+1} \bmod{p}\]
 
-\paragraph{Partitions}
+\paragraph{$\boldsymbol{k}$ Partitions:}
+$|~1~|~0,~1~|~0,~1,~1~|~0,~1,~1,~1~|~0,~1,~2,~1,~1~|~0,~1,~2,~2,~1,~1~|~0,~1,~3,~3,~2,~1,~1~|$
+
 Die Anzahl der Partitionen von $n$ in genau $k$ positive Summanden.
-Die Anzahl der Partitionen von $n$ mit Elementen aus ${1,\dots,k}$.
+Die Anzahl der Partitionen von $n$ mit größtem Elementen $k$.
 \begin{align*}
 	p_0(0)=1 \qquad p_k(n)&=0 \text{ für } k > n \text{ oder } n \leq 0 \text{ oder } k \leq 0\\
 	p_k(n)&= p_k(n-k) + p_{k-1}(n-1)\\
+\end{align*}
+
+\paragraph{Partitions:}
+$1,~1,~2,~3,~5,~7,~11,~15,~22,~30,~42,~56,~77,~101,~135,~176,~231,~297,~385,~490,~627$
+
+\begin{align*}
 	p(n)=\sum_{k=1}^{n} p_k(n)&=p_n(2n)=\sum\limits_{k=1}^\infty(-1)^{k+1}\bigg[p\bigg(n - \frac{k(3k-1)}{2}\bigg) + p\bigg(n - \frac{k(3k+1)}{2}\bigg)\bigg] \\
 	p(n)&=[x^n] \left(\sum_{k=-\infty}^\infty (-1)^k x^{k(3k-1)/2}\right)^{-1}
 	  \sim \frac{1}{4 \sqrt{3} n} \exp\left(\pi \sqrt{\frac{2n}{3}}\right)

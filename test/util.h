@@ -1,6 +1,12 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+#ifdef SANITIZE
+	constexpr bool sanitize = true;
+#else
+	constexpr bool sanitize = false;
+#endif
+
 using ll = long long;
 using lll = __int128;
 using ld = long double;
@@ -10,6 +16,7 @@ namespace INT {constexpr int INF = 0x3FFF'FFFF;}
 namespace LL {constexpr ll INF = 0x3FFF'FFFF'FFFF'FFFFll;}
 namespace LD {constexpr ld INF = numeric_limits<ld>::infinity();}
 
+#ifdef SANITIZE
 template<typename T>
 T _lg_check(T n) {
 	assert(n > 0);
@@ -17,6 +24,7 @@ T _lg_check(T n) {
 }
 
 #define __lg _lg_check
+#endif
 
 namespace details {
 	template<typename T = ll>

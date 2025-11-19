@@ -1,25 +1,33 @@
 #include "../util.h"
 namespace got {
-#include <graph/bitonicTSPsimple.cpp>
+#include <graph/bitonicTSP.cpp>
 }
 namespace expected {
-#include <graph/bitonicTSP.cpp>
+#include <graph/bitonicTSPsimple.cpp>
 }
 
 void stress_test() {
 	ll queries = 0;
 	for (int tries = 0; tries < 200'000; tries++) {
-		int n = Random::integer<int>(1, 30);
+		int n = Random::integer<int>(2, 30);
 
 		vector<vector<double>> dist(n);
 		for (auto& v : dist) v = Random::reals<double>(n, 0, 1e18);
+		auto eval = [&](const vector<int>& order) {
+			double res = 0;
+			for (int i = 0; i < n; i++) res += dist[order[i]][order[i+1]];
+			return res;
+		};
+
 
 		got::dist = dist;
 		expected::dist = dist;
 
-		auto got = got::bitonicTSP();
-		auto expected = got::bitonicTSP();
+		auto got = eval(got::bitonicTSP());
+		auto expected = eval(expected::bitonicTSP());
 
+		std::cout << got << std::endl;
+		std::cout << expected << std::endl;
 		if (got != expected) cerr << "error" << FAIL;
 		queries += n;
 	}
@@ -27,7 +35,7 @@ void stress_test() {
 }
 
 //this is an easy graph...
-constexpr int N = 2'000;
+constexpr int N = 5'000;
 void performance_test() {
 	timer t;
 	got::dist = vector<vector<double>>(N);
@@ -45,5 +53,5 @@ void performance_test() {
 
 int main() {
 	stress_test();
-	performance_test();
+	if (!sanitize) performance_test();
 }

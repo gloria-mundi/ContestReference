@@ -9,9 +9,9 @@ namespace floydWarshall {
 #include <graph/floydWarshall.cpp>
 }
 
-void stress_test() {
+void stress_test(int LIM) {
 	ll queries = 0;
-	for (int tries = 0; tries < 100'000; tries++) {
+	for (int tries = 0; tries < LIM; tries++) {
 		int n = Random::integer<int>(2, 30);
 		int m = Random::integer<int>(n-1, max<int>(n, min<int>(500, n*(n-1) / 2 + 1)));
 		vector<ll> potential = Random::integers<ll>(n, 0, 1'000'000'000'000ll);
@@ -65,6 +65,7 @@ void performance_test() {
 }
 
 int main() {
-	stress_test();
-	performance_test();
+	stress_test(10'000);
+	if (!sanitize) stress_test(100'000);
+	if (!sanitize) performance_test();
 }

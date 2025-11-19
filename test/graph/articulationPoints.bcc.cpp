@@ -42,9 +42,9 @@ vector<vector<int>> naiveBCC(int m) {
 	return res;
 }
 
-void stress_test_bcc() {
+void stress_test_bcc(int LIM) {
 	ll queries = 0;
-	for (int tries = 0; tries < 200'000; tries++) {
+	for (int tries = 0; tries < LIM; tries++) {
 		int n = Random::integer<int>(1, 30);
 		int m = Random::integer<int>(0, max<int>(1, min<int>(300, n*(n-1) / 2 + 1)));
 		Graph<NoData, 0, 1> g(n);
@@ -74,5 +74,6 @@ void stress_test_bcc() {
 }
 
 int main() {
-	stress_test_bcc();
+	stress_test_bcc(20'000);
+	if (!sanitize) stress_test_bcc(200'000);
 }

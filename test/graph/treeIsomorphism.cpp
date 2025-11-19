@@ -122,5 +122,5 @@ int main() {
 	stress_test_eq();
 	test_tiny();
 	stress_test_neq();
-	performance_test();
+	if (!sanitize) performance_test();
 }

@@ -1,4 +1,4 @@
-vector<ll> poly_inv(const vector<ll>& a, int n) {
+vector<ll> poly_inv(const vector<ll>& a, int n) { // a[0] == 1
 	vector<ll> q = {powMod(a[0], mod-2, mod)};
 	for (int len = 1; len < n; len *= 2){
 		vector<ll> a2 = a, q2 = q;
@@ -35,13 +35,13 @@ vector<ll> poly_integr(vector<ll> a) {
 	return a;
 }
 
-vector<ll> poly_log(vector<ll> a, int n) {
+vector<ll> poly_log(vector<ll> a, int n) { // a[0] == 1
 	a = mul(poly_deriv(a), poly_inv(a, n));
 	a.resize(n-1);
 	return poly_integr(a);
 }
 
-vector<ll> poly_exp(vector<ll> a, int n) {
+vector<ll> poly_exp(vector<ll> a, int n) { // a[0] == 0
 	vector<ll> q = {1};
 	for (int len = 1; len < n; len *= 2) {
 		vector<ll> p = poly_log(q, 2*len);

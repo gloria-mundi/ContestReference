@@ -35,8 +35,10 @@ void stress_test() {
 		}
 	}
 	cerr << "tested random queries: " << queries << endl;
-	if (t.time > 500) cerr << "too slow: " << t.time << FAIL;
-	cerr << "tested performance: " << t.time << "ms" << endl;
+	if (!sanitize) {
+		if (t.time > 500) cerr << "too slow: " << t.time << FAIL;
+		cerr << "tested performance: " << t.time << "ms" << endl;
+	}
 }
 
 int main() {

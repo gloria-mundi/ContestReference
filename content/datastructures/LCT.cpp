@@ -53,8 +53,7 @@ struct LCT {
 				if (right) right->revert ^= 1;
 			}
 			nodeValue = joinValueDelta(nodeValue, delta);
-			subTreeValue = joinValueDelta(subTreeValue,
-			                              _update(delta, size));
+			subTreeValue = getSubtreeValue();
 			if (left) left->delta = joinDeltas(left->delta, delta);
 			if (right) right->delta = joinDeltas(right->delta, delta);
 			delta = updateDefault;
@@ -68,8 +67,8 @@ struct LCT {
 			subTreeValue = joinValueDelta(nodeValue, delta);
 			size = 1;
 			if (left) {
-				subTreeValue = _query(subTreeValue,
-				                      left->getSubtreeValue());
+				subTreeValue = _query(left->getSubtreeValue(),
+				                      subTreeValue);
 				size += left->size;
 			}
 			if (right) {

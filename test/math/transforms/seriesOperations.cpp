@@ -63,9 +63,9 @@ namespace reference {//checked against yosupo
 	}
 }
 
-void test_inv() {
+void test_inv(ll LIM) {
 	ll queries = 0;
-	for (ll i = 0; i < 50'000; i++) {
+	for (ll i = 0; i < LIM; i++) {
 		int n = Random::integer<int>(1, 100);
 		int m = Random::integer<int>(1, 100);
 		vector<ll> a = Random::integers<ll>(n, 0, mod);
@@ -78,9 +78,9 @@ void test_inv() {
 	cerr << "tested inv: " << queries << endl;
 }
 
-void test_deriv() {
+void test_deriv(ll LIM) {
 	ll queries = 0;
-	for (ll i = 0; i < 50'000; i++) {
+	for (ll i = 0; i < LIM; i++) {
 		int n = Random::integer<int>(1, 100);
 		vector<ll> a = Random::integers<ll>(n, 0, mod);
 
@@ -92,9 +92,9 @@ void test_deriv() {
 	cerr << "tested deriv: " << queries << endl;
 }
 
-void test_integr() {
+void test_integr(ll LIM) {
 	ll queries = 0;
-	for (ll i = 0; i < 50'000; i++) {
+	for (ll i = 0; i < LIM; i++) {
 		int n = Random::integer<int>(1, 100);
 		vector<ll> a = Random::integers<ll>(n, 0, mod);
 
@@ -106,9 +106,9 @@ void test_integr() {
 	cerr << "tested integr: " << queries << endl;
 }
 
-void test_log() {
+void test_log(ll LIM) {
 	ll queries = 0;
-	for (ll i = 0; i < 50'000; i++) {
+	for (ll i = 0; i < LIM; i++) {
 		int n = Random::integer<int>(1, 100);
 		int m = Random::integer<int>(1, 100);
 		vector<ll> a = Random::integers<ll>(n, 0, mod);
@@ -121,9 +121,9 @@ void test_log() {
 	cerr << "tested log: " << queries << endl;
 }
 
-void test_exp() {
+void test_exp(ll LIM) {
 	ll queries = 0;
-	for (ll i = 0; i < 50'000; i++) {
+	for (ll i = 0; i < LIM; i++) {
 		int n = Random::integer<int>(1, 100);
 		int m = Random::integer<int>(1, 100);
 		vector<ll> a = Random::integers<ll>(n, 0, mod);
@@ -137,9 +137,10 @@ void test_exp() {
 }
 
 int main() {
-	test_inv();
-	test_deriv();
-	test_integr();
-	test_log();
-	test_exp();
+	ll LIM = sanitize ? 5'000 : 50'000;
+	test_inv(LIM);
+	test_deriv(LIM);
+	test_integr(LIM);
+	test_log(LIM);
+	test_exp(LIM);
 }

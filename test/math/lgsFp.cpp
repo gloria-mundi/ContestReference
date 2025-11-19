@@ -108,5 +108,5 @@ void performance_test() {
 int main() {
 	test_square();
 	stress_test_inv();
-	performance_test();
+	if (!sanitize) performance_test();
 }

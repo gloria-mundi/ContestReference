@@ -81,5 +81,5 @@ void performance_test() {
 
 int main() {
 	stress_test_art();
-	performance_test();
+	if (!sanitize) performance_test();
 }

@@ -113,6 +113,8 @@ void performance_test_binary_search() {
 int main() {
 	stress_test();
 	stress_test_binary_search();
-	performance_test();
-	performance_test_binary_search();
+	if (!sanitize) {
+		performance_test();
+		performance_test_binary_search();
+	}
 }

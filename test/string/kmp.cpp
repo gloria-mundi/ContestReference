@@ -78,8 +78,8 @@ void performance_test_kmp() {
 int main() {
 	cerr << "preprocessing:" << endl;
 	stress_test_preprocessing();
-	performance_test_preprocessing();
+	if (!sanitize) performance_test_preprocessing();
 	cerr << "kmp:" << endl;
 	stress_test_kmp();
-	performance_test_kmp();
+	if (!sanitize) performance_test_kmp();
 }
