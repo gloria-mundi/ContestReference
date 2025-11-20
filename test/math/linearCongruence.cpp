@@ -14,7 +14,7 @@ void stress_test() {
 	ll work = 0;
 	ll positive = 0;
 	for (ll tries = 0; tries < 500'000; tries++) {
-		ll m = Random::integer<ll>(0, 1'000);
+		ll m = Random::integer<ll>(1, 1'000);
 		ll a = Random::integer<ll>(0, m);
 		ll b = Random::integer<ll>(0, m);
 
@@ -33,7 +33,7 @@ void performance_test() {
 	timer t;
 	hash_t hash = 0;
 	for (int operations = 0; operations < N; operations++) {
-		ll m = Random::integer<ll>(0, 1'0000'000'000);
+		ll m = Random::integer<ll>(1, 1'0000'000'000);
 		ll a = Random::integer<ll>(0, m);
 		ll b = Random::integer<ll>(0, m);
 

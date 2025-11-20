@@ -19,7 +19,7 @@ void stress_test() {
 		auto dfs = [&](auto&& self, string pref, ll node) -> void {
 			auto& [l, r, _, next] = st.tree[node];
 			if (l >= 0) pref += s.substr(l, r - l);
-			if (pref.back() == '#') got[n + 1 - ssize(pref)] = pref;
+			if (!pref.empty() && pref.back() == '#') got[n + 1 - ssize(pref)] = pref;
 			for (auto [__, j] : next) {
 				self(self, pref, j);
 			}
