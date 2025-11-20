@@ -3,7 +3,7 @@ TESTS = $(basename $(shell find . -path ./awk -prune -o -type f -name '*.cpp' -p
 AWK = $(basename $(shell find . -type f -name '*.awk'))
 CXX = g++ -std=gnu++20 -I awk/ -I ../content/ -O2 -Wall -Wextra -Wshadow -Werror
 SAN = -fsanitize=address,undefined -DSANITIZE
-TIMEOUT = 300
+TIMEOUT = 5m
 
 test: $(TESTS:=.ok) $(TESTS:=.san.ok)
 

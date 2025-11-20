@@ -1,3 +1,7 @@
+#ifdef SANITIZE
+# define _GLIBCXX_ASSERTIONS 1
+# define _GLIBCXX_SANITIZE_VECTOR 1
+#endif
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -202,7 +206,7 @@ namespace detail {
 		return 30/t;
 	}
 
-	double speed = benchmark();
+	double speed = sanitize ? numeric_limits<double>::infinity() : benchmark();
 }
 
 struct timer {

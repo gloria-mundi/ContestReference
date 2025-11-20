@@ -92,7 +92,7 @@ void stress_test() {
 			cerr << FAIL;
 		}
 	}
-	if (t.time > 100) cerr << "too slow" << FAIL;
+	if (!sanitize && t.time > 100) cerr << "too slow" << FAIL;
 	cerr << "stress tested: " << t.time << "ms" << endl;
 }
 

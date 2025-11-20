@@ -90,7 +90,7 @@ void extra_tests() {
 		bool expected = ssize(factors) == 1 && factors.begin()->second == 1;
 		if (got != expected) cerr << "error: " << x << FAIL;
 	}
-	if (t.time > 10) cerr << "too slow" << FAIL;
+	if (!sanitize && t.time > 10) cerr << "too slow" << FAIL;
 	cerr << "stress tested: " << t.time << "ms" << endl;
 }
 
